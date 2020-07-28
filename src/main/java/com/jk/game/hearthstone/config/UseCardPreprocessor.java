@@ -7,7 +7,7 @@ import com.jk.game.hearthstone.exception.IllegalOperationException;
 
 /**
  * 使用卡牌操作的前置处理器
- * 任何的出牌操作都会触发 processBeforePlay方法
+ * 任何的出牌操作都会触发processBeforePlay方法
  *
  * @author jk
  */

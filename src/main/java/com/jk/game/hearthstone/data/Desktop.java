@@ -4,6 +4,7 @@ package com.jk.game.hearthstone.data;
 import com.jk.game.hearthstone.card.Card;
 import com.jk.game.hearthstone.card.Player;
 import com.jk.game.hearthstone.card.organism.minion.Minion;
+import com.jk.game.hearthstone.enumeration.PlayerType;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -45,5 +46,17 @@ public class Desktop implements Cloneable {
             result.secondCards.add((Card) card.clone());
         }
         return result;
+    }
+
+    public Player getPlayer(PlayerType playerType){
+        return playerType == PlayerType.PLAYER_TYPE_MAIN ? mainPlayer : secondPlayer;
+    }
+
+    public List<Card> getCards(PlayerType playerType){
+        return playerType == PlayerType.PLAYER_TYPE_MAIN ? mainCards : secondCards;
+    }
+
+    public List<Minion> getMinions(PlayerType playerType){
+        return playerType == PlayerType.PLAYER_TYPE_MAIN ? mainMinions : secondMinions;
     }
 }
