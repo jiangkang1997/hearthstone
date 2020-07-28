@@ -1,9 +1,9 @@
 package com.jk.game.hearthstone.data;
 
 
-import com.jk.game.hearthstone.card.BaseCard;
+import com.jk.game.hearthstone.card.Card;
 import com.jk.game.hearthstone.card.Player;
-import com.jk.game.hearthstone.card.organism.entourage.BaseEntourage;
+import com.jk.game.hearthstone.card.organism.minion.Minion;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -16,33 +16,33 @@ import java.util.List;
 @Data
 public class Desktop implements Cloneable {
 
-    private Player enemy;
-    private Player myself;
-    private List<BaseEntourage> enemiesEntourage = new ArrayList<>();
-    private List<BaseEntourage> myEntourage = new ArrayList<>();
-    private List<BaseCard> myCards = new ArrayList<>();
-    private List<BaseCard> enemiesCards = new ArrayList<>();
+    private Player mainPlayer;
+    private Player secondPlayer;
+    private List<Minion> mainMinions = new ArrayList<>();
+    private List<Minion> secondMinions = new ArrayList<>();
+    private List<Card> mainCards = new ArrayList<>();
+    private List<Card> secondCards = new ArrayList<>();
 
     @Override
     public Object clone() throws CloneNotSupportedException {
         Desktop result = (Desktop)super.clone();
-        if(enemy!=null){
-            result.enemy = (Player) enemy.clone();
+        if(secondPlayer!=null){
+            result.secondPlayer = (Player) secondPlayer.clone();
         }
-        if(myself!=null){
-            result.myself = (Player) myself.clone();
+        if(mainPlayer!=null){
+            result.mainPlayer = (Player) mainPlayer.clone();
         }
-        for (BaseEntourage entourage : enemiesEntourage) {
-            result.enemiesEntourage.add((BaseEntourage) entourage.clone());
+        for (Minion minion : secondMinions) {
+            result.secondMinions.add((Minion) minion.clone());
         }
-        for (BaseEntourage entourage : myEntourage) {
-            result.myEntourage.add((BaseEntourage) entourage.clone());
+        for (Minion minion : mainMinions) {
+            result.mainMinions.add((Minion) minion.clone());
         }
-        for (BaseCard card : myCards) {
-            result.myCards.add((BaseCard) card.clone());
+        for (Card card : mainCards) {
+            result.mainCards.add((Card) card.clone());
         }
-        for (BaseCard card : enemiesCards) {
-            result.enemiesCards.add((BaseCard) card.clone());
+        for (Card card : secondCards) {
+            result.secondCards.add((Card) card.clone());
         }
         return result;
     }

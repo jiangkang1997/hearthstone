@@ -1,6 +1,6 @@
 package com.jk.game.hearthstone.card.arms;
 
-import com.jk.game.hearthstone.card.BaseCard;
+import com.jk.game.hearthstone.card.Card;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public abstract class BaseArms extends BaseCard implements Cloneable {
+public class Arms extends Card implements Cloneable {
 
     protected Integer att;
     protected Integer durable;

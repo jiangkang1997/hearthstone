@@ -7,7 +7,7 @@ package com.jk.game.hearthstone.config;
  *
  * @author jk
  */
-public interface PlayPostProcessor {
+public interface UseCardPostProcessor {
 
     /**
      *  Triggered after the card is played

@@ -1,7 +1,7 @@
 package com.jk.game.hearthstone.common;
 
-import com.jk.game.hearthstone.config.PlayPostProcessor;
-import com.jk.game.hearthstone.config.PlayPreprocessor;
+import com.jk.game.hearthstone.config.UseCardPostProcessor;
+import com.jk.game.hearthstone.config.UseCardPreprocessor;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -15,18 +15,18 @@ import java.util.Map;
 @Component
 public class SpringUtil implements ApplicationContextAware {
 
-    private ApplicationContext applicationContext;
+    private static ApplicationContext applicationContext;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
+        SpringUtil.applicationContext = applicationContext;
     }
 
-    public Map<String, PlayPreprocessor> getPlayPreprocessors(){
-        return applicationContext.getBeansOfType(PlayPreprocessor.class);
+    public static Map<String, UseCardPreprocessor> getPlayPreprocessors(){
+        return applicationContext.getBeansOfType(UseCardPreprocessor.class);
     }
 
-    public Map<String, PlayPostProcessor> getPlayPostProcessors(){
-        return applicationContext.getBeansOfType(PlayPostProcessor.class);
+    public static Map<String, UseCardPostProcessor> getPlayPostProcessors(){
+        return applicationContext.getBeansOfType(UseCardPostProcessor.class);
     }
 }

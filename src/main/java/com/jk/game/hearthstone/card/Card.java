@@ -1,7 +1,8 @@
 package com.jk.game.hearthstone.card;
 
 
-import com.jk.game.hearthstone.enumeration.CardOwner;
+import com.jk.game.hearthstone.enumeration.CardType;
+import com.jk.game.hearthstone.enumeration.PlayerType;
 import lombok.Data;
 
 /**
@@ -10,10 +11,11 @@ import lombok.Data;
  * @author jk
  */
 @Data
-public abstract class BaseCard implements Cloneable {
+public class Card implements Cloneable {
 
     protected Integer cost;
-    protected CardOwner cardOwner;
+    protected CardType cardType;
+    protected PlayerType playerType;
 
 
     @Override

@@ -1,7 +1,7 @@
 package com.jk.game.hearthstone.card.organism.hero;
 
-import com.jk.game.hearthstone.card.arms.BaseArms;
-import com.jk.game.hearthstone.card.organism.BaseOrganism;
+import com.jk.game.hearthstone.card.arms.Arms;
+import com.jk.game.hearthstone.card.organism.Organism;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,10 +11,10 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public abstract class BaseHero extends BaseOrganism implements Cloneable {
+public class Hero extends Organism implements Cloneable {
 
     private Integer skillCost = 2;
-    private BaseArms arms = null;
+    private Arms arms = null;
     private Integer armor = 0;
 
     private Boolean canSkill = true;
@@ -24,7 +24,7 @@ public abstract class BaseHero extends BaseOrganism implements Cloneable {
     public Object clone() throws CloneNotSupportedException {
         Object result =  super.clone();
         if(this.arms!=null){
-            ((BaseHero)result).arms = (BaseArms) this.arms.clone();
+            ((Hero)result).arms = (Arms) this.arms.clone();
         }
         return result;
     }

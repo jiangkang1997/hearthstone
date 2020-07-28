@@ -1,6 +1,9 @@
 package com.jk.game.hearthstone.enumeration;
 
-public enum  CardOwner {
+/**
+ * @author jk
+ */
+public enum CardType {
     CARD_OWNER_法师,
     CARD_OWNER_潜行者,
     CARD_OWNER_牧师,
