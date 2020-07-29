@@ -1,14 +1,13 @@
-package com.jk.game.hearthstone.core;
+package com.jk.game.hearthstone.core.processer;
 
 import com.jk.game.hearthstone.annotation.TargetScope;
 import com.jk.game.hearthstone.card.Card;
 import com.jk.game.hearthstone.card.Player;
+import com.jk.game.hearthstone.card.magic.Magic;
 import com.jk.game.hearthstone.card.organism.Organism;
 import com.jk.game.hearthstone.card.organism.hero.Hero;
 import com.jk.game.hearthstone.card.organism.minion.Minion;
-import com.jk.game.hearthstone.config.UseCardPreprocessor;
 import com.jk.game.hearthstone.data.Desktop;
-import com.jk.game.hearthstone.enumeration.PlayerType;
 import com.jk.game.hearthstone.enumeration.Stand;
 import com.jk.game.hearthstone.exception.IllegalOperationException;
 
@@ -22,8 +21,7 @@ import java.util.List;
 public class DefaultUseCardPreprocessor implements UseCardPreprocessor {
 
     private static final int MAX_MINION_NUM = 7;
-    private static final int MAX_TASK_NUM = 5;
-    private static final int MAX_SECRET_NUM = 5;
+    private static final int MAX_TASK_SECRET_NUM = 5;
 
     @Override
     public void processBeforePlay(Desktop desktop, Card card, Organism target) throws IllegalOperationException {
@@ -67,10 +65,13 @@ public class DefaultUseCardPreprocessor implements UseCardPreprocessor {
     }
 
     private void minionNumLegalityCheck(Desktop desktop, Card card) throws IllegalOperationException{
-        //todo: 奥秘和任务的数量限制
         List<Minion> minions = desktop.getMinions(card.getPlayerType());
         if(minions.size() == MAX_MINION_NUM){
             throw new IllegalOperationException("无法拥有更多随从");
+        }
+        List<Magic> tasksAndSecrets = desktop.getTasksAndSecrets(card.getPlayerType());
+        if(tasksAndSecrets.size() >= MAX_TASK_SECRET_NUM){
+            throw new IllegalOperationException("无法拥有更多奥秘和任务");
         }
     }
 }

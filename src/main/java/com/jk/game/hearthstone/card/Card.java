@@ -28,4 +28,9 @@ public class Card implements Cloneable {
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+
+    @Override
+    public boolean equals(Object o){
+        return super.equals(o);
+    }
 }

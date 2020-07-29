@@ -3,7 +3,9 @@ package com.jk.game.hearthstone.data;
 
 import com.jk.game.hearthstone.card.Card;
 import com.jk.game.hearthstone.card.Player;
+import com.jk.game.hearthstone.card.magic.Magic;
 import com.jk.game.hearthstone.card.organism.minion.Minion;
+import com.jk.game.hearthstone.core.processer.ProcessorManager;
 import com.jk.game.hearthstone.enumeration.PlayerType;
 import lombok.Data;
 
@@ -17,12 +19,34 @@ import java.util.List;
 @Data
 public class Desktop implements Cloneable {
 
+    /**
+     * 玩家
+     */
     private Player mainPlayer;
     private Player secondPlayer;
+
+    /**
+     * 场上随从
+     */
     private List<Minion> mainMinions = new ArrayList<>();
     private List<Minion> secondMinions = new ArrayList<>();
+
+    /**
+     * 手牌
+     */
     private List<Card> mainCards = new ArrayList<>();
     private List<Card> secondCards = new ArrayList<>();
+
+    /**
+     * 头上的任务和奥秘
+     */
+    private List<Magic> mainTasksAndSecrets = new ArrayList<>();
+    private List<Magic> secondTasksAndSecrets = new ArrayList<>();
+
+    /**
+     * 事件处理器管理者
+     */
+    private ProcessorManager processorManager = new ProcessorManager();
 
     @Override
     public Object clone() throws CloneNotSupportedException {
@@ -58,5 +82,9 @@ public class Desktop implements Cloneable {
 
     public List<Minion> getMinions(PlayerType playerType){
         return playerType == PlayerType.PLAYER_TYPE_MAIN ? mainMinions : secondMinions;
+    }
+
+    public List<Magic> getTasksAndSecrets(PlayerType playerType){
+        return playerType == PlayerType.PLAYER_TYPE_MAIN ? mainTasksAndSecrets : secondTasksAndSecrets;
     }
 }

@@ -1,4 +1,4 @@
-package com.jk.game.hearthstone.config;
+package com.jk.game.hearthstone.core.processer;
 
 
 /**
@@ -7,7 +7,7 @@ package com.jk.game.hearthstone.config;
  *
  * @author jk
  */
-public interface UseCardPostProcessor {
+public interface UseCardPostProcessor extends Processor {
 
     /**
      *  Triggered after the card is played

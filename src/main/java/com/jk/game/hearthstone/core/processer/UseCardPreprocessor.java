@@ -1,4 +1,4 @@
-package com.jk.game.hearthstone.config;
+package com.jk.game.hearthstone.core.processer;
 
 import com.jk.game.hearthstone.card.Card;
 import com.jk.game.hearthstone.card.organism.Organism;
@@ -11,7 +11,7 @@ import com.jk.game.hearthstone.exception.IllegalOperationException;
  *
  * @author jk
  */
-public interface UseCardPreprocessor {
+public interface UseCardPreprocessor extends Processor {
 
 
     /**
