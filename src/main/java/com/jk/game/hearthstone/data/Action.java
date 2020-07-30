@@ -1,6 +1,6 @@
 package com.jk.game.hearthstone.data;
 
-import com.jk.game.hearthstone.card.BaseCard;
+import com.jk.game.hearthstone.card.Card;
 import com.jk.game.hearthstone.enumeration.ActionType;
 import lombok.Data;
 
@@ -13,15 +13,15 @@ import static com.jk.game.hearthstone.enumeration.ActionType.*;
 public class Action {
 
     public ActionType actionType;
-    public BaseCard initiator;
-    public BaseCard target;
+    public Card initiator;
+    public Card target;
 
-    public Action(ActionType actionType,BaseCard initiator){
+    public Action(ActionType actionType,Card initiator){
         this.actionType = actionType;
         this.initiator = initiator;
     }
 
-    public Action(ActionType actionType,BaseCard initiator,BaseCard target){
+    public Action(ActionType actionType,Card initiator,Card target){
         this.actionType = actionType;
         this.initiator = initiator;
         this.target = target;

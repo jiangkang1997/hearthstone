@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author jk
  */
-public class DefaultUseCardPreprocessor implements UseCardPreprocessor {
+public class DefaultUseCardPreprocessor extends AbstractUseCardPreprocessor {
 
     private static final int MAX_MINION_NUM = 7;
     private static final int MAX_TASK_SECRET_NUM = 5;
@@ -26,14 +26,14 @@ public class DefaultUseCardPreprocessor implements UseCardPreprocessor {
     @Override
     public void processBeforePlay(Desktop desktop, Card card, Organism target) throws IllegalOperationException {
         //水晶合法性
-        powerLegalityCheck(desktop,card,target);
+        powerLegalityCheck(desktop,card);
         //目标合法性
         targetLegalityCheck(card, target);
         //随从数量合法性
         minionNumLegalityCheck(desktop,card);
     }
 
-    private void powerLegalityCheck(Desktop desktop, Card card, Organism target) throws IllegalOperationException{
+    private void powerLegalityCheck(Desktop desktop, Card card) throws IllegalOperationException{
         int cost = card.getCost();
         Player player = desktop.getPlayer(card.getPlayerType());
         if(cost > player.getPower()){

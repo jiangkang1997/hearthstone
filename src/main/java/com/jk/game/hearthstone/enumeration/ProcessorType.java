@@ -6,6 +6,11 @@ package com.jk.game.hearthstone.enumeration;
 public enum ProcessorType {
 
     /**
+     * 基础处理器（空实现）
+     */
+    BASE,
+
+    /**
      * 出牌前置处理
      */
     PRE_USE_CARD,

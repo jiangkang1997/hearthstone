@@ -3,6 +3,7 @@ package com.jk.game.hearthstone.core.processer;
 import com.jk.game.hearthstone.card.Card;
 import com.jk.game.hearthstone.card.organism.Organism;
 import com.jk.game.hearthstone.data.Desktop;
+import com.jk.game.hearthstone.enumeration.ProcessorType;
 import com.jk.game.hearthstone.exception.IllegalOperationException;
 
 /**
@@ -11,7 +12,9 @@ import com.jk.game.hearthstone.exception.IllegalOperationException;
  *
  * @author jk
  */
-public interface UseCardPreprocessor extends Processor {
+public abstract class AbstractUseCardPreprocessor extends AbstractProcessor {
+
+    public final ProcessorType PROCESSOR_TYPE = ProcessorType.PRE_USE_CARD;
 
 
     /**
@@ -23,5 +26,5 @@ public interface UseCardPreprocessor extends Processor {
      * @param target 使用卡牌时指向的目标
      * @throws IllegalOperationException 非法的出牌操作
      */
-    void processBeforePlay(Desktop desktop, Card card, Organism target) throws IllegalOperationException;
+    abstract void processBeforePlay(Desktop desktop, Card card, Organism target) throws IllegalOperationException;
 }

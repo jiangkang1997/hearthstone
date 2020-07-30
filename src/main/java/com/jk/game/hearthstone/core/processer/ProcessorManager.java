@@ -1,5 +1,6 @@
 package com.jk.game.hearthstone.core.processer;
 
+import com.jk.game.hearthstone.card.Card;
 import com.jk.game.hearthstone.enumeration.ProcessorType;
 import org.springframework.util.CollectionUtils;
 
@@ -16,7 +17,7 @@ import java.util.Map;
  */
 public class ProcessorManager {
 
-    private Map<ProcessorType, List<Processor>> processorMap = new HashMap<>();
+    private Map<ProcessorType, List<Processor>> processorTypeMap = new HashMap<>();
 
     public ProcessorManager(){
         DefaultUseCardPreprocessor defaultUseCardPreprocessor = new DefaultUseCardPreprocessor();
@@ -28,13 +29,13 @@ public class ProcessorManager {
      * @param processorType 处理器类型
      * @param processor 卡片实例
      */
-    public synchronized void register(ProcessorType processorType,Processor processor){
-        if(processorMap.get(processorType) == null){
+    public synchronized void register(ProcessorType processorType, Processor processor){
+        if(processorTypeMap.get(processorType) == null){
             List<Processor> processors = new ArrayList<>();
             processors.add(processor);
-            processorMap.put(processorType,processors);
+            processorTypeMap.put(processorType,processors);
         }else {
-            processorMap.get(processorType).add(processor);
+            processorTypeMap.get(processorType).add(processor);
         }
     }
 
@@ -44,28 +45,46 @@ public class ProcessorManager {
      * @return 已注册的对应类型下所有的处理器
      */
     public List<Processor> getProcessors(ProcessorType processorType){
-        return processorMap.get(processorType);
+        return processorTypeMap.get(processorType);
     }
+
 
     /**
      * 移除一个实例对应的所有处理器
-     * @param processor 卡片实例
+     * @param owner 卡片实例
      */
-    public void removeProcessor(Processor processor){
-        for (List<Processor> processors : processorMap.values()) {
-            processors.remove(processor);
+    public void removeProcessor(Card owner){
+        List<Processor> remove = new ArrayList<>();
+        for (List<Processor> processors : processorTypeMap.values()) {
+            for (Processor processor : processors) {
+                if(processor.getOwner() == owner){
+                    remove.add(processor);
+                }
+            }
+            if(remove.size() != 0){
+                processors.removeAll(remove);
+                remove.clear();
+            }
         }
     }
 
     /**
      * 移除一个实例对应类型的处理器
-     * @param processor 卡片实例
+     * @param owner 卡片实例
      * @param processorType 处理器类型
      */
-    public void removeProcessor(Processor processor,ProcessorType processorType){
-        List<Processor> processors = processorMap.get(processorType);
+    public void removeProcessor(Card owner,ProcessorType processorType){
+        List<Processor> processors = processorTypeMap.get(processorType);
         if(!CollectionUtils.isEmpty(processors)){
-            processors.remove(processor);
+            List<Processor> remove = new ArrayList<>();
+            for (Processor processor : processors) {
+                if(processor.getOwner() == owner){
+                    remove.add(processor);
+                }
+            }
+            if(remove.size() != 0){
+                processors.removeAll(remove);
+            }
         }
     }
 
