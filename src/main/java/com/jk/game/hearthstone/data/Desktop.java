@@ -87,4 +87,5 @@ public class Desktop implements Cloneable {
     public List<Magic> getTasksAndSecrets(PlayerType playerType){
         return playerType == PlayerType.PLAYER_TYPE_MAIN ? mainTasksAndSecrets : secondTasksAndSecrets;
     }
+
 }

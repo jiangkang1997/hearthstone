@@ -1,6 +1,8 @@
 package com.jk.game.hearthstone.core.processer;
 
 
+import com.jk.game.hearthstone.card.Card;
+import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.ProcessorType;
 
 /**
@@ -15,6 +17,8 @@ public abstract class AbstractUseCardPostProcessor extends AbstractProcessor {
 
     /**
      * Triggered after the card is played
+     * @param desktop
+     * @param card
      */
-    public abstract void processAfterPlay();
+    public abstract void processAfterPlay(Desktop desktop, Card card);
 }

@@ -14,7 +14,6 @@ import lombok.Setter;
 public class Hero extends Organism implements Cloneable {
 
     private Integer skillCost = 2;
-    private Arms arms = null;
     private Integer armor = 0;
 
     private Boolean canSkill = true;
@@ -22,10 +21,6 @@ public class Hero extends Organism implements Cloneable {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        Object result =  super.clone();
-        if(this.arms!=null){
-            ((Hero)result).arms = (Arms) this.arms.clone();
-        }
-        return result;
+        return super.clone();
     }
 }

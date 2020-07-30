@@ -26,5 +26,5 @@ public abstract class AbstractUseCardPreprocessor extends AbstractProcessor {
      * @param target 使用卡牌时指向的目标
      * @throws IllegalOperationException 非法的出牌操作
      */
-    abstract void processBeforePlay(Desktop desktop, Card card, Organism target) throws IllegalOperationException;
+    public abstract void processBeforePlay(Desktop desktop, Card card, Organism target) throws IllegalOperationException;
 }
