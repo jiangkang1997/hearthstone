@@ -12,6 +12,7 @@ import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.ProcessorType;
 import com.jk.game.hearthstone.exception.IllegalOperationException;
 import com.jk.game.hearthstone.exception.InvalidOperationException;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ import java.util.List;
  *
  * @author jk
  */
+@Slf4j
 public class UseCardHandler {
 
     public static void usrCard(Desktop desktop, Card card, Organism target) throws IllegalOperationException {
@@ -36,20 +38,24 @@ public class UseCardHandler {
             //入场
             JoinHandler.join(desktop, card);
             //触发法术效果或者战吼
-            if(card instanceof NormalMagic){
+            if (card instanceof NormalMagic) {
                 ((NormalMagic) card).effect(desktop, target);
-            }else {
+            } else {
                 doBattleCry(desktop, card, target);
             }
             //出牌后置处理
             doUseCardPostProcessor(desktop, card);
-        }catch (InvalidOperationException ignored){}
+        } catch (InvalidOperationException ignored) {
+        } catch (IllegalAccessException | InstantiationException e) {
+            log.error("实例化处理器失败");
+            e.printStackTrace();
+        }
     }
 
     private static void doUseCardPreprocessor(Desktop desktop, Card card, Organism target) throws IllegalOperationException {
         List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.PRE_USE_CARD);
         for (Processor preprocessor : processors) {
-            ((AbstractUseCardPreprocessor)preprocessor).processBeforePlay(desktop, card, target);
+            ((AbstractUseCardPreprocessor) preprocessor).processBeforePlay(desktop, card, target);
         }
     }
 
@@ -62,10 +68,10 @@ public class UseCardHandler {
         //todo: 战吼后置处理，（死亡结算？）
     }
 
-    private static void doUseCardPostProcessor(Desktop desktop, Card card) {
+    private static void doUseCardPostProcessor(Desktop desktop, Card card) throws IllegalAccessException, InstantiationException {
         List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.POST_USE_CARD);
         for (Processor preprocessor : processors) {
-            ((AbstractUseCardPostProcessor)preprocessor).processAfterPlay(desktop, card);
+            ((AbstractUseCardPostProcessor) preprocessor).processAfterPlay(desktop, card);
         }
     }
 

@@ -11,8 +11,6 @@ import com.jk.game.hearthstone.enumeration.ProcessorType;
  */
 public interface Processor {
 
-    ProcessorType PROCESSOR_TYPE = ProcessorType.BASE;
-
     /**
      * 返回该处理器的拥有者
      * @return 处理器的拥有者
@@ -24,5 +22,11 @@ public interface Processor {
      * @param card 拥有者
      */
     void setOwner(Card card);
+
+    /**
+     * 获取处理器类型
+     * @return 处理器类型
+     */
+    ProcessorType getProcessorType();
 
 }

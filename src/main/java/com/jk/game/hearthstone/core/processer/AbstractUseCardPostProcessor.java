@@ -13,12 +13,15 @@ import com.jk.game.hearthstone.enumeration.ProcessorType;
  */
 public abstract class AbstractUseCardPostProcessor extends AbstractProcessor {
 
-    public final ProcessorType PROCESSOR_TYPE = ProcessorType.PRE_USE_CARD;
+    private final ProcessorType PROCESSOR_TYPE = ProcessorType.POST_USE_CARD;
 
     /**
-     * Triggered after the card is played
-     * @param desktop
-     * @param card
+     * 在出牌操作后触发
+     *
+     * @param desktop 桌面环境
+     * @param card 使用的卡牌
+     * @throws InstantiationException
+     * @throws IllegalAccessException
      */
-    public abstract void processAfterPlay(Desktop desktop, Card card);
+    public abstract void processAfterPlay(Desktop desktop, Card card) throws InstantiationException, IllegalAccessException;
 }

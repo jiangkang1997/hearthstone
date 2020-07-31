@@ -21,15 +21,17 @@ public class ProcessorManager {
 
     public ProcessorManager(){
         DefaultUseCardPreprocessor defaultUseCardPreprocessor = new DefaultUseCardPreprocessor();
-        register(ProcessorType.PRE_USE_CARD,defaultUseCardPreprocessor);
+        DefaultUseCardPostProcessor defaultUseCardPostProcessor = new DefaultUseCardPostProcessor();
+        register(defaultUseCardPreprocessor);
+        register(defaultUseCardPostProcessor);
     }
 
     /**
      * 注册处理器
-     * @param processorType 处理器类型
      * @param processor 卡片实例
      */
-    public synchronized void register(ProcessorType processorType, Processor processor){
+    public synchronized void register(Processor processor){
+        ProcessorType processorType = processor.getProcessorType();
         if(processorTypeMap.get(processorType) == null){
             List<Processor> processors = new ArrayList<>();
             processors.add(processor);
