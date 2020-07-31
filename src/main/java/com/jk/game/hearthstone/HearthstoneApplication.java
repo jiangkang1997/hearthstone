@@ -9,10 +9,11 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @SpringBootApplication
 @EnableAspectJAutoProxy
-public class HearthstoneApplication {
+public class  HearthstoneApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(HearthstoneApplication.class, args);
+
     }
 
 }
