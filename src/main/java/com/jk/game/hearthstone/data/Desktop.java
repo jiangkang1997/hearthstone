@@ -5,6 +5,7 @@ import com.jk.game.hearthstone.card.Card;
 import com.jk.game.hearthstone.card.Player;
 import com.jk.game.hearthstone.card.magic.Magic;
 import com.jk.game.hearthstone.card.organism.minion.Minion;
+import com.jk.game.hearthstone.core.aura.AuraManager;
 import com.jk.game.hearthstone.core.processer.ProcessorManager;
 import com.jk.game.hearthstone.enumeration.PlayerType;
 import lombok.Data;
@@ -47,6 +48,11 @@ public class Desktop implements Cloneable {
      * 事件处理器管理者
      */
     private ProcessorManager processorManager = new ProcessorManager();
+
+    /**
+     * 光环管理器
+     */
+    private AuraManager auraManager = new AuraManager();
 
     @Override
     public Object clone() throws CloneNotSupportedException {
