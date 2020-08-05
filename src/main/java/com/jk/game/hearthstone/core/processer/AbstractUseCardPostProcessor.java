@@ -24,4 +24,9 @@ public abstract class AbstractUseCardPostProcessor extends AbstractProcessor {
      * @throws IllegalAccessException
      */
     public abstract void processAfterPlay(Desktop desktop, Card card) throws InstantiationException, IllegalAccessException;
+
+    @Override
+    public ProcessorType getProcessorType() {
+        return PROCESSOR_TYPE;
+    }
 }

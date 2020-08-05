@@ -2,6 +2,7 @@ package com.jk.game.hearthstone.card.organism.minion;
 
 
 import com.jk.game.hearthstone.card.organism.Organism;
+import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,8 +18,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Minion extends Organism implements Cloneable {
 
-    public Minion(int cost, int attack, int health, String name, String desc, CardType cardType){
-        super(cost, attack, health, name, desc, cardType);
+    public Minion(Desktop desktop,int cost, int attack, int health, String name, String desc, CardType cardType){
+        super(desktop,cost, attack, health, name, desc, cardType);
     }
 
 

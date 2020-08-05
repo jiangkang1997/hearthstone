@@ -23,26 +23,25 @@ public class AbusiveSergeant extends Minion implements BattleCry {
 
     private static final String DESC = "战吼：在本回合中，使一个随从获得+2攻击力";
 
-    public AbusiveSergeant(){
-        super(1,1,1,"叫嚣的中士", DESC, CardType.CARD_TYPE_NEUTRAL);
+    public AbusiveSergeant(Desktop desktop){
+        super(desktop,1,1,1,"叫嚣的中士", DESC, CardType.CARD_TYPE_NEUTRAL);
     }
 
     @Override
-    public void effect(Desktop desktop, @NonNull Organism target) {
-        final Integer num = 2;
-        AbusiveSergeantAura aura = new AbusiveSergeantAura(this,target,num);
+    public void effect(Desktop desktop, Organism target) {
+        AbusiveSergeantAura aura = new AbusiveSergeantAura(target);
+        aura.setOwner(this);
         desktop.getAuraManager().register(aura);
     }
 
 
     static class AbusiveSergeantAura extends AbstractAttackAura{
 
-        AbusiveSergeantAura(Card owner, Organism target, Integer num){
+        AbusiveSergeantAura(Organism target){
             auraLife = AuraLife.AURA_LIFE_ONE_TURN;
             isSpecified = true;
-            setOwner(owner);
             this.target = target;
-            this.num = num;
+            num = 2;
         }
     }
 }

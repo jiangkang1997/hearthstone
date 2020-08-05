@@ -1,6 +1,7 @@
 package com.jk.game.hearthstone.card;
 
 
+import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
 import com.jk.game.hearthstone.enumeration.PlayerType;
 import lombok.Data;
@@ -21,8 +22,10 @@ public class Card implements Cloneable {
     protected PlayerType playerType;
     protected String name;
     protected String desc;
+    protected Desktop desktop;
 
-    public Card(int cost,String name,String desc,CardType cardType){
+    public Card(Desktop desktop,int cost, String name, String desc, CardType cardType){
+        this.desktop = desktop;
         this.cost = cost;
         this.name = name;
         this.desc = desc;

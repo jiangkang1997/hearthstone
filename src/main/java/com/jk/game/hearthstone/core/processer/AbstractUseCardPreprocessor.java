@@ -14,7 +14,7 @@ import com.jk.game.hearthstone.exception.IllegalOperationException;
  */
 public abstract class AbstractUseCardPreprocessor extends AbstractProcessor {
 
-    public final ProcessorType PROCESSOR_TYPE = ProcessorType.PRE_USE_CARD;
+    private final ProcessorType PROCESSOR_TYPE = ProcessorType.PRE_USE_CARD;
 
 
     /**
@@ -27,4 +27,9 @@ public abstract class AbstractUseCardPreprocessor extends AbstractProcessor {
      * @throws IllegalOperationException 非法的出牌操作
      */
     public abstract void processBeforePlay(Desktop desktop, Card card, Organism target) throws IllegalOperationException;
+
+    @Override
+    public ProcessorType getProcessorType() {
+        return PROCESSOR_TYPE;
+    }
 }

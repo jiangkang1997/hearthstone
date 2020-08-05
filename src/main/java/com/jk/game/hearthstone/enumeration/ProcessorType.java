@@ -19,4 +19,9 @@ public enum ProcessorType {
      * 出牌后置处理
      */
     POST_USE_CARD,
+
+    /**
+     * 入场后置
+     */
+    POST_JOIN;
 }

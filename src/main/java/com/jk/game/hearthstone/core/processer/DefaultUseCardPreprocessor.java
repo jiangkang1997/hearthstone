@@ -46,7 +46,7 @@ public class DefaultUseCardPreprocessor extends AbstractUseCardPreprocessor {
         TargetScope[] targetScopes = card.getClass().getAnnotationsByType(TargetScope.class);
         Class classScope = null;
         Stand stand = null;
-        if(targetScopes != null){
+        if(targetScopes != null && targetScopes.length > 0){
             for (TargetScope targetScope : targetScopes) {
                 classScope = targetScope.classScope();
                 stand = targetScope.stand();
