@@ -6,6 +6,8 @@ import com.jk.game.hearthstone.card.organism.Organism;
 import com.jk.game.hearthstone.card.organism.minion.Minion;
 import com.jk.game.hearthstone.config.BattleCry;
 import com.jk.game.hearthstone.core.aura.AbstractAttackAura;
+import com.jk.game.hearthstone.core.buff.AbstractAttackBuff;
+import com.jk.game.hearthstone.core.buff.AbstractBuff;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.AuraLife;
 import com.jk.game.hearthstone.enumeration.CardType;
@@ -23,25 +25,21 @@ public class AbusiveSergeant extends Minion implements BattleCry {
 
     private static final String DESC = "战吼：在本回合中，使一个随从获得+2攻击力";
 
-    public AbusiveSergeant(Desktop desktop){
-        super(desktop,1,1,1,"叫嚣的中士", DESC, CardType.CARD_TYPE_NEUTRAL);
+    public AbusiveSergeant(){
+        super(1,1,1,"叫嚣的中士", DESC, CardType.CARD_TYPE_NEUTRAL);
     }
 
     @Override
     public void effect(Desktop desktop, Organism target) {
-        AbusiveSergeantAura aura = new AbusiveSergeantAura(target);
-        aura.setOwner(this);
-        desktop.getAuraManager().register(aura);
+        AbusiveSergeantBuff buff = new AbusiveSergeantBuff(this);
+        target.registerBuff(buff);
     }
 
 
-    static class AbusiveSergeantAura extends AbstractAttackAura{
-
-        AbusiveSergeantAura(Organism target){
-            auraLife = AuraLife.AURA_LIFE_ONE_TURN;
-            isSpecified = true;
-            this.target = target;
-            num = 2;
+    static class AbusiveSergeantBuff extends AbstractAttackBuff {
+        AbusiveSergeantBuff(Card owner){
+            this.owner = owner;
+            attackNum = 2;
         }
     }
 }

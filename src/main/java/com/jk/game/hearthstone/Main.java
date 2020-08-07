@@ -35,5 +35,6 @@ public class Main {
 
         UseCardHandler.usrCard(desktop,wisp,null);
         UseCardHandler.usrCard(desktop,abusiveSergeant,wisp);
+        System.out.println(wisp.getAttack());
     }
 }

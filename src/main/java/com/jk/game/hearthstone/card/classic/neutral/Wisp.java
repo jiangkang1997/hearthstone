@@ -11,8 +11,8 @@ import com.jk.game.hearthstone.enumeration.CardType;
  */
 public class Wisp extends Minion {
 
-    public Wisp(Desktop desktop){
-        super(desktop,0,1,1,"小精灵","", CardType.CARD_TYPE_NEUTRAL);
+    public Wisp(){
+        super(0,1,1,"小精灵","", CardType.CARD_TYPE_NEUTRAL);
     }
 
 }

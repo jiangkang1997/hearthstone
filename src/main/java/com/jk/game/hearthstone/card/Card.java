@@ -22,10 +22,8 @@ public class Card implements Cloneable {
     protected PlayerType playerType;
     protected String name;
     protected String desc;
-    protected Desktop desktop;
 
-    public Card(Desktop desktop,int cost, String name, String desc, CardType cardType){
-        this.desktop = desktop;
+    public Card(int cost, String name, String desc, CardType cardType){
         this.cost = cost;
         this.name = name;
         this.desc = desc;
