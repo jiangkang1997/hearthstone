@@ -9,7 +9,7 @@ import com.jk.game.hearthstone.card.organism.Organism;
 public abstract class AbstractBuff implements Buff {
 
     protected Card owner;
-    private int age = 0;
+    protected int life = 0;
 
     @Override
     public Card getOwner() {
@@ -18,12 +18,12 @@ public abstract class AbstractBuff implements Buff {
 
 
     @Override
-    public int getAge() {
-        return age;
+    public int getLife() {
+        return life;
     }
 
     @Override
-    public void countAge() {
-        age++;
+    public void spendLife() {
+        life--;
     }
 }

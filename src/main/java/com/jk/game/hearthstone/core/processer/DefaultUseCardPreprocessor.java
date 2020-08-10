@@ -34,6 +34,7 @@ public class DefaultUseCardPreprocessor extends AbstractUseCardPreprocessor {
     }
 
     private void powerLegalityCheck(Desktop desktop, Card card) throws IllegalOperationException{
+        //todo: 血色绽放
         int cost = card.getCost();
         Player player = desktop.getPlayer(card.getPlayerType());
         if(cost > player.getPower()){

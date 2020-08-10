@@ -27,11 +27,12 @@ public class Organism extends Card implements Cloneable {
 
     protected Integer attack = 0;
     protected Integer health = 0;
+    protected boolean canAttack = false;
     protected List<Buff> buffList = new ArrayList<>();
     protected List<Aura> auraList = new ArrayList<>();
 
-    public Organism(int cost, int attack, int health, String name, String desc, CardType cardType){
-        super(cost, name, desc, cardType);
+    public Organism(Desktop desktop,int cost, int attack, int health, String name, String desc, CardType cardType){
+        super(desktop,cost, name, desc, cardType);
         this.attack = attack;
         this.health = health;
     }

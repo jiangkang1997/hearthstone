@@ -37,12 +37,8 @@ public class UseCardHandler {
             cards.remove(card);
             //入场
             JoinHandler.join(desktop, card);
-            //触发法术效果或者战吼
-            if (card instanceof NormalMagic) {
-                ((NormalMagic) card).effect(desktop, target);
-            } else {
-                doBattleCry(desktop, card, target);
-            }
+            //触发法术效果/战吼/连击/流放/初始化buff
+            executeEffect(desktop, card, target);
             //出牌后置处理
             doUseCardPostProcessor(desktop, card);
         } catch (InvalidOperationException ignored) {
@@ -60,18 +56,23 @@ public class UseCardHandler {
     }
 
 
-    private static void doBattleCry(Desktop desktop, Card card, Organism target) {
-        if (card instanceof BattleCry) {
-            ((BattleCry) card).effect(desktop, target);
-        }
-        //todo: 战吼后置处理，（死亡结算？）
-    }
-
     private static void doUseCardPostProcessor(Desktop desktop, Card card) throws IllegalAccessException, InstantiationException {
         List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.POST_USE_CARD);
         for (Processor preprocessor : processors) {
             ((AbstractUseCardPostProcessor) preprocessor).processAfterPlay(desktop, card);
         }
+    }
+
+    private static void executeEffect(Desktop desktop,Card card,Organism target){
+        //触发法术效果
+        if (card instanceof NormalMagic) {
+            ((NormalMagic) card).effect(desktop, target);
+        }
+        //触发战吼效果
+        else if (card instanceof BattleCry) {
+            ((BattleCry) card).effect(desktop, target);
+        }
+        //todo：连击，流放
     }
 
 }

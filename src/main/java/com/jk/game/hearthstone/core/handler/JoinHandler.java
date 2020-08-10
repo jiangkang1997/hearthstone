@@ -7,6 +7,8 @@ import com.jk.game.hearthstone.card.magic.secret.Secret;
 import com.jk.game.hearthstone.card.magic.task.Task;
 import com.jk.game.hearthstone.card.organism.hero.Hero;
 import com.jk.game.hearthstone.card.organism.minion.Minion;
+import com.jk.game.hearthstone.core.processer.AbstractJoinPostProcessor;
+import com.jk.game.hearthstone.core.processer.Processor;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.JoinType;
 import com.jk.game.hearthstone.enumeration.ProcessorType;
@@ -35,7 +37,7 @@ public class JoinHandler {
      * @param desktop
      * @param card
      */
-    public static void join(Desktop desktop, Card card) throws InvalidOperationException {
+    public static void join(Desktop desktop, Card card) throws InvalidOperationException, InstantiationException, IllegalAccessException {
         doJoinPreprocessor(desktop, card);
         if (card instanceof Arms) {
             doArmsJoin(desktop, (Arms) card);
@@ -75,7 +77,12 @@ public class JoinHandler {
         }
     }
 
-    private static void doJoinPostProcessor(Desktop desktop,Card card){
-        //todo: 入场后置 （鱼人招潮者）使用，召唤，招募都算
+    private static void doJoinPostProcessor(Desktop desktop,Card card) throws IllegalAccessException, InstantiationException {
+        //入场后置 （鱼人招潮者）使用，召唤，招募都算
+        List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.POST_JOIN);
+        for (Processor processor : processors) {
+            ((AbstractJoinPostProcessor) processor).processAfterJoin(desktop, card);
+        }
+        //哈哈海盗 入场后判断是否添加buff
     }
 }

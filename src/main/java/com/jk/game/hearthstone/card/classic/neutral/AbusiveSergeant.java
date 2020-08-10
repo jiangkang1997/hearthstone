@@ -25,8 +25,8 @@ public class AbusiveSergeant extends Minion implements BattleCry {
 
     private static final String DESC = "战吼：在本回合中，使一个随从获得+2攻击力";
 
-    public AbusiveSergeant(){
-        super(1,1,1,"叫嚣的中士", DESC, CardType.CARD_TYPE_NEUTRAL);
+    public AbusiveSergeant(Desktop desktop){
+        super(desktop,1,1,1,"叫嚣的中士", DESC, CardType.CARD_TYPE_NEUTRAL);
     }
 
     @Override
@@ -39,6 +39,7 @@ public class AbusiveSergeant extends Minion implements BattleCry {
     static class AbusiveSergeantBuff extends AbstractAttackBuff {
         AbusiveSergeantBuff(Card owner){
             this.owner = owner;
+            life = 1;
             attackNum = 2;
         }
     }

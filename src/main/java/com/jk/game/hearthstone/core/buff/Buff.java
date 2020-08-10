@@ -27,14 +27,14 @@ public interface Buff {
     BuffType getBuffType();
 
     /**
-     * 获取buff的存活回合数
+     * 获取buff的持续时间
      *
-     * @return buff的存活回合数
+     * @return buff的持续时间
      */
-    int getAge();
+    int getLife();
 
     /**
-     * buff的存活回合数+1
+     * buff持续时间减一回合
      */
-    void countAge();
+    void spendLife();
 }

@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Card implements Cloneable {
 
+    protected Desktop desktop;
     protected Integer cost;
     protected Integer overload = 0;
     protected CardType cardType;
@@ -23,7 +24,8 @@ public class Card implements Cloneable {
     protected String name;
     protected String desc;
 
-    public Card(int cost, String name, String desc, CardType cardType){
+    public Card(Desktop desktop,int cost, String name, String desc, CardType cardType){
+        this.desktop = desktop;
         this.cost = cost;
         this.name = name;
         this.desc = desc;
