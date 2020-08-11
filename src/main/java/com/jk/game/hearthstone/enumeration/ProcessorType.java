@@ -23,5 +23,15 @@ public enum ProcessorType {
     /**
      * 入场后置
      */
-    POST_JOIN;
+    POST_JOIN,
+
+    /**
+     * 英雄技能前置
+     */
+    PRE_HERO_SKILL,
+
+    /**
+     * 英雄技能后置
+     */
+    POST_HERO_SKILL;
 }

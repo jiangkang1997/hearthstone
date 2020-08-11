@@ -1,7 +1,7 @@
 package com.jk.game.hearthstone.card.organism.hero;
 
-import com.jk.game.hearthstone.card.arms.Arms;
 import com.jk.game.hearthstone.card.organism.Organism;
+import com.jk.game.hearthstone.data.Desktop;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,14 +13,35 @@ import lombok.Setter;
 @Setter
 public class Hero extends Organism implements Cloneable {
 
-    private Integer skillCost = 2;
-    private Integer armor = 0;
+    /**
+     * 英雄技能耗费
+     */
+    protected Integer skillCost = 2;
 
-    private Boolean canSkill = true;
+    /**
+     * 护甲
+     */
+    protected Integer armor = 0;
+
+    /**
+     * 是否可以使用英雄技能
+     */
+    protected Boolean canSkill = true;
 
 
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+
+    @Override
+    public int getAttack() {
+        //自身攻击力加上武器的攻击力
+        int attack =  super.getAttack();
+        int armsAttack = desktop.getPlayer(getPlayerType()).getArms().getAttack();
+        return attack + armsAttack;
+    }
+
+
+    public void skill(Desktop desktop,Organism target){}
 }

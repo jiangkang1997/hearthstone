@@ -21,11 +21,10 @@ public enum PlayerType {
 
     /**
      * 获取对手的类型
-     * @param playerType 当前玩家类型
      * @return 对手的类型
      */
-    public static PlayerType getOpponentType(PlayerType playerType){
-        if(playerType == PLAYER_TYPE_MAIN){
+    public PlayerType getOpponentType(){
+        if(this == PLAYER_TYPE_MAIN){
             return PLAYER_TYPE_SECOND;
         }else {
             return PLAYER_TYPE_MAIN;

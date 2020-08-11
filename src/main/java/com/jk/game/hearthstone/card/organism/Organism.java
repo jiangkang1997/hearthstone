@@ -62,4 +62,9 @@ public class Organism extends Card implements Cloneable {
     public void registerAura(Aura aura){
         auraList.add(aura);
     }
+
+    public boolean getCanAttack(){
+        //todo：能否攻击的基本逻辑 包括冲锋，突袭，冰冻等
+        return canAttack;
+    }
 }

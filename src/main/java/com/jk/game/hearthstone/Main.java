@@ -25,9 +25,9 @@ public class Main {
         desktop.setSecondPlayer(secondPlayer);
         mainPlayer.setPower(2);
 
-        Wisp wisp = new Wisp();
+        Wisp wisp = new Wisp(desktop);
         wisp.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
-        AbusiveSergeant abusiveSergeant = new AbusiveSergeant();
+        AbusiveSergeant abusiveSergeant = new AbusiveSergeant(desktop);
         abusiveSergeant.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
 
         desktop.getMainCards().add(wisp);

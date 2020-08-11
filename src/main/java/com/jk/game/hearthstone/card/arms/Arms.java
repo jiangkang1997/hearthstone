@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class Arms extends Card implements Cloneable {
 
-    protected Integer att;
+    protected Integer attack;
     protected Integer durable;
 
 
