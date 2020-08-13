@@ -2,6 +2,8 @@ package com.jk.game.hearthstone.card.organism.hero;
 
 import com.jk.game.hearthstone.card.organism.Organism;
 import com.jk.game.hearthstone.data.Desktop;
+import com.jk.game.hearthstone.enumeration.CardType;
+import com.jk.game.hearthstone.enumeration.PlayerType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +13,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class Hero extends Organism implements Cloneable {
+public class Hero extends Organism{
 
     /**
      * 英雄技能耗费
@@ -28,10 +30,32 @@ public class Hero extends Organism implements Cloneable {
      */
     protected Boolean canSkill = true;
 
+    /**
+     * 副本
+     */
+    private Hero duplicate;
+
+    private static final int ATTACK = 0;
+    private static final int HEALTH = 30;
+
+    public Hero(Desktop desktop, String name, PlayerType playerType){
+        super(desktop,0,ATTACK,HEALTH,name,"", CardType.CARD_TYPE_MAGE);
+        this.playerType = playerType;
+    }
+
+    public Hero(Desktop desktop,String name,int skillCost,int armor,PlayerType playerType){
+        this(desktop,name,playerType);
+        this.skillCost = skillCost;
+        this.armor = armor;
+    }
+
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Hero clone() throws CloneNotSupportedException {
+        if(duplicate == null){
+            duplicate = (Hero) super.clone();
+        }
+        return duplicate;
     }
 
     @Override

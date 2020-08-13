@@ -1,7 +1,6 @@
 package com.jk.game.hearthstone.core.buff;
 
 import com.jk.game.hearthstone.card.Card;
-import com.jk.game.hearthstone.card.organism.Organism;
 
 /**
  * @author jk
@@ -10,6 +9,8 @@ public abstract class AbstractBuff implements Buff {
 
     protected Card owner;
     protected int life = 0;
+
+    private AbstractBuff duplicate;
 
     @Override
     public Card getOwner() {
@@ -25,5 +26,16 @@ public abstract class AbstractBuff implements Buff {
     @Override
     public void spendLife() {
         life--;
+    }
+
+    @Override
+    public AbstractBuff clone() throws CloneNotSupportedException {
+        if(duplicate == null){
+            duplicate = (AbstractBuff) super.clone();
+            if(owner != null){
+                duplicate.owner = owner.clone();
+            }
+        }
+        return duplicate;
     }
 }

@@ -14,6 +14,7 @@ import com.jk.game.hearthstone.enumeration.JoinType;
 import com.jk.game.hearthstone.enumeration.ProcessorType;
 import com.jk.game.hearthstone.exception.IllegalOperationException;
 import com.jk.game.hearthstone.exception.InvalidOperationException;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -80,9 +81,10 @@ public class JoinHandler {
     private static void doJoinPostProcessor(Desktop desktop,Card card) throws IllegalAccessException, InstantiationException {
         //入场后置 （鱼人招潮者）使用，召唤，招募都算
         List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.POST_JOIN);
-        for (Processor processor : processors) {
-            ((AbstractJoinPostProcessor) processor).processAfterJoin(desktop, card);
+        if(!CollectionUtils.isEmpty(processors)){
+            for (Processor processor : processors) {
+                ((AbstractJoinPostProcessor) processor).processAfterJoin(desktop, card);
+            }
         }
-        //哈哈海盗 入场后判断是否添加buff
     }
 }

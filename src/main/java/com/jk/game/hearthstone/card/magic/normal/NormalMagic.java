@@ -1,6 +1,7 @@
 package com.jk.game.hearthstone.card.magic.normal;
 
 import com.jk.game.hearthstone.card.magic.Magic;
+import com.jk.game.hearthstone.card.magic.secret.Secret;
 import com.jk.game.hearthstone.card.organism.Organism;
 import com.jk.game.hearthstone.data.Desktop;
 
@@ -10,6 +11,16 @@ import com.jk.game.hearthstone.data.Desktop;
  * @author jk
  */
 public class NormalMagic extends Magic {
+
+    private NormalMagic duplicate;
+
+    @Override
+    public NormalMagic clone() throws CloneNotSupportedException {
+        if(duplicate == null){
+            duplicate = (NormalMagic) super.clone();
+        }
+        return duplicate;
+    }
 
     /**
      * 法术效果

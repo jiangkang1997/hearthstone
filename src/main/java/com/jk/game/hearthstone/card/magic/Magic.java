@@ -8,4 +8,16 @@ import com.jk.game.hearthstone.card.Card;
  */
 public class Magic extends Card {
 
+    /**
+     * 副本
+     */
+    private Magic duplicate;
+
+    @Override
+    public Magic clone() throws CloneNotSupportedException {
+        if(duplicate == null){
+            duplicate = (Magic) super.clone();
+        }
+        return duplicate;
+    }
 }

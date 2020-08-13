@@ -1,7 +1,6 @@
 package com.jk.game.hearthstone.core.aura;
 
 import com.jk.game.hearthstone.card.Card;
-import com.jk.game.hearthstone.card.organism.Organism;
 import com.jk.game.hearthstone.enumeration.AuraLife;
 import com.jk.game.hearthstone.enumeration.AuraType;
 
@@ -78,18 +77,4 @@ public class AuraManager {
         return registerAuraMap.get(auraType);
     }
 
-    /**
-     * 查询某生物被附加的所有的指定类型的光环
-     * @param auraType 光环类型
-     * @param target 被附加的目标
-     * @return 光环
-     */
-    /*public List<Aura> getAuraByTypeAndTarget(AuraType auraType, Organism target){
-        List<Aura> result = new ArrayList<>();
-        List<Aura> auras = registerAuraMap.get(auraType);
-        for (Aura aura : auras) {
-            //if(aura)
-        }
-
-    }*/
 }

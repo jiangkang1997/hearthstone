@@ -2,7 +2,6 @@ package com.jk.game.hearthstone.card.organism;
 
 
 import com.jk.game.hearthstone.card.Card;
-import com.jk.game.hearthstone.core.aura.Aura;
 import com.jk.game.hearthstone.core.buff.AbstractAttackBuff;
 import com.jk.game.hearthstone.core.buff.Buff;
 import com.jk.game.hearthstone.data.Desktop;
@@ -11,6 +10,7 @@ import com.jk.game.hearthstone.enumeration.CardType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +23,14 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Organism extends Card implements Cloneable {
+public class Organism extends Card{
 
     protected Integer attack = 0;
     protected Integer health = 0;
     protected boolean canAttack = false;
     protected List<Buff> buffList = new ArrayList<>();
-    protected List<Aura> auraList = new ArrayList<>();
+
+    private Organism duplicate;
 
     public Organism(Desktop desktop,int cost, int attack, int health, String name, String desc, CardType cardType){
         super(desktop,cost, name, desc, cardType);
@@ -51,17 +52,25 @@ public class Organism extends Card implements Cloneable {
 
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Organism clone() throws CloneNotSupportedException {
+        if(duplicate == null){
+            Organism result = (Organism) super.clone();
+            duplicate = result;
+            if(!CollectionUtils.isEmpty(buffList)){
+                List<Buff> buffListClone = new ArrayList<>();
+                for (Buff buff : buffList) {
+                    buffListClone.add(buff.clone());
+                }
+                result.setBuffList(buffListClone);
+            }
+        }
+        return duplicate;
     }
 
     public void registerBuff(Buff buff){
         buffList.add(buff);
     }
 
-    public void registerAura(Aura aura){
-        auraList.add(aura);
-    }
 
     public boolean getCanAttack(){
         //todo：能否攻击的基本逻辑 包括冲锋，突袭，冰冻等

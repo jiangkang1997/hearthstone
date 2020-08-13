@@ -41,8 +41,13 @@ public class Player implements Cloneable {
      */
     private Arms arms;
 
-    public void costPower(int cost,int overload) throws IllegalOperationException {
-        if(power - cost < 0){
+    /**
+     * 副本
+     */
+    private Player duplicate;
+
+    public void costPower(int cost, int overload) throws IllegalOperationException {
+        if (power - cost < 0) {
             throw new IllegalOperationException("我需要更多的法力值");
         }
         power = power - cost;
@@ -50,17 +55,19 @@ public class Player implements Cloneable {
     }
 
 
-
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        Object result = super.clone();
-        if(hero != null){
-            ((Player) result).hero = (Hero) hero.clone();
+    public Player clone() throws CloneNotSupportedException {
+        if (duplicate == null) {
+            Player result = (Player) super.clone();
+            duplicate = result;
+            if (hero != null) {
+                result.hero = hero.clone();
+            }
+            if (arms != null) {
+                result.arms = (Arms) arms.clone();
+            }
         }
-        if(arms != null){
-            ((Player) result).arms = (Arms) arms.clone();
-        }
-        return result;
+        return duplicate;
     }
 
 }

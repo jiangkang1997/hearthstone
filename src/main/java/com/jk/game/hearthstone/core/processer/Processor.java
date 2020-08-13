@@ -9,7 +9,7 @@ import com.jk.game.hearthstone.enumeration.ProcessorType;
  *
  * @author jk
  */
-public interface Processor {
+public interface Processor extends Cloneable{
 
     /**
      * 返回该处理器的拥有者
@@ -29,4 +29,5 @@ public interface Processor {
      */
     ProcessorType getProcessorType();
 
+    Processor clone() throws CloneNotSupportedException;
 }

@@ -9,7 +9,7 @@ import com.jk.game.hearthstone.enumeration.BuffType;
  *
  * @author jk
  */
-public interface Buff {
+public interface Buff extends Cloneable {
 
     /**
      * 获取buff的释放者
@@ -37,4 +37,6 @@ public interface Buff {
      * buff持续时间减一回合
      */
     void spendLife();
+
+    Buff clone() throws CloneNotSupportedException;
 }

@@ -1,6 +1,8 @@
 package com.jk.game.hearthstone.card.arms;
 
 import com.jk.game.hearthstone.card.Card;
+import com.jk.game.hearthstone.card.magic.normal.NormalMagic;
+import com.jk.game.hearthstone.data.Desktop;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,14 +13,21 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Arms extends Card implements Cloneable {
+public class Arms extends Card{
 
     protected Integer attack;
     protected Integer durable;
 
+    /**
+     * 副本
+     */
+    private Arms duplicate;
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Arms clone() throws CloneNotSupportedException {
+        if(duplicate == null){
+            duplicate = (Arms) super.clone();
+        }
+        return duplicate;
     }
 }

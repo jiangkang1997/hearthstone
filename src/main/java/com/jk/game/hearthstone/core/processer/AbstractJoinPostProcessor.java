@@ -10,7 +10,7 @@ import com.jk.game.hearthstone.enumeration.ProcessorType;
  *
  * @author jk
  */
-public abstract class AbstractJoinPostProcessor {
+public abstract class AbstractJoinPostProcessor extends AbstractProcessor{
 
     private final ProcessorType PROCESSOR_TYPE = ProcessorType.POST_JOIN;
 
@@ -21,4 +21,9 @@ public abstract class AbstractJoinPostProcessor {
      * @param card 使用的卡牌
      */
     public abstract void processAfterJoin(Desktop desktop, Card card) throws InstantiationException, IllegalAccessException;
+
+    @Override
+    public ProcessorType getProcessorType() {
+        return PROCESSOR_TYPE;
+    }
 }

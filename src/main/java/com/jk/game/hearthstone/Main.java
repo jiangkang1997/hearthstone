@@ -15,12 +15,12 @@ import com.jk.game.hearthstone.exception.IllegalOperationException;
  */
 public class Main {
 
-    public static void main(String[] args) throws IllegalOperationException {
+    public static void main(String[] args) throws IllegalOperationException, CloneNotSupportedException {
         Desktop desktop = new Desktop();
         Player mainPlayer = new Player();
         Player secondPlayer = new Player();
-        mainPlayer.setHero(new Hero());
-        secondPlayer.setHero(new Hero());
+        mainPlayer.setHero(new Hero(desktop,"敌人",PlayerType.PLAYER_TYPE_MAIN));
+        secondPlayer.setHero(new Hero(desktop,"玩家",PlayerType.PLAYER_TYPE_SECOND));
         desktop.setMainPlayer(mainPlayer);
         desktop.setSecondPlayer(secondPlayer);
         mainPlayer.setPower(2);
@@ -36,5 +36,7 @@ public class Main {
         UseCardHandler.usrCard(desktop,wisp,null);
         UseCardHandler.usrCard(desktop,abusiveSergeant,wisp);
         System.out.println(wisp.getAttack());
+
+        Desktop clone = desktop.clone();
     }
 }

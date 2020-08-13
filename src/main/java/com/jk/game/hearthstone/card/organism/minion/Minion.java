@@ -16,12 +16,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Minion extends Organism implements Cloneable {
+public class Minion extends Organism{
 
     /**
      * 冲锋
      */
     protected boolean charge = false;
+
+    /**
+     * 副本
+     */
+    private Minion duplicate;
 
     public Minion(Desktop desktop,int cost, int attack, int health, String name, String desc, CardType cardType){
         super(desktop,cost, attack, health, name, desc, cardType);
@@ -29,7 +34,10 @@ public class Minion extends Organism implements Cloneable {
 
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Minion clone() throws CloneNotSupportedException {
+        if(duplicate == null){
+            duplicate = (Minion) super.clone();
+        }
+        return duplicate;
     }
 }
