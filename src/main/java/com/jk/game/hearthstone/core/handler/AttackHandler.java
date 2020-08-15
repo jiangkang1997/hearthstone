@@ -1,11 +1,19 @@
 package com.jk.game.hearthstone.core.handler;
 
+import com.jk.game.hearthstone.card.Card;
 import com.jk.game.hearthstone.card.Player;
+import com.jk.game.hearthstone.card.organism.Organism;
 import com.jk.game.hearthstone.card.organism.minion.Minion;
+import com.jk.game.hearthstone.core.processer.AbstractHeroAttackPostProcessor;
+import com.jk.game.hearthstone.core.processer.AbstractHeroAttackPreProcessor;
+import com.jk.game.hearthstone.core.processer.AbstractMinionAttackPreProcessor;
+import com.jk.game.hearthstone.core.processer.Processor;
 import com.jk.game.hearthstone.data.AttackParameters;
 import com.jk.game.hearthstone.data.AttackTarget;
 import com.jk.game.hearthstone.data.Desktop;
+import com.jk.game.hearthstone.enumeration.ProcessorType;
 import com.jk.game.hearthstone.exception.AttackException;
+import com.jk.game.hearthstone.exception.IllegalOperationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 
@@ -19,43 +27,6 @@ import java.util.List;
 public class AttackHandler {
 
     protected  static String message;
-
-    private static boolean attackCheck( AttackTarget attackTarget,AttackParameters attackParameters){
-        Player player1 = attackParameters.getMainPlayer ();
-        Player player2 = attackParameters.getSecondPlayer ();
-        Minion minion1 = attackParameters.getMainMinion ();
-        Minion minion2 = attackParameters.getSecondMinion ();
-
-
-        if(player1!= null && player1 != attackTarget.getMainPlayer ()){
-            message ="玩家1异常";
-        }
-
-        if(player2!= null && player2 != attackTarget.getSecondPlayer ()){
-            message ="玩家2异常";
-        }else if(attackTarget.getRidiculeMinions ()!=null && attackTarget.getRidiculeMinions ().size ()>0){
-            message = "必须先攻击有嘲讽的随从";
-        }
-
-        if(!attackTarget.getMainMinions ().contains (minion1)){
-            message ="未找到该随从";
-        }
-
-        if(!attackTarget.getCommonlyMinions ().contains (minion2)
-                && !attackTarget.getRidiculeMinions ().contains (minion2)){
-            message ="未找到该随从";
-        }
-
-        if(minion2!=null
-                && !attackTarget.getRidiculeMinions ().contains (minion2)){
-            message = "必须先攻击有嘲讽的随从";
-        }
-
-        if(StringUtils.isEmpty (message)){
-            return true;
-        }
-        return false;
-    }
 
     //攻击
     public static void doAttack(Desktop desktop , AttackParameters attackParameters) throws AttackException{
@@ -76,7 +47,7 @@ public class AttackHandler {
 
         if(player1!= null) {
             if (player2 != null) {
-                //TODO 攻击前判断
+                //TODO 攻击前判断未终止的情况下
                 int playerHeath = player2.getHero ().getArmor ()
                         + player2.getHero ().getHealth () - player1.getHero ().getAttack ();
                 player2.getHero ().setHealth (playerHeath);
@@ -85,7 +56,9 @@ public class AttackHandler {
                     int duplicate = player1.getArms ().getDurable () - 1;
                     player1.getArms ().setDurable (duplicate);
                 }
-                //TODO 攻击后判断，进入结算
+
+                //TODO 攻击后判断
+                //TODO 进入结算
 
             } else if (minion2 != null) {
                 //TODO 攻击前判断
@@ -96,20 +69,22 @@ public class AttackHandler {
                     minionHeath = 0;
                 }
                 minion2.setHealth (minionHeath);
-                //TODO 攻击后判断，进入结算
+                //TODO 攻击后判断
+                //TODO 进入结算
             }
         }
 
         if(minion1!= null){
                 if(player2 != null){
-                    //TODO 攻击前判断
+                    //TODO 攻击前判断未终止的情况下
                     int playerHeath =  player2.getHero ().getArmor()
                             + player2.getHero ().getHealth () - minion1.getAttack ();
                     player2.getHero ().setHealth (playerHeath);
-                    //TODO 攻击后判断，进入结算
+                    //TODO 攻击后判断
+                    //TODO 进入结算
 
                 }else if(minion2 != null){
-                    //TODO 攻击前判断
+                    //TODO 攻击前判断未终止的情况下
 
                     int minionHeath =  minion1.getHealth () - minion2.getAttack ();
                     if(minionHeath < 0){
@@ -123,7 +98,8 @@ public class AttackHandler {
                     }
                     minion2.setHealth (minionHeath);
 
-                    //TODO 攻击后判断，进入结算
+                    //TODO 攻击后判断
+                    //TODO 进入结算
                 }
         }
 
@@ -163,5 +139,70 @@ public class AttackHandler {
         }
 
         return attackTarget;
+    }
+
+    private static boolean attackCheck( AttackTarget attackTarget,AttackParameters attackParameters){
+        Player player1 = attackParameters.getMainPlayer ();
+        Player player2 = attackParameters.getSecondPlayer ();
+        Minion minion1 = attackParameters.getMainMinion ();
+        Minion minion2 = attackParameters.getSecondMinion ();
+
+
+        if(player1!= null && player1 != attackTarget.getMainPlayer ()){
+            message ="玩家1异常";
+        }
+
+        if(player2!= null && player2 != attackTarget.getSecondPlayer ()){
+            message ="玩家2异常";
+        }else if(attackTarget.getRidiculeMinions ()!=null && attackTarget.getRidiculeMinions ().size ()>0){
+            message = "必须先攻击有嘲讽的随从";
+        }
+
+        if(!attackTarget.getMainMinions ().contains (minion1)){
+            message ="未找到该随从";
+        }
+
+        if(!attackTarget.getCommonlyMinions ().contains (minion2)
+                && !attackTarget.getRidiculeMinions ().contains (minion2)){
+            message ="未找到该随从";
+        }
+
+        if(minion2!=null
+                && !attackTarget.getRidiculeMinions ().contains (minion2)){
+            message = "必须先攻击有嘲讽的随从";
+        }
+
+        if(StringUtils.isEmpty (message)){
+            return true;
+        }
+        return false;
+    }
+
+    private static void doHeroAttackPreprocessor(Desktop desktop, Card card, Organism target) throws IllegalOperationException {
+        List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.PRE_HEROATTACK_SKILL);
+        for (Processor preprocessor : processors) {
+            ((AbstractHeroAttackPreProcessor) preprocessor).processBeforeHeroAttack (desktop, card, target);
+        }
+    }
+
+    private static void doHeroAttackPostprocessor(Desktop desktop, Card card, Organism target) throws IllegalOperationException {
+        List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.POST_HEROATTACK_SKILL);
+        for (Processor preprocessor : processors) {
+            ((AbstractHeroAttackPostProcessor) preprocessor).processAfterHeroAttack (desktop, card, target);
+        }
+    }
+
+    private static void doMinionAttackPreprocessor(Desktop desktop, Card card, Organism target) throws IllegalOperationException {
+        List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.PRE_MINIONATTACK_SKILL);
+        for (Processor preprocessor : processors) {
+            ((AbstractMinionAttackPreProcessor) preprocessor).processBeforeMinionAttack (desktop, card, target);
+        }
+    }
+
+    private static void doMinionAttackPostprocessor(Desktop desktop, Card card, Organism target) throws IllegalOperationException {
+        List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.POST_MINIONATTACK_SKILL);
+        for (Processor preprocessor : processors) {
+            ((AbstractMinionAttackPreProcessor) preprocessor).processBeforeMinionAttack (desktop, card, target);
+        }
     }
 }

@@ -33,5 +33,25 @@ public enum ProcessorType {
     /**
      * 英雄技能后置
      */
-    POST_HERO_SKILL;
+    POST_HERO_SKILL,
+
+    /**
+     * 英雄攻击前置
+     */
+    PRE_HEROATTACK_SKILL,
+
+    /**
+     * 英雄攻击后置
+     */
+    POST_HEROATTACK_SKILL,
+
+    /**
+     * 随从攻击前置
+     */
+    PRE_MINIONATTACK_SKILL,
+
+    /**
+     * 随从攻击后置
+     */
+    POST_MINIONATTACK_SKILL;
 }
