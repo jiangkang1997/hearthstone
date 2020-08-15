@@ -28,6 +28,7 @@ public class Organism extends Card{
     protected Integer attack = 0;
     protected Integer health = 0;
     protected boolean canAttack = false;
+    protected boolean ridicule = false;
     protected List<Buff> buffList = new ArrayList<>();
 
     private Organism duplicate;
@@ -75,5 +76,15 @@ public class Organism extends Card{
     public boolean getCanAttack(){
         //todo：能否攻击的基本逻辑 包括冲锋，突袭，冰冻等
         return canAttack;
+    }
+
+    public boolean getRidicule(){
+
+        for (Buff buff : buffList) {
+            if(buff.getBuffType() == BuffType.BUFF_TYPE_RIDICULE){
+                return !ridicule;
+            }
+        }
+        return ridicule;
     }
 }
