@@ -1,7 +1,6 @@
 package com.jk.game.hearthstone.core.processer;
 
-import com.jk.game.hearthstone.card.Card;
-import com.jk.game.hearthstone.card.organism.Organism;
+import com.jk.game.hearthstone.data.AttackParameters;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.ProcessorType;
 import com.jk.game.hearthstone.exception.IllegalOperationException;
@@ -20,7 +19,7 @@ public abstract class AbstractMinionAttackPreProcessor extends AbstractProcessor
      * @Author: lb
      * @Date: 2020/8/16
      */
-    public abstract void processBeforeMinionAttack(Desktop desktop, Card card, Organism target) throws IllegalOperationException;
+    public abstract void processBeforeMinionAttack(Desktop desktop, AttackParameters attackParameters) throws IllegalOperationException;
 
     @Override
     public ProcessorType getProcessorType() {

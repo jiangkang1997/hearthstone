@@ -1,13 +1,8 @@
 package com.jk.game.hearthstone.core.handler;
 
-import com.jk.game.hearthstone.card.Card;
 import com.jk.game.hearthstone.card.Player;
-import com.jk.game.hearthstone.card.organism.Organism;
 import com.jk.game.hearthstone.card.organism.minion.Minion;
-import com.jk.game.hearthstone.core.processer.AbstractHeroAttackPostProcessor;
-import com.jk.game.hearthstone.core.processer.AbstractHeroAttackPreProcessor;
-import com.jk.game.hearthstone.core.processer.AbstractMinionAttackPreProcessor;
-import com.jk.game.hearthstone.core.processer.Processor;
+import com.jk.game.hearthstone.core.processer.*;
 import com.jk.game.hearthstone.data.AttackParameters;
 import com.jk.game.hearthstone.data.AttackTarget;
 import com.jk.game.hearthstone.data.Desktop;
@@ -29,7 +24,7 @@ public class AttackHandler {
     protected  static String message;
 
     //攻击
-    public static void doAttack(Desktop desktop , AttackParameters attackParameters) throws AttackException{
+    public static void doAttack(Desktop desktop , AttackParameters attackParameters) throws AttackException, IllegalOperationException {
         AttackTarget attackTarget = getAttackTarget (desktop);
 
         try {
@@ -39,7 +34,6 @@ public class AttackHandler {
             e.printStackTrace ();
         }
 
-
         Player player1 = attackParameters.getMainPlayer ();
         Player player2 = attackParameters.getSecondPlayer ();
         Minion minion1 = attackParameters.getMainMinion ();
@@ -47,59 +41,97 @@ public class AttackHandler {
 
         if(player1!= null) {
             if (player2 != null) {
-                //TODO 攻击前判断未终止的情况下
-                int playerHeath = player2.getHero ().getArmor ()
-                        + player2.getHero ().getHealth () - player1.getHero ().getAttack ();
-                player2.getHero ().setHealth (playerHeath);
 
-                if (StringUtils.isEmpty (player1.getArms ()) && player1.getArms ().getDurable () > 1) {
-                    int duplicate = player1.getArms ().getDurable () - 1;
-                    player1.getArms ().setDurable (duplicate);
+                Desktop desktop1 = doHeroAttackPreprocessor (desktop,attackParameters);
+
+                attackTarget = getAttackTarget (desktop1);
+
+                // 攻击前判断未终止的情况下
+                if(attackCheck(attackTarget,attackParameters)){
+                    int playerHeath = player2.getHero ().getArmor ()
+                            + player2.getHero ().getHealth () - player1.getHero ().getAttack ();
+                    player2.getHero ().setHealth (playerHeath);
+
+                    if (StringUtils.isEmpty (player1.getArms ()) && player1.getArms ().getDurable () > 1) {
+                        int duplicate = player1.getArms ().getDurable () - 1;
+                        player1.getArms ().setDurable (duplicate);
+                    }
+                    desktop1.setMainPlayer (player1);
+                    desktop1.setSecondPlayer (player2);
+                    //攻击后判断
+                    desktop1 = doHeroAttackPostprocessor (desktop1,attackParameters);
+                    //TODO 进入结算
                 }
-
-                //TODO 攻击后判断
-                //TODO 进入结算
-
             } else if (minion2 != null) {
-                //TODO 攻击前判断
-                int playerHeath = player1.getHero ().getHealth () - minion2.getAttack ();
-                player1.getHero ().setHealth (playerHeath);
-                int minionHeath = minion2.getHealth () - player1.getHero ().getAttack ();
-                if (minionHeath < 0) {
-                    minionHeath = 0;
+                Desktop desktop1 = doHeroAttackPreprocessor (desktop,attackParameters);
+                // 攻击前判断
+                attackTarget = getAttackTarget (desktop1);
+
+                if(attackCheck(attackTarget,attackParameters)) {
+                    int playerHeath = player1.getHero ().getHealth () - minion2.getAttack ();
+                    player1.getHero ().setHealth (playerHeath);
+                    int minionHeath = minion2.getHealth () - player1.getHero ().getAttack ();
+                    if (minionHeath < 0) {
+                        minionHeath = 0;
+                    }
+                    minion2.setHealth (minionHeath);
+
+                    desktop1.setMainPlayer (player1);
+
+                    //TODO 确定场面被攻击随从
+                    for(Minion minion :desktop1.getSecondMinions()){
+
+                    }
+
+                    // 攻击后判断
+                    desktop1 = doHeroAttackPostprocessor (desktop1,attackParameters);
+                    //TODO 进入结算
                 }
-                minion2.setHealth (minionHeath);
-                //TODO 攻击后判断
-                //TODO 进入结算
             }
         }
 
         if(minion1!= null){
                 if(player2 != null){
-                    //TODO 攻击前判断未终止的情况下
-                    int playerHeath =  player2.getHero ().getArmor()
-                            + player2.getHero ().getHealth () - minion1.getAttack ();
-                    player2.getHero ().setHealth (playerHeath);
-                    //TODO 攻击后判断
-                    //TODO 进入结算
+                    // 攻击前判断未终止的情况下
+                    Desktop desktop1 = doMinionAttackPreprocessor (desktop,attackParameters);
+                    attackTarget = getAttackTarget (desktop1);
+
+                    // 攻击前判断未终止的情况下
+                    if(attackCheck(attackTarget,attackParameters)){
+                        int playerHeath =  player2.getHero ().getArmor()
+                                + player2.getHero ().getHealth () - minion1.getAttack ();
+                        player2.getHero ().setHealth (playerHeath);
+                        //攻击后判断
+                        desktop1.setSecondPlayer (player2);
+                        doMinionAttackPostprocessor (desktop1,attackParameters);
+                        //TODO 进入结算
+                    }
+
 
                 }else if(minion2 != null){
                     //TODO 攻击前判断未终止的情况下
+                    Desktop desktop1 = doMinionAttackPreprocessor (desktop,attackParameters);
+                    attackTarget = getAttackTarget (desktop1);
 
-                    int minionHeath =  minion1.getHealth () - minion2.getAttack ();
-                    if(minionHeath < 0){
-                        minionHeath = 0;
+                    // 攻击前判断未终止的情况下
+                    if(attackCheck(attackTarget,attackParameters)) {
+                        int minionHeath = minion1.getHealth () - minion2.getAttack ();
+                        if (minionHeath < 0) {
+                            minionHeath = 0;
+                        }
+                        minion1.setHealth (minionHeath);
+
+                        minionHeath = minion2.getHealth () - minion1.getAttack ();
+                        if (minionHeath < 0) {
+                            minionHeath = 0;
+                        }
+                        minion2.setHealth (minionHeath);
+
+                        //TODO 确定场面被攻击随从
+                        //TODO 攻击后判断
+                        doMinionAttackPostprocessor (desktop1,attackParameters);
+                        //TODO 进入结算
                     }
-                    minion1.setHealth (minionHeath);
-
-                     minionHeath = minion2.getHealth () - minion1.getAttack ();
-                    if(minionHeath < 0){
-                        minionHeath = 0;
-                    }
-                    minion2.setHealth (minionHeath);
-
-                    //TODO 攻击后判断
-                    //TODO 进入结算
                 }
         }
 
@@ -178,31 +210,35 @@ public class AttackHandler {
         return false;
     }
 
-    private static void doHeroAttackPreprocessor(Desktop desktop, Card card, Organism target) throws IllegalOperationException {
+    private static Desktop doHeroAttackPreprocessor(Desktop desktop, AttackParameters attackParameters) throws IllegalOperationException {
         List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.PRE_HEROATTACK_SKILL);
         for (Processor preprocessor : processors) {
-            ((AbstractHeroAttackPreProcessor) preprocessor).processBeforeHeroAttack (desktop, card, target);
+            ((AbstractHeroAttackPreProcessor) preprocessor).processBeforeHeroAttack (desktop, attackParameters);
         }
+        return desktop;
     }
 
-    private static void doHeroAttackPostprocessor(Desktop desktop, Card card, Organism target) throws IllegalOperationException {
+    private static Desktop doHeroAttackPostprocessor(Desktop desktop, AttackParameters attackParameters) throws IllegalOperationException {
         List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.POST_HEROATTACK_SKILL);
         for (Processor preprocessor : processors) {
-            ((AbstractHeroAttackPostProcessor) preprocessor).processAfterHeroAttack (desktop, card, target);
+            ((AbstractHeroAttackPostProcessor) preprocessor).processAfterHeroAttack (desktop, attackParameters);
         }
+        return desktop;
     }
 
-    private static void doMinionAttackPreprocessor(Desktop desktop, Card card, Organism target) throws IllegalOperationException {
+    private static Desktop doMinionAttackPreprocessor(Desktop desktop, AttackParameters attackParameters) throws IllegalOperationException {
         List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.PRE_MINIONATTACK_SKILL);
         for (Processor preprocessor : processors) {
-            ((AbstractMinionAttackPreProcessor) preprocessor).processBeforeMinionAttack (desktop, card, target);
+            ((AbstractMinionAttackPreProcessor) preprocessor).processBeforeMinionAttack (desktop, attackParameters);
         }
+        return desktop;
     }
 
-    private static void doMinionAttackPostprocessor(Desktop desktop, Card card, Organism target) throws IllegalOperationException {
+    private static Desktop doMinionAttackPostprocessor(Desktop desktop, AttackParameters attackParameters) throws IllegalOperationException {
         List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.POST_MINIONATTACK_SKILL);
         for (Processor preprocessor : processors) {
-            ((AbstractMinionAttackPreProcessor) preprocessor).processBeforeMinionAttack (desktop, card, target);
+            ((AbstractMinionAttackPostProcessor) preprocessor).processAfterMinionAttack (desktop, attackParameters);
         }
+        return desktop;
     }
 }
