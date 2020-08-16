@@ -15,7 +15,7 @@ public abstract class AbstractHeroAttackPreProcessor extends AbstractProcessor {
 
     /**
     * @Description: 
-    * @Param: [desktop, card, target]
+    * @Param: [desktop, attackParameters]
     * @return: void
     * @Author: lb
     * @Date: 2020/8/16

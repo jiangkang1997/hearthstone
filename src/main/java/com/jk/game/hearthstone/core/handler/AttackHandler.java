@@ -25,29 +25,31 @@ public class AttackHandler {
 
     //攻击
     public static void doAttack(Desktop desktop , AttackParameters attackParameters) throws AttackException, IllegalOperationException {
+        //获取场面攻击者，被攻击对象
         AttackTarget attackTarget = getAttackTarget (desktop);
 
         try {
+            //判断单次攻击是否可行
             attackCheck(attackTarget,attackParameters);
         }catch (Exception e){
             log.error (message);
             e.printStackTrace ();
         }
 
+        //判断单次攻击是否可行
         Player player1 = attackParameters.getMainPlayer ();
         Player player2 = attackParameters.getSecondPlayer ();
         Minion minion1 = attackParameters.getMainMinion ();
         Minion minion2 = attackParameters.getSecondMinion ();
 
         if(player1!= null) {
+            //英雄攻击英雄
             if (player2 != null) {
-
+                // 攻击前，事件触发，判断攻击是否继续
                 Desktop desktop1 = doHeroAttackPreprocessor (desktop,attackParameters);
-
                 attackTarget = getAttackTarget (desktop1);
-
-                // 攻击前判断未终止的情况下
                 if(attackCheck(attackTarget,attackParameters)){
+                    // 攻击继续
                     int playerHeath = player2.getHero ().getArmor ()
                             + player2.getHero ().getHealth () - player1.getHero ().getAttack ();
                     player2.getHero ().setHealth (playerHeath);
@@ -60,14 +62,20 @@ public class AttackHandler {
                     desktop1.setSecondPlayer (player2);
                     //攻击后判断
                     desktop1 = doHeroAttackPostprocessor (desktop1,attackParameters);
-                    //TODO 进入结算
-                }
-            } else if (minion2 != null) {
-                Desktop desktop1 = doHeroAttackPreprocessor (desktop,attackParameters);
-                // 攻击前判断
-                attackTarget = getAttackTarget (desktop1);
+                    // 进入结算
 
+                    // 攻击取消
+                }else {
+
+                }
+
+                //英雄攻击随从
+            } else if (minion2 != null) {
+                // 攻击前，事件触发，判断攻击是否继续
+                Desktop desktop1 = doHeroAttackPreprocessor (desktop,attackParameters);
+                attackTarget = getAttackTarget (desktop1);
                 if(attackCheck(attackTarget,attackParameters)) {
+                    // 攻击继续
                     int playerHeath = player1.getHero ().getHealth () - minion2.getAttack ();
                     player1.getHero ().setHealth (playerHeath);
                     int minionHeath = minion2.getHealth () - player1.getHero ().getAttack ();
@@ -85,17 +93,21 @@ public class AttackHandler {
 
                     // 攻击后判断
                     desktop1 = doHeroAttackPostprocessor (desktop1,attackParameters);
-                    //TODO 进入结算
+                    // 进入结算
+
+                    // 攻击取消
+                }else {
+
                 }
             }
         }
 
+        //随从攻击英雄
         if(minion1!= null){
                 if(player2 != null){
-                    // 攻击前判断未终止的情况下
+                    // 攻击前，事件触发，判断攻击是否继续
                     Desktop desktop1 = doMinionAttackPreprocessor (desktop,attackParameters);
                     attackTarget = getAttackTarget (desktop1);
-
                     // 攻击前判断未终止的情况下
                     if(attackCheck(attackTarget,attackParameters)){
                         int playerHeath =  player2.getHero ().getArmor()
@@ -105,11 +117,13 @@ public class AttackHandler {
                         desktop1.setSecondPlayer (player2);
                         doMinionAttackPostprocessor (desktop1,attackParameters);
                         //TODO 进入结算
+                        //攻击取消
+                    }else {
+
                     }
-
-
+                    //随从攻击随从
                 }else if(minion2 != null){
-                    //TODO 攻击前判断未终止的情况下
+                    // 攻击前，事件触发，判断攻击是否继续
                     Desktop desktop1 = doMinionAttackPreprocessor (desktop,attackParameters);
                     attackTarget = getAttackTarget (desktop1);
 
@@ -128,9 +142,12 @@ public class AttackHandler {
                         minion2.setHealth (minionHeath);
 
                         //TODO 确定场面被攻击随从
-                        //TODO 攻击后判断
+                        //攻击后判断
                         doMinionAttackPostprocessor (desktop1,attackParameters);
                         //TODO 进入结算
+                        //攻击取消
+                    }else {
+
                     }
                 }
         }

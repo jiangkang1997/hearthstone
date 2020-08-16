@@ -14,12 +14,12 @@ public abstract class AbstractHeroAttackPostProcessor extends AbstractProcessor{
     private final ProcessorType PROCESSOR_TYPE = ProcessorType.POST_HEROATTACK_SKILL;
 
     /**
-     * @Description:
-     * @Param: [desktop, card, target]
-     * @return: void
-     * @Author: lb
-     * @Date: 2020/8/16
-     */
+    * @Description: 
+    * @Param: [desktop, attackParameters]
+    * @return: void
+    * @Author: lb
+    * @Date: 2020/8/16
+    */
     public abstract void processAfterHeroAttack(Desktop desktop, AttackParameters attackParameters) throws IllegalOperationException;
 
     @Override

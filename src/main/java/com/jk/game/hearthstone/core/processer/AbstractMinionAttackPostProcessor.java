@@ -13,12 +13,12 @@ public abstract class AbstractMinionAttackPostProcessor extends AbstractProcesso
     private final ProcessorType PROCESSOR_TYPE = ProcessorType.POST_MINIONATTACK_SKILL;
 
     /**
-     * @Description:
-     * @Param: [desktop, card, target]
-     * @return: void
-     * @Author: lb
-     * @Date: 2020/8/16
-     */
+    * @Description: 
+    * @Param: [desktop, attackParameters]
+    * @return: void
+    * @Author: lb
+    * @Date: 2020/8/16
+    */
     public abstract void processAfterMinionAttack(Desktop desktop, AttackParameters attackParameters) throws IllegalOperationException;
 
     @Override
