@@ -5,14 +5,17 @@ import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
 import com.jk.game.hearthstone.enumeration.PlayerType;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Superclass of all cards
  *
  * @author jk
  */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Card implements Cloneable{
 

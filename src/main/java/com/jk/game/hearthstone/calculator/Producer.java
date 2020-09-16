@@ -33,17 +33,17 @@ public class Producer {
      * @param desktop
      * @return 包含所有信息
      */
-    public static Turn getPossibleAction(Desktop desktop, PlayerType playerType) {
-        Turn turn = new Turn();
+    public static List<Action> getPossibleAction(Desktop desktop, PlayerType playerType) {
+        List<Action> actions = new ArrayList<>();
         //手牌动作
-        turn.actions.addAll(cardAction(desktop,playerType));
+        actions.addAll(cardAction(desktop,playerType));
         //随从动作
-        turn.actions.addAll(entourageAction(desktop,playerType));
+        actions.addAll(entourageAction(desktop,playerType));
         //英雄攻击
-        turn.actions.addAll(heroAttackAction(desktop,playerType));
+        actions.addAll(heroAttackAction(desktop,playerType));
         //英雄技能
-        turn.actions.addAll(heroSkillAction(desktop,playerType));
-        return turn;
+        actions.addAll(heroSkillAction(desktop,playerType));
+        return actions;
     }
 
     private static List<Action> cardAction(Desktop desktop,PlayerType playerType) {

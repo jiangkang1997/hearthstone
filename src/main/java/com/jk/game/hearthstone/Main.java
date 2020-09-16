@@ -1,6 +1,5 @@
 package com.jk.game.hearthstone;
 
-import com.jk.game.hearthstone.card.Card;
 import com.jk.game.hearthstone.card.Player;
 import com.jk.game.hearthstone.card.classic.neutral.AbusiveSergeant;
 import com.jk.game.hearthstone.card.classic.neutral.Wisp;
@@ -38,5 +37,6 @@ public class Main {
         System.out.println(wisp.getAttack());
 
         Desktop clone = desktop.clone();
+        System.out.println(clone);
     }
 }

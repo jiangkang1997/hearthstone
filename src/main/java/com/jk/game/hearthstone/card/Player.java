@@ -3,12 +3,14 @@ package com.jk.game.hearthstone.card;
 import com.jk.game.hearthstone.card.arms.Arms;
 import com.jk.game.hearthstone.card.organism.hero.Hero;
 import com.jk.game.hearthstone.exception.IllegalOperationException;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author jk
  */
-@Data
+@Getter
+@Setter
 public class Player implements Cloneable {
 
     /**
@@ -69,5 +71,4 @@ public class Player implements Cloneable {
         }
         return duplicate;
     }
-
 }
