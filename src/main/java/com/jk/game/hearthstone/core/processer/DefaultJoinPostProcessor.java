@@ -26,6 +26,7 @@ public class DefaultJoinPostProcessor extends AbstractJoinPostProcessor {
             for (Class<?> clazz : classes) {
                 if (Processor.class.isAssignableFrom(clazz) && clazz.getAnnotation(InitializedProcessor.class) != null) {
                     Processor processor = (Processor) clazz.newInstance();
+                    processor.setOwner(card);
                     desktop.getProcessorManager().register(processor);
                 }
             }
@@ -38,6 +39,7 @@ public class DefaultJoinPostProcessor extends AbstractJoinPostProcessor {
             for (Class<?> clazz : classes) {
                 if (Aura.class.isAssignableFrom(clazz) && clazz.getAnnotation(InitializedAura.class) != null) {
                     Aura aura = (Aura) clazz.newInstance();
+                    aura.setOwner(card);
                     desktop.getAuraManager().register(aura);
                 }
             }

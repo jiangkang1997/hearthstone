@@ -28,7 +28,16 @@ public class Organism extends Card{
     protected Integer attack = 0;
     protected Integer health = 0;
     protected boolean canAttack = false;
+
+    /**
+     * 嘲讽
+     */
     protected boolean ridicule = false;
+
+    /**
+     * 冻结
+     */
+    protected boolean freeze = false;
     protected List<Buff> buffList = new ArrayList<>();
 
     private Organism duplicate;

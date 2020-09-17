@@ -4,6 +4,7 @@ import com.jk.game.hearthstone.card.magic.Magic;
 import com.jk.game.hearthstone.card.magic.secret.Secret;
 import com.jk.game.hearthstone.card.organism.Organism;
 import com.jk.game.hearthstone.data.Desktop;
+import com.jk.game.hearthstone.enumeration.CardType;
 
 /**
  * 常规法术
@@ -13,6 +14,10 @@ import com.jk.game.hearthstone.data.Desktop;
 public class NormalMagic extends Magic {
 
     private NormalMagic duplicate;
+
+    public NormalMagic(Desktop desktop,int cost, String name, String desc, CardType cardType){
+        super(desktop, cost, name, desc, cardType);
+    }
 
     @Override
     public NormalMagic clone() throws CloneNotSupportedException {

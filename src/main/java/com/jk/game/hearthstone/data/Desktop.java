@@ -64,6 +64,12 @@ public class Desktop implements Cloneable {
      */
     private Desktop duplicate;
 
+    /**
+     * 法强
+     */
+    private int mainSpellPower = 0;
+    private int secondSpellPower = 0;
+
     @Override
     public Desktop clone() throws CloneNotSupportedException {
         if (duplicate == null) {
@@ -119,6 +125,10 @@ public class Desktop implements Cloneable {
 
     public List<Magic> getTasksAndSecrets(PlayerType playerType) {
         return playerType == PlayerType.PLAYER_TYPE_MAIN ? mainTasksAndSecrets : secondTasksAndSecrets;
+    }
+
+    public int getSpellPower(PlayerType playerType){
+        return playerType == PlayerType.PLAYER_TYPE_MAIN ? mainSpellPower : secondSpellPower;
     }
 
 }

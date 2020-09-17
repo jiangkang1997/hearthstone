@@ -7,6 +7,9 @@ import java.lang.annotation.Target;
 
 /**
  * 自动注册的光环
+ * 当一张卡牌拥有标注有此注解的光环时，当其入场时，光环会自动注册至 {@link com.jk.game.hearthstone.data.Desktop}
+ * 入场的定义：
+ * @see com.jk.game.hearthstone.core.handler.JoinHandler
  *
  * @author  jk
  */

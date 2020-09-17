@@ -20,10 +20,8 @@ public abstract class AbstractUseCardPostProcessor extends AbstractProcessor {
      *
      * @param desktop 桌面环境
      * @param card 使用的卡牌
-     * @throws InstantiationException
-     * @throws IllegalAccessException
      */
-    public abstract void processAfterPlay(Desktop desktop, Card card) throws InstantiationException, IllegalAccessException;
+    public abstract void processAfterPlay(Desktop desktop, Card card);
 
     @Override
     public ProcessorType getProcessorType() {

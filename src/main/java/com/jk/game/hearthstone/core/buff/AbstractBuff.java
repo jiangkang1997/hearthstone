@@ -7,7 +7,14 @@ import com.jk.game.hearthstone.card.Card;
  */
 public abstract class AbstractBuff implements Buff {
 
+    /**
+     * buff的释放者
+     */
     protected Card owner;
+
+    /**
+     * buff持续的回合数
+     */
     protected int life = 0;
 
     private AbstractBuff duplicate;

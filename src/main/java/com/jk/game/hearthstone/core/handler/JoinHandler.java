@@ -10,13 +10,13 @@ import com.jk.game.hearthstone.card.organism.minion.Minion;
 import com.jk.game.hearthstone.core.processer.AbstractJoinPostProcessor;
 import com.jk.game.hearthstone.core.processer.Processor;
 import com.jk.game.hearthstone.data.Desktop;
-import com.jk.game.hearthstone.enumeration.JoinType;
 import com.jk.game.hearthstone.enumeration.ProcessorType;
-import com.jk.game.hearthstone.exception.IllegalOperationException;
 import com.jk.game.hearthstone.exception.InvalidOperationException;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+
+import static com.jk.game.hearthstone.enumeration.Dictionary.MAX_MINION_NUM;
 
 /**
  * 卡牌入场操作的处理者
@@ -30,8 +30,6 @@ import java.util.List;
  */
 public class JoinHandler {
 
-    private static final int MAX_MINION_NUM = 7;
-    private static final int MAX_TASK_SECRET_NUM = 5;
 
     /**
      * 卡牌的入场
@@ -74,12 +72,14 @@ public class JoinHandler {
         //todo：目前入场的随从被默认放在最右侧，暂时不支持选择随从入场位置
         List<Minion> minions = desktop.getMinions(minion.getPlayerType());
         if(minions.size() < MAX_MINION_NUM){
+
             minions.add(minion);
         }
     }
 
     private static void doJoinPostProcessor(Desktop desktop,Card card) throws IllegalAccessException, InstantiationException {
         //入场后置 （鱼人招潮者）使用，召唤，招募都算
+        //以及注册卡牌所携带的处理器和光环效果
         List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.POST_JOIN);
         if(!CollectionUtils.isEmpty(processors)){
             for (Processor processor : processors) {

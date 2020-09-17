@@ -11,7 +11,7 @@ import com.jk.game.hearthstone.data.Desktop;
 public class DefaultUseCardPostProcessor extends AbstractUseCardPostProcessor {
 
     @Override
-    public void processAfterPlay(Desktop desktop, Card card) throws InstantiationException, IllegalAccessException {
+    public void processAfterPlay(Desktop desktop, Card card){
 
     }
 
