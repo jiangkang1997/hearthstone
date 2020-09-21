@@ -1,7 +1,7 @@
 package com.jk.game.hearthstone.core.handler;
 
-import com.jk.game.hearthstone.card.organism.Organism;
-import com.jk.game.hearthstone.card.organism.hero.Hero;
+import com.jk.game.hearthstone.card.parent.organism.Organism;
+import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
 import com.jk.game.hearthstone.core.processer.AbstractHeroSkillPostProcessor;
 import com.jk.game.hearthstone.core.processer.AbstractHeroSkillPreprocessor;
 import com.jk.game.hearthstone.core.processer.Processor;

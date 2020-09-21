@@ -1,12 +1,12 @@
 package com.jk.game.hearthstone.core.handler;
 
-import com.jk.game.hearthstone.card.Card;
-import com.jk.game.hearthstone.card.Player;
-import com.jk.game.hearthstone.card.arms.Arms;
-import com.jk.game.hearthstone.card.magic.secret.Secret;
-import com.jk.game.hearthstone.card.magic.task.Task;
-import com.jk.game.hearthstone.card.organism.hero.Hero;
-import com.jk.game.hearthstone.card.organism.minion.Minion;
+import com.jk.game.hearthstone.card.parent.Card;
+import com.jk.game.hearthstone.card.parent.Player;
+import com.jk.game.hearthstone.card.parent.arms.Arms;
+import com.jk.game.hearthstone.card.parent.magic.secret.Secret;
+import com.jk.game.hearthstone.card.parent.magic.task.Task;
+import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
+import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
 import com.jk.game.hearthstone.core.processer.AbstractJoinPostProcessor;
 import com.jk.game.hearthstone.core.processer.Processor;
 import com.jk.game.hearthstone.data.Desktop;

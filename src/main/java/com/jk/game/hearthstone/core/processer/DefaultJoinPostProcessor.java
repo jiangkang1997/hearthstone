@@ -2,7 +2,7 @@ package com.jk.game.hearthstone.core.processer;
 
 import com.jk.game.hearthstone.annotation.InitializedAura;
 import com.jk.game.hearthstone.annotation.InitializedProcessor;
-import com.jk.game.hearthstone.card.Card;
+import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.core.aura.Aura;
 import com.jk.game.hearthstone.data.Desktop;
 
@@ -21,7 +21,7 @@ public class DefaultJoinPostProcessor extends AbstractJoinPostProcessor {
     }
 
     private void registerProcessor(Desktop desktop, Card card) throws IllegalAccessException, InstantiationException {
-        Class<?>[] classes = card.getClass().getClasses();
+        Class<?>[] classes = card.getClass().getDeclaredClasses();
         if (classes.length != 0) {
             for (Class<?> clazz : classes) {
                 if (Processor.class.isAssignableFrom(clazz) && clazz.getAnnotation(InitializedProcessor.class) != null) {
@@ -34,7 +34,7 @@ public class DefaultJoinPostProcessor extends AbstractJoinPostProcessor {
     }
 
     private void registerAura(Desktop desktop,Card card) throws IllegalAccessException, InstantiationException {
-        Class<?>[] classes = card.getClass().getClasses();
+        Class<?>[] classes = card.getClass().getDeclaredClasses();
         if (classes.length != 0) {
             for (Class<?> clazz : classes) {
                 if (Aura.class.isAssignableFrom(clazz) && clazz.getAnnotation(InitializedAura.class) != null) {

@@ -1,7 +1,7 @@
 package com.jk.game.hearthstone.core.handler;
 
-import com.jk.game.hearthstone.card.Player;
-import com.jk.game.hearthstone.card.organism.minion.Minion;
+import com.jk.game.hearthstone.card.parent.Player;
+import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
 import com.jk.game.hearthstone.core.processer.*;
 import com.jk.game.hearthstone.data.AttackParameters;
 import com.jk.game.hearthstone.data.AttackTarget;

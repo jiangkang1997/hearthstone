@@ -1,7 +1,7 @@
-package com.jk.game.hearthstone.card.organism;
+package com.jk.game.hearthstone.card.parent.organism;
 
 
-import com.jk.game.hearthstone.card.Card;
+import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.core.buff.AbstractAttackBuff;
 import com.jk.game.hearthstone.core.buff.Buff;
 import com.jk.game.hearthstone.data.Desktop;

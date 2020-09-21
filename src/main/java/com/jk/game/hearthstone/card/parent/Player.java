@@ -1,7 +1,7 @@
-package com.jk.game.hearthstone.card;
+package com.jk.game.hearthstone.card.parent;
 
-import com.jk.game.hearthstone.card.arms.Arms;
-import com.jk.game.hearthstone.card.organism.hero.Hero;
+import com.jk.game.hearthstone.card.parent.arms.Arms;
+import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
 import com.jk.game.hearthstone.exception.IllegalOperationException;
 import lombok.Getter;
 import lombok.Setter;

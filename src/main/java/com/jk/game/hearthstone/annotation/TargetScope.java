@@ -1,7 +1,7 @@
 package com.jk.game.hearthstone.annotation;
 
 
-import com.jk.game.hearthstone.card.organism.Organism;
+import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.enumeration.Stand;
 
 import java.lang.annotation.*;

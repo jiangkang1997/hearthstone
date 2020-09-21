@@ -1,12 +1,12 @@
 package com.jk.game.hearthstone.core.processer;
 
 import com.jk.game.hearthstone.annotation.TargetScope;
-import com.jk.game.hearthstone.card.Card;
-import com.jk.game.hearthstone.card.Player;
-import com.jk.game.hearthstone.card.magic.Magic;
-import com.jk.game.hearthstone.card.organism.Organism;
-import com.jk.game.hearthstone.card.organism.hero.Hero;
-import com.jk.game.hearthstone.card.organism.minion.Minion;
+import com.jk.game.hearthstone.card.parent.Card;
+import com.jk.game.hearthstone.card.parent.Player;
+import com.jk.game.hearthstone.card.parent.magic.Magic;
+import com.jk.game.hearthstone.card.parent.organism.Organism;
+import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
+import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.Stand;
 import com.jk.game.hearthstone.exception.IllegalOperationException;

@@ -1,8 +1,11 @@
 package com.jk.game.hearthstone.calculator;
 
-import com.jk.game.hearthstone.card.Player;
-import com.jk.game.hearthstone.card.organism.hero.Hero;
-import com.jk.game.hearthstone.card.organism.hero.Mage;
+import com.jk.game.hearthstone.card.classic.mage.FrostArrow;
+import com.jk.game.hearthstone.card.classic.mage.IceSpear;
+import com.jk.game.hearthstone.card.classic.mage.ManaDragon;
+import com.jk.game.hearthstone.card.parent.Player;
+import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
+import com.jk.game.hearthstone.card.parent.organism.hero.Mage;
 import com.jk.game.hearthstone.data.Action;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.data.History;
@@ -46,6 +49,23 @@ public class KillCalculator {
         mainPlayer.setPower(4);
         mainPlayer.setMaxPower(4);
 
+        //手牌 两张寒冰箭 一张冰枪术
+        FrostArrow frostArrow1 = new FrostArrow(desktop);
+        FrostArrow frostArrow2 = new FrostArrow(desktop);
+        IceSpear iceSpear = new IceSpear(desktop);
+        frostArrow1.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
+        frostArrow2.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
+        iceSpear.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
+        desktop.getMainCards().add(frostArrow1);
+        desktop.getMainCards().add(frostArrow2);
+        desktop.getMainCards().add(iceSpear);
+
+        //场上一张可攻击的法力伏龙
+        ManaDragon manaDragon = new ManaDragon(desktop);
+        manaDragon.setCanAttack(true);
+        manaDragon.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
+        desktop.getMainMinions().add(manaDragon);
+
         return desktop;
     }
 
@@ -69,8 +89,8 @@ public class KillCalculator {
             log.info("水晶数：" + desktop.getMainPlayer().getPower());
             log.info("敌方血量：" + desktop.getSecondPlayer().getHero().getHealth());
             log(history.getCurrentTurn().actions, "出牌顺序");
-            Desktop dfsDesktop = desktop.clone();
-            dfs(dfsDesktop);
+            //Desktop dfsDesktop = desktop.clone();
+            dfs(desktop);
             //将备份的desktop拿回，回到原始状态
             desktop = duplicate;
             duplicate = duplicate.clone();

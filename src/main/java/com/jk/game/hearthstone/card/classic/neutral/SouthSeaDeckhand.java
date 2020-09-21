@@ -1,6 +1,6 @@
 package com.jk.game.hearthstone.card.classic.neutral;
 
-import com.jk.game.hearthstone.card.organism.minion.Minion;
+import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
 

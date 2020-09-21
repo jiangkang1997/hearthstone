@@ -1,6 +1,6 @@
 package com.jk.game.hearthstone.core.aura;
 
-import com.jk.game.hearthstone.card.organism.Organism;
+import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.enumeration.AuraType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

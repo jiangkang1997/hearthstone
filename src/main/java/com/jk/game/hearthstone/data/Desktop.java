@@ -1,9 +1,9 @@
 package com.jk.game.hearthstone.data;
 
-import com.jk.game.hearthstone.card.Card;
-import com.jk.game.hearthstone.card.Player;
-import com.jk.game.hearthstone.card.magic.Magic;
-import com.jk.game.hearthstone.card.organism.minion.Minion;
+import com.jk.game.hearthstone.card.parent.Card;
+import com.jk.game.hearthstone.card.parent.Player;
+import com.jk.game.hearthstone.card.parent.magic.Magic;
+import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
 import com.jk.game.hearthstone.core.aura.AuraManager;
 import com.jk.game.hearthstone.core.processer.ProcessorManager;
 import com.jk.game.hearthstone.enumeration.PlayerType;

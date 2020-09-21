@@ -1,8 +1,7 @@
 package com.jk.game.hearthstone.core.processer;
 
-import com.jk.game.hearthstone.card.Card;
+import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.enumeration.ProcessorType;
-import org.apache.tomcat.jni.Proc;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;

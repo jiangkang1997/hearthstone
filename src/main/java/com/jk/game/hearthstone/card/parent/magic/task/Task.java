@@ -1,6 +1,6 @@
-package com.jk.game.hearthstone.card.magic.task;
+package com.jk.game.hearthstone.card.parent.magic.task;
 
-import com.jk.game.hearthstone.card.magic.Magic;
+import com.jk.game.hearthstone.card.parent.magic.Magic;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
 

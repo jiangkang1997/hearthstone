@@ -1,7 +1,7 @@
 package com.jk.game.hearthstone.core.aura;
 
-import com.jk.game.hearthstone.card.Card;
-import com.jk.game.hearthstone.card.organism.Organism;
+import com.jk.game.hearthstone.card.parent.Card;
+import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.enumeration.AuraLife;
 import com.jk.game.hearthstone.enumeration.AuraType;
 import com.jk.game.hearthstone.enumeration.Stand;

@@ -1,9 +1,9 @@
 package com.jk.game.hearthstone.card.classic.mage;
 
 import com.jk.game.hearthstone.annotation.InitializedProcessor;
-import com.jk.game.hearthstone.card.Card;
-import com.jk.game.hearthstone.card.magic.Magic;
-import com.jk.game.hearthstone.card.organism.minion.Minion;
+import com.jk.game.hearthstone.card.parent.Card;
+import com.jk.game.hearthstone.card.parent.magic.Magic;
+import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
 import com.jk.game.hearthstone.core.buff.AbstractAttackBuff;
 import com.jk.game.hearthstone.core.processer.AbstractUseCardPostProcessor;
 import com.jk.game.hearthstone.data.Desktop;

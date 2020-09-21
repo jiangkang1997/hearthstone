@@ -1,7 +1,7 @@
-package com.jk.game.hearthstone.card.organism.minion;
+package com.jk.game.hearthstone.card.parent.organism.minion;
 
 
-import com.jk.game.hearthstone.card.organism.Organism;
+import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
 import lombok.Getter;

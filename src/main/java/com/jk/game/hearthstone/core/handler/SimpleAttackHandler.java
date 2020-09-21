@@ -1,7 +1,7 @@
 package com.jk.game.hearthstone.core.handler;
 
-import com.jk.game.hearthstone.card.organism.Organism;
-import com.jk.game.hearthstone.card.organism.minion.Minion;
+import com.jk.game.hearthstone.card.parent.organism.Organism;
+import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
 
 /**
  * 测试用的简单攻击处理器

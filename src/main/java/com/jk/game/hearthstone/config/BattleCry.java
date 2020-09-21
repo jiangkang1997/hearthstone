@@ -1,6 +1,6 @@
 package com.jk.game.hearthstone.config;
 
-import com.jk.game.hearthstone.card.organism.Organism;
+import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.data.Desktop;
 
 /**

@@ -1,9 +1,9 @@
 package com.jk.game.hearthstone.card.classic.neutral;
 
 import com.jk.game.hearthstone.annotation.TargetScope;
-import com.jk.game.hearthstone.card.Card;
-import com.jk.game.hearthstone.card.organism.Organism;
-import com.jk.game.hearthstone.card.organism.minion.Minion;
+import com.jk.game.hearthstone.card.parent.Card;
+import com.jk.game.hearthstone.card.parent.organism.Organism;
+import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
 import com.jk.game.hearthstone.config.BattleCry;
 import com.jk.game.hearthstone.core.buff.AbstractAttackBuff;
 import com.jk.game.hearthstone.data.Desktop;

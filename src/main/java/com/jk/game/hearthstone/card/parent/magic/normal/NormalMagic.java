@@ -1,8 +1,7 @@
-package com.jk.game.hearthstone.card.magic.normal;
+package com.jk.game.hearthstone.card.parent.magic.normal;
 
-import com.jk.game.hearthstone.card.magic.Magic;
-import com.jk.game.hearthstone.card.magic.secret.Secret;
-import com.jk.game.hearthstone.card.organism.Organism;
+import com.jk.game.hearthstone.card.parent.magic.Magic;
+import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
 

@@ -1,6 +1,6 @@
 package com.jk.game.hearthstone.core.handler;
 
-import com.jk.game.hearthstone.card.Card;
+import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.data.Desktop;
 
 import java.util.List;

@@ -1,10 +1,9 @@
-package com.jk.game.hearthstone.card;
+package com.jk.game.hearthstone.card.parent;
 
 
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
 import com.jk.game.hearthstone.enumeration.PlayerType;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -1,8 +1,8 @@
 package com.jk.game.hearthstone.card.classic.mage;
 
 import com.jk.game.hearthstone.annotation.TargetScope;
-import com.jk.game.hearthstone.card.magic.normal.NormalMagic;
-import com.jk.game.hearthstone.card.organism.Organism;
+import com.jk.game.hearthstone.card.parent.magic.normal.NormalMagic;
+import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
 

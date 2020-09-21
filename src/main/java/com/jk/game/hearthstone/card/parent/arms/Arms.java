@@ -1,8 +1,6 @@
-package com.jk.game.hearthstone.card.arms;
+package com.jk.game.hearthstone.card.parent.arms;
 
-import com.jk.game.hearthstone.card.Card;
-import com.jk.game.hearthstone.card.magic.normal.NormalMagic;
-import com.jk.game.hearthstone.data.Desktop;
+import com.jk.game.hearthstone.card.parent.Card;
 import lombok.Getter;
 import lombok.Setter;
 

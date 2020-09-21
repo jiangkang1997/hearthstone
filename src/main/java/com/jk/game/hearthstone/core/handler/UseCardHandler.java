@@ -1,9 +1,9 @@
 package com.jk.game.hearthstone.core.handler;
 
-import com.jk.game.hearthstone.card.Card;
-import com.jk.game.hearthstone.card.Player;
-import com.jk.game.hearthstone.card.magic.normal.NormalMagic;
-import com.jk.game.hearthstone.card.organism.Organism;
+import com.jk.game.hearthstone.card.parent.Card;
+import com.jk.game.hearthstone.card.parent.Player;
+import com.jk.game.hearthstone.card.parent.magic.normal.NormalMagic;
+import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.config.BattleCry;
 import com.jk.game.hearthstone.core.processer.AbstractUseCardPostProcessor;
 import com.jk.game.hearthstone.core.processer.AbstractUseCardPreprocessor;

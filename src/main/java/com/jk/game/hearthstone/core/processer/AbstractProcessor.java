@@ -1,6 +1,6 @@
 package com.jk.game.hearthstone.core.processer;
 
-import com.jk.game.hearthstone.card.Card;
+import com.jk.game.hearthstone.card.parent.Card;
 
 /**
  * @author jk
