@@ -2,6 +2,7 @@ package com.jk.game.hearthstone.calculator;
 
 import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
+import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
 import com.jk.game.hearthstone.core.handler.HeroSkillHandler;
 import com.jk.game.hearthstone.core.handler.SimpleAttackHandler;
 import com.jk.game.hearthstone.core.handler.UseCardHandler;
@@ -9,6 +10,9 @@ import com.jk.game.hearthstone.data.Action;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.ActionType;
 import com.jk.game.hearthstone.exception.IllegalOperationException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 操作的消费者
@@ -31,6 +35,25 @@ public class Customer {
         //英雄技能操作
         else if(action.getActionType() == ActionType.ACTION_TYPE_SKILL){
             HeroSkillHandler.doHeroSkill(desktop,(Hero) action.getCard(),action.getTarget());
+        }
+        //死亡结算 这里只结算死亡的随从
+        List<Minion> mainGraveyard = new ArrayList<>();
+        List<Minion> secondGraveyard = new ArrayList<>();
+        for (Minion mainMinion : desktop.getMainMinions()) {
+            if(mainMinion.getHealth() <= 0 ){
+                mainGraveyard.add(mainMinion);
+            }
+        }
+        for (Minion secondMinion : desktop.getSecondMinions()) {
+            if(secondMinion.getHealth() <= 0){
+                secondGraveyard.add(secondMinion);
+            }
+        }
+        for (Minion minion : mainGraveyard) {
+            desktop.getMainMinions().remove(minion);
+        }
+        for (Minion minion : secondGraveyard) {
+            desktop.getSecondMinions().remove(minion);
         }
     }
 }

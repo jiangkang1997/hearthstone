@@ -25,7 +25,7 @@ public class ManaDragon extends Minion {
 
 
     @InitializedProcessor
-    static class ManaDragonProcess extends AbstractUseCardPostProcessor{
+    public static class ManaDragonProcess extends AbstractUseCardPostProcessor{
 
         @Override
         public void processAfterPlay(Desktop desktop, Card card){

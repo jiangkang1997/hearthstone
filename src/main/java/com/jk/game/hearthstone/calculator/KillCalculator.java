@@ -84,17 +84,19 @@ public class KillCalculator {
             log(history.getCurrentTurn().actions, "收工了，回溯");
             return;
         }
-        for (Action action : actions) {
-            Customer.doOperation(desktop,action);
+        for (int index = 0; index < actions.size() ; index++) {
+            //todo: 由于desktop克隆了  所以actions需要重新生成一遍
+            history.getCurrentTurn().actions.add(actions.get(index));
+            Customer.doOperation(desktop,actions.get(index));
+            log(history.getCurrentTurn().actions, "出牌顺序");
             log.info("水晶数：" + desktop.getMainPlayer().getPower());
             log.info("敌方血量：" + desktop.getSecondPlayer().getHero().getHealth());
-            log(history.getCurrentTurn().actions, "出牌顺序");
-            //Desktop dfsDesktop = desktop.clone();
             dfs(desktop);
             //将备份的desktop拿回，回到原始状态
             desktop = duplicate;
             duplicate = duplicate.clone();
-            back(action);
+            actions = Producer.getPossibleAction(desktop, PlayerType.PLAYER_TYPE_MAIN);
+            back(actions.get(index));
             log(history.getCurrentTurn().actions, "回溯");
         }
     }
