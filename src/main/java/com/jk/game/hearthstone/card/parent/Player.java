@@ -6,12 +6,14 @@ import com.jk.game.hearthstone.exception.IllegalOperationException;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * @author jk
  */
 @Getter
 @Setter
-public class Player implements Cloneable {
+public class Player implements Serializable {
 
     /**
      * 当前水晶数量

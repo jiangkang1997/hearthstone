@@ -4,6 +4,7 @@ import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.enumeration.ProcessorType;
 import org.springframework.util.CollectionUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Map;
  *
  * @author jk
  */
-public class ProcessorManager implements Cloneable{
+public class ProcessorManager implements Serializable {
 
     private Map<ProcessorType, List<Processor>> processorTypeMap = new HashMap<>();
 

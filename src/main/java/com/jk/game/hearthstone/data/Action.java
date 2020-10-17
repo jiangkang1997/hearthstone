@@ -5,13 +5,15 @@ import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.enumeration.ActionType;
 import lombok.Data;
 
+import java.io.Serializable;
+
 import static com.jk.game.hearthstone.enumeration.ActionType.*;
 
 /**
  * @author jk
  */
 @Data
-public class Action {
+public class Action implements Serializable {
 
     private ActionType actionType;
     private Card card;

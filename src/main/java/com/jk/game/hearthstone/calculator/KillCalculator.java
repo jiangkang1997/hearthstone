@@ -12,8 +12,10 @@ import com.jk.game.hearthstone.data.History;
 import com.jk.game.hearthstone.enumeration.ActionType;
 import com.jk.game.hearthstone.enumeration.PlayerType;
 import com.jk.game.hearthstone.exception.IllegalOperationException;
+import com.jk.game.hearthstone.util.DeepCloneUtil;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -24,7 +26,7 @@ public class KillCalculator {
 
     private static History history = new History();
 
-    public static void main(String[] args) throws CloneNotSupportedException, IllegalOperationException {
+    public static void main(String[] args) throws IllegalOperationException, IOException, ClassNotFoundException {
         Desktop desktop = init();
         dfs(desktop);
     }
@@ -66,15 +68,17 @@ public class KillCalculator {
         manaDragon.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
         desktop.getMainMinions().add(manaDragon);
 
+
+
         return desktop;
     }
 
 
-    private static void dfs(Desktop desktop) throws CloneNotSupportedException, IllegalOperationException {
+    private static void dfs(Desktop desktop) throws IllegalOperationException, IOException, ClassNotFoundException {
         List<Action> actions = Producer.getPossibleAction(desktop, PlayerType.PLAYER_TYPE_MAIN);
         log(actions, "当前所有操作：");
         //深度克隆一份controller的副本，以便回溯时回到初始状态
-        Desktop duplicate = desktop.clone();
+        Desktop duplicate = (Desktop) DeepCloneUtil.deepClone(desktop);
         //出口
         if (desktop.getSecondPlayer().getHero().getHealth() <= 0) {
             log(history.getCurrentTurn().actions, "成功");
@@ -94,7 +98,7 @@ public class KillCalculator {
             dfs(desktop);
             //将备份的desktop拿回，回到原始状态
             desktop = duplicate;
-            duplicate = duplicate.clone();
+            duplicate = (Desktop) DeepCloneUtil.deepClone(duplicate);
             actions = Producer.getPossibleAction(desktop, PlayerType.PLAYER_TYPE_MAIN);
             back(actions.get(index));
             log(history.getCurrentTurn().actions, "回溯");

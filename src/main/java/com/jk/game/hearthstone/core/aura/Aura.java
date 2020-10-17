@@ -6,13 +6,17 @@ import com.jk.game.hearthstone.enumeration.AuraLife;
 import com.jk.game.hearthstone.enumeration.AuraType;
 import com.jk.game.hearthstone.enumeration.Stand;
 
+import javax.naming.directory.SearchResult;
+import java.io.Serializable;
+import java.rmi.ServerError;
+
 /**
  * 光环
  * 炉石中所有的buff效果和光环统称为光环
  *
  * @author jk
  */
-public interface Aura {
+public interface Aura extends Serializable {
 
     /**
      * 获取光环类型

@@ -4,6 +4,7 @@ import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.enumeration.AuraLife;
 import com.jk.game.hearthstone.enumeration.AuraType;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.Map;
  *
  * @author jk
  */
-public class AuraManager {
+public class AuraManager implements Serializable {
 
     private Map<AuraType, List<Aura>> registerAuraMap = new HashMap<>();
 

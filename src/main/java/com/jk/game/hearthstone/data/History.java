@@ -3,6 +3,7 @@ package com.jk.game.hearthstone.data;
 import lombok.Data;
 import org.springframework.util.CollectionUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @author jk
  */
 @Data
-public class History implements Cloneable {
+public class History implements Serializable {
 
     /**
      * 当前回合

@@ -3,12 +3,14 @@ package com.jk.game.hearthstone.core.buff;
 import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.enumeration.BuffType;
 
+import java.io.Serializable;
+
 /**
  * buff类的统一接口
  *
  * @author jk
  */
-public interface Buff extends Cloneable {
+public interface Buff extends Serializable {
 
     /**
      * 获取buff的释放者

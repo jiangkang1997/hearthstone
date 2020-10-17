@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * Superclass of all cards
  *
@@ -16,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Card implements Cloneable{
+public class Card implements Serializable {
 
     protected Desktop desktop;
     protected Integer cost;

@@ -9,6 +9,7 @@ import com.jk.game.hearthstone.core.processer.ProcessorManager;
 import com.jk.game.hearthstone.enumeration.PlayerType;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
  * @author jk
  */
 @Data
-public class Desktop implements Cloneable {
+public class Desktop implements Serializable {
 
     /**
      * 玩家

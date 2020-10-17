@@ -1,5 +1,8 @@
 package com.jk.game.hearthstone.util;
 
+import lombok.SneakyThrows;
+
+import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.*;
@@ -10,7 +13,16 @@ import java.util.*;
  */
 public class DeepCloneUtil {
 
-    public static Object deepClone(Object object) throws InstantiationException, IllegalAccessException {
+    public static Object deepClone(Object object) throws IOException, ClassNotFoundException {
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(os);
+        oos.writeObject(object);
+        ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
+        ObjectInputStream ois = new ObjectInputStream(is);
+        return ois.readObject();
+    }
+
+    public static Object deepClone2(Object object) throws InstantiationException, IllegalAccessException {
         Map<Object,Object> cloneCache = new HashMap<>(64);
         return deepClone1(object,cloneCache);
     }

@@ -4,6 +4,7 @@ import com.jk.game.hearthstone.card.parent.Player;
 import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  */
 
 @Data
-public class AttackTarget {
+public class AttackTarget implements Serializable {
 
     /**
      * 玩家
