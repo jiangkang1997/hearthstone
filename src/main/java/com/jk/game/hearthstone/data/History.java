@@ -1,7 +1,6 @@
 package com.jk.game.hearthstone.data;
 
 import lombok.Data;
-import org.springframework.util.CollectionUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,33 +16,46 @@ public class History implements Serializable {
     /**
      * 当前回合
      */
-    private Turn currentTurn = new Turn();
+    private Turn currentTurn;
 
     /**
      * 上个回合
      */
-    private Turn lastTurn = new Turn();
+    private Turn lastTurn;
 
     /**
      * 历史回合
      */
     private List<Turn> historicalTurn = new ArrayList<>();
 
-    private History duplicate;
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        if(duplicate == null){
-            duplicate = (History) super.clone();
-            duplicate.historicalTurn = new ArrayList<>();
-            duplicate.currentTurn = currentTurn.clone();
-            duplicate.lastTurn = lastTurn.clone();
-            if(!CollectionUtils.isEmpty(historicalTurn)){
-                for (Turn turn : historicalTurn) {
-                    duplicate.historicalTurn.add(turn.clone());
-                }
-            }
+    public void record(Action action){
+        if(currentTurn == null){
+            currentTurn = new Turn();
         }
-        return duplicate;
+        currentTurn.actions.add(action);
+    }
+
+    /**
+     * 下一回合
+     */
+    public void nextTurn(){
+        if(lastTurn != null){
+            historicalTurn.add(lastTurn);
+        }
+        lastTurn = currentTurn == null ? new Turn() : currentTurn;
+    }
+
+    /**
+     * @return 当前回合数
+     */
+    public int getCurrentTurnNo(){
+        return lastTurn == null ? 1 : historicalTurn.size()+2;
+    }
+
+    public Turn getCurrentTurn(){
+        if (currentTurn == null) {
+            currentTurn = new Turn();
+        }
+        return currentTurn;
     }
 }

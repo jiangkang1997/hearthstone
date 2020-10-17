@@ -19,11 +19,6 @@ public class Action implements Serializable {
     private Card card;
     private Organism target;
 
-    /**
-     * 副本
-     */
-    private Action duplicate;
-
     public Action(ActionType actionType,Card card){
         this.actionType = actionType;
         this.card = card;
@@ -54,19 +49,5 @@ public class Action implements Serializable {
             }
         }
         return result.toString();
-    }
-
-    @Override
-    public Action clone() throws CloneNotSupportedException {
-        if(duplicate == null){
-            duplicate = (Action) super.clone();
-            if(card != null){
-                duplicate.card = card.clone();
-            }
-            if(target != null){
-                duplicate.target = target.clone();
-            }
-        }
-        return duplicate;
     }
 }

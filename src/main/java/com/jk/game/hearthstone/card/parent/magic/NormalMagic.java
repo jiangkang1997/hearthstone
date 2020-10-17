@@ -1,6 +1,5 @@
-package com.jk.game.hearthstone.card.parent.magic.normal;
+package com.jk.game.hearthstone.card.parent.magic;
 
-import com.jk.game.hearthstone.card.parent.magic.Magic;
 import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
@@ -12,19 +11,10 @@ import com.jk.game.hearthstone.enumeration.CardType;
  */
 public class NormalMagic extends Magic {
 
-    private NormalMagic duplicate;
-
     public NormalMagic(Desktop desktop,int cost, String name, String desc, CardType cardType){
         super(desktop, cost, name, desc, cardType);
     }
 
-    @Override
-    public NormalMagic clone() throws CloneNotSupportedException {
-        if(duplicate == null){
-            duplicate = (NormalMagic) super.clone();
-        }
-        return duplicate;
-    }
 
     /**
      * 法术效果

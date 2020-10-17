@@ -159,7 +159,7 @@ public class AttackHandler {
 
         //判断英雄是否能攻击
         if(desktop.getMainPlayer () == null && desktop.getMainPlayer().getHero ().getAttack ()>=0
-                && desktop.getMainPlayer().getHero ().getCanAttack ()){
+                && desktop.getMainPlayer().getHero ().isCanAttack ()){
             attackTarget.setMainPlayer (desktop.getMainPlayer ());
         }
 
@@ -167,7 +167,7 @@ public class AttackHandler {
         List<Minion> mainMinions = desktop.getMainMinions ();
         if(mainMinions != null && mainMinions.size ()>0 ){
             for(Minion minion:mainMinions){
-                if(minion.getCanAttack () && minion.getAttack ()>0){
+                if(minion.isCanAttack () && minion.getAttack ()>0){
                     attackTarget.getMainMinions ().add (minion);
                 }
             }

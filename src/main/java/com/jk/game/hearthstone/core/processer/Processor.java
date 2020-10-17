@@ -30,6 +30,4 @@ public interface Processor extends Serializable {
      * @return 处理器类型
      */
     ProcessorType getProcessorType();
-
-    Processor clone() throws CloneNotSupportedException;
 }

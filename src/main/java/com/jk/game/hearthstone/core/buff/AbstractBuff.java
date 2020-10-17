@@ -17,8 +17,6 @@ public abstract class AbstractBuff implements Buff {
      */
     protected int life = 0;
 
-    private AbstractBuff duplicate;
-
     @Override
     public Card getOwner() {
         return owner;
@@ -33,16 +31,5 @@ public abstract class AbstractBuff implements Buff {
     @Override
     public void spendLife() {
         life--;
-    }
-
-    @Override
-    public AbstractBuff clone() throws CloneNotSupportedException {
-        if(duplicate == null){
-            duplicate = (AbstractBuff) super.clone();
-            if(owner != null){
-                duplicate.owner = owner.clone();
-            }
-        }
-        return duplicate;
     }
 }

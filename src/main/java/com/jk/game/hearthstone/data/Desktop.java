@@ -61,56 +61,10 @@ public class Desktop implements Serializable {
     private History history;
 
     /**
-     * 副本
-     */
-    private Desktop duplicate;
-
-    /**
      * 法强
      */
     private int mainSpellPower = 0;
     private int secondSpellPower = 0;
-
-    @Override
-    public Desktop clone() throws CloneNotSupportedException {
-        if (duplicate == null) {
-            duplicate = (Desktop) super.clone();
-            duplicate.mainMinions = new ArrayList<>();
-            duplicate.secondMinions = new ArrayList<>();
-            duplicate.mainCards = new ArrayList<>();
-            duplicate.secondMinions = new ArrayList<>();
-            duplicate.mainTasksAndSecrets = new ArrayList<>();
-            duplicate.secondTasksAndSecrets = new ArrayList<>();
-            if (mainPlayer != null) {
-                duplicate.mainPlayer = mainPlayer.clone();
-            }
-            if (secondPlayer != null) {
-                duplicate.secondPlayer = secondPlayer.clone();
-            }
-            for (Minion minion : mainMinions) {
-                duplicate.mainMinions.add(minion.clone());
-            }
-            for (Minion minion : secondMinions) {
-                duplicate.secondMinions.add(minion.clone());
-            }
-            for (Card card : mainCards) {
-                duplicate.mainCards.add(card.clone());
-            }
-            for (Card card : secondCards) {
-                duplicate.secondCards.add(card.clone());
-            }
-            for (Magic tasksAndSecret : mainTasksAndSecrets) {
-                duplicate.mainTasksAndSecrets.add(tasksAndSecret.clone());
-            }
-            for (Magic tasksAndSecret : secondTasksAndSecrets) {
-                duplicate.secondTasksAndSecrets.add(tasksAndSecret.clone());
-            }
-            duplicate.processorManager = processorManager.clone();
-            //todo : 光环clone
-
-        }
-        return duplicate;
-    }
 
     public Player getPlayer(PlayerType playerType) {
         return playerType == PlayerType.PLAYER_TYPE_MAIN ? mainPlayer : secondPlayer;

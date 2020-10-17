@@ -6,12 +6,13 @@ import com.jk.game.hearthstone.card.classic.mage.ManaDragon;
 import com.jk.game.hearthstone.card.parent.Player;
 import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
 import com.jk.game.hearthstone.card.parent.organism.hero.Mage;
+import com.jk.game.hearthstone.core.handler.JoinHandler;
 import com.jk.game.hearthstone.data.Action;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.data.History;
-import com.jk.game.hearthstone.enumeration.ActionType;
 import com.jk.game.hearthstone.enumeration.PlayerType;
 import com.jk.game.hearthstone.exception.IllegalOperationException;
+import com.jk.game.hearthstone.exception.InvalidOperationException;
 import com.jk.game.hearthstone.util.DeepCloneUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,9 +25,7 @@ import java.util.List;
 @Slf4j
 public class KillCalculator {
 
-    private static History history = new History();
-
-    public static void main(String[] args) throws IllegalOperationException, IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IllegalOperationException, IOException, ClassNotFoundException, IllegalAccessException, InvalidOperationException, InstantiationException {
         Desktop desktop = init();
         dfs(desktop);
     }
@@ -34,8 +33,9 @@ public class KillCalculator {
     /**
      * 初始化环境
      */
-    private static Desktop init() {
+    private static Desktop init() throws InstantiationException, IllegalAccessException, InvalidOperationException {
         Desktop desktop = new Desktop();
+        desktop.setHistory(new History());
 
         Player mainPlayer = new Player();
         Hero mainHero = new Mage(desktop, PlayerType.PLAYER_TYPE_MAIN);
@@ -66,8 +66,8 @@ public class KillCalculator {
         ManaDragon manaDragon = new ManaDragon(desktop);
         manaDragon.setCanAttack(true);
         manaDragon.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
-        desktop.getMainMinions().add(manaDragon);
-
+        JoinHandler.join(desktop,manaDragon);
+        manaDragon.setBirthday(2);
 
 
         return desktop;
@@ -81,18 +81,17 @@ public class KillCalculator {
         Desktop duplicate = (Desktop) DeepCloneUtil.deepClone(desktop);
         //出口
         if (desktop.getSecondPlayer().getHero().getHealth() <= 0) {
-            log(history.getCurrentTurn().actions, "成功");
+            log(desktop.getHistory().getCurrentTurn().actions, "成功");
         }
         //收工了
         if (actions.size() == 0) {
-            log(history.getCurrentTurn().actions, "收工了，回溯");
+            log(desktop.getHistory().getCurrentTurn().actions, "收工了，回溯");
             return;
         }
         for (int index = 0; index < actions.size() ; index++) {
-            //todo: 由于desktop克隆了  所以actions需要重新生成一遍
-            history.getCurrentTurn().actions.add(actions.get(index));
+            desktop.getHistory().record(actions.get(index));
             Customer.doOperation(desktop,actions.get(index));
-            log(history.getCurrentTurn().actions, "出牌顺序");
+            log(desktop.getHistory().getCurrentTurn().actions, "出牌顺序");
             log.info("水晶数：" + desktop.getMainPlayer().getPower());
             log.info("敌方血量：" + desktop.getSecondPlayer().getHero().getHealth());
             dfs(desktop);
@@ -100,28 +99,10 @@ public class KillCalculator {
             desktop = duplicate;
             duplicate = (Desktop) DeepCloneUtil.deepClone(duplicate);
             actions = Producer.getPossibleAction(desktop, PlayerType.PLAYER_TYPE_MAIN);
-            back(actions.get(index));
-            log(history.getCurrentTurn().actions, "回溯");
+            log(desktop.getHistory().getCurrentTurn().actions, "回溯");
         }
     }
 
-
-    /**
-     * 回溯方法
-     * 主要功能是清除上一步的历史记录 desktop的回退由克隆完成
-     *
-     * @param action 此次操作
-     */
-    private static void back(Action action) {
-        //如果是出牌
-        if (action.getActionType().equals(ActionType.ACTION_TYPE_USE)) {
-            history.getCurrentTurn().playNum -= 1;
-        }
-        //清除历史记录
-        if (history.getCurrentTurn().actions.size() > 0) {
-            history.getCurrentTurn().actions.remove(history.getCurrentTurn().actions.size() - 1);
-        }
-    }
 
     private static void log(List<Action> actions, String info) {
         System.out.println(info);

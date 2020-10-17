@@ -45,32 +45,11 @@ public class Player implements Serializable {
      */
     private Arms arms;
 
-    /**
-     * 副本
-     */
-    private Player duplicate;
-
     public void costPower(int cost, int overload) throws IllegalOperationException {
         if (power - cost < 0) {
             throw new IllegalOperationException("我需要更多的法力值");
         }
         power = power - cost;
         overloadPowerNextTurn = overloadPowerNextTurn + overload;
-    }
-
-
-    @Override
-    public Player clone() throws CloneNotSupportedException {
-        if (duplicate == null) {
-            Player result = (Player) super.clone();
-            duplicate = result;
-            if (hero != null) {
-                result.hero = hero.clone();
-            }
-            if (arms != null) {
-                result.arms = (Arms) arms.clone();
-            }
-        }
-        return duplicate;
     }
 }

@@ -38,6 +38,4 @@ public interface Buff extends Serializable {
      * buff持续时间减一回合
      */
     void spendLife();
-
-    Buff clone() throws CloneNotSupportedException;
 }

@@ -1,6 +1,8 @@
 package com.jk.game.hearthstone.card.parent.arms;
 
 import com.jk.game.hearthstone.card.parent.Card;
+import com.jk.game.hearthstone.data.Desktop;
+import com.jk.game.hearthstone.enumeration.CardType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,16 +18,7 @@ public class Arms extends Card{
     protected Integer attack;
     protected Integer durable;
 
-    /**
-     * 副本
-     */
-    private Arms duplicate;
-
-    @Override
-    public Arms clone() throws CloneNotSupportedException {
-        if(duplicate == null){
-            duplicate = (Arms) super.clone();
-        }
-        return duplicate;
+    public Arms(Desktop desktop, int cost, String name, String desc, CardType cardType) {
+        super(desktop, cost, name, desc, cardType);
     }
 }

@@ -20,11 +20,6 @@ public class ProcessorManager implements Serializable {
 
     private Map<ProcessorType, List<Processor>> processorTypeMap = new HashMap<>();
 
-    /**
-     * 副本
-     */
-    private ProcessorManager duplicate;
-
     public ProcessorManager(){
         DefaultUseCardPreprocessor defaultUseCardPreprocessor = new DefaultUseCardPreprocessor();
         DefaultUseCardPostProcessor defaultUseCardPostProcessor = new DefaultUseCardPostProcessor();
@@ -96,24 +91,5 @@ public class ProcessorManager implements Serializable {
                 processors.removeAll(remove);
             }
         }
-    }
-
-    @Override
-    public ProcessorManager clone() throws CloneNotSupportedException {
-        if(duplicate == null){
-            duplicate = (ProcessorManager) super.clone();
-            Map<ProcessorType, List<Processor>> cloneMap = new HashMap<>(16);
-            if(!CollectionUtils.isEmpty(processorTypeMap)){
-                for (Map.Entry<ProcessorType, List<Processor>> entry : processorTypeMap.entrySet()) {
-                    List<Processor> processors = new ArrayList<>();
-                    for (Processor processor : entry.getValue()) {
-                        processors.add(processor.clone());
-                    }
-                    cloneMap.put(entry.getKey(),processors);
-                }
-            }
-            duplicate.processorTypeMap = cloneMap;
-        }
-        return duplicate;
     }
 }

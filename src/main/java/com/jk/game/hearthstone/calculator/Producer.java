@@ -83,7 +83,7 @@ public class Producer {
         List<Action> actions = new ArrayList<>();
         //todo: 攻击的前置拦截
         for (Minion minion : desktop.getMinions(playerType)) {
-            if (minion.getCanAttack()) {
+            if (minion.isCanAttack()) {
                 for (Minion foeMinion : desktop.getMinions(playerType.getOpponentType())) {
                     actions.add(new Action(ActionType.ACTION_TYPE_ATTACK, minion, foeMinion));
                 }
@@ -99,7 +99,7 @@ public class Producer {
         //todo: 攻击的前置拦截
         Player player = desktop.getPlayer(playerType);
         Hero hero = player.getHero();
-        if (hero.getCanAttack()) {
+        if (hero.isCanAttack()) {
             int att = hero.getAttack();
             //英雄攻击力大于0才能攻击
             if (att > 0) {

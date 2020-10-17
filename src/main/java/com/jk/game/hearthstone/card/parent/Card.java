@@ -17,7 +17,6 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class Card implements Serializable {
 
     protected Desktop desktop;
@@ -27,8 +26,6 @@ public class Card implements Serializable {
     protected PlayerType playerType;
     protected String name;
     protected String desc;
-
-    private Card duplicate;
 
     public Card(Desktop desktop,int cost, String name, String desc, CardType cardType){
         this.desktop = desktop;
@@ -41,18 +38,6 @@ public class Card implements Serializable {
     public Integer getCost(){
         //todo 需要完成减费效果和加费效果的结算
         return cost;
-    }
-
-    @Override
-    public Card clone() throws CloneNotSupportedException {
-        if(duplicate == null){
-            Card card = (Card) super.clone();
-            duplicate = card;
-            if(desktop != null){
-                card.desktop = desktop.clone();
-            }
-        }
-        return duplicate;
     }
 
     @Override

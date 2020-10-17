@@ -3,8 +3,8 @@ package com.jk.game.hearthstone.core.handler;
 import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.card.parent.Player;
 import com.jk.game.hearthstone.card.parent.arms.Arms;
-import com.jk.game.hearthstone.card.parent.magic.secret.Secret;
-import com.jk.game.hearthstone.card.parent.magic.task.Task;
+import com.jk.game.hearthstone.card.parent.magic.Secret;
+import com.jk.game.hearthstone.card.parent.magic.Task;
 import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
 import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
 import com.jk.game.hearthstone.core.processer.AbstractJoinPostProcessor;
@@ -72,9 +72,9 @@ public class JoinHandler {
         //todo：目前入场的随从被默认放在最右侧，暂时不支持选择随从入场位置
         List<Minion> minions = desktop.getMinions(minion.getPlayerType());
         if(minions.size() < MAX_MINION_NUM){
-
             minions.add(minion);
         }
+        minion.setBirthday(desktop.getHistory().getCurrentTurnNo());
     }
 
     private static void doJoinPostProcessor(Desktop desktop,Card card) throws IllegalAccessException, InstantiationException {

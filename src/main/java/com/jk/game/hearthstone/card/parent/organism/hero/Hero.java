@@ -30,11 +30,6 @@ public class Hero extends Organism{
      */
     protected Boolean canSkill = true;
 
-    /**
-     * 副本
-     */
-    private Hero duplicate;
-
     private static final int ATTACK = 0;
     private static final int HEALTH = 30;
 
@@ -47,15 +42,6 @@ public class Hero extends Organism{
         this(desktop,name,playerType);
         this.skillCost = skillCost;
         this.armor = armor;
-    }
-
-
-    @Override
-    public Hero clone() throws CloneNotSupportedException {
-        if(duplicate == null){
-            duplicate = (Hero) super.clone();
-        }
-        return duplicate;
     }
 
     @Override
