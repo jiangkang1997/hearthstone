@@ -35,7 +35,6 @@ public class KillCalculator {
      */
     private static Desktop init() throws InstantiationException, IllegalAccessException, InvalidOperationException {
         Desktop desktop = new Desktop();
-        desktop.setHistory(new History());
 
         Player mainPlayer = new Player();
         Hero mainHero = new Mage(desktop, PlayerType.PLAYER_TYPE_MAIN);

@@ -39,12 +39,12 @@ public class Customer {
         //死亡结算 这里只结算死亡的随从
         List<Minion> mainGraveyard = new ArrayList<>();
         List<Minion> secondGraveyard = new ArrayList<>();
-        for (Minion mainMinion : desktop.getMainMinions()) {
+        for (Minion mainMinion : desktop.getMainMinions().getList()) {
             if(mainMinion.getHealth() <= 0 ){
                 mainGraveyard.add(mainMinion);
             }
         }
-        for (Minion secondMinion : desktop.getSecondMinions()) {
+        for (Minion secondMinion : desktop.getSecondMinions().getList()) {
             if(secondMinion.getHealth() <= 0){
                 secondGraveyard.add(secondMinion);
             }

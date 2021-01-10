@@ -14,7 +14,12 @@ import java.util.List;
 @Data
 public class Turn implements Serializable {
 
-    public Integer playNum = 0;
+    /**
+     * 当前回合已使用的卡牌数量
+     * 作为连击和大范等的判断依据
+     */
+    private Integer useNum = 0;
+
     public List<Action> actions = new ArrayList<>();
 
     public void print() {

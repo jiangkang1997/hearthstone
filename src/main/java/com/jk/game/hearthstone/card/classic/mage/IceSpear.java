@@ -3,6 +3,7 @@ package com.jk.game.hearthstone.card.classic.mage;
 import com.jk.game.hearthstone.annotation.TargetScope;
 import com.jk.game.hearthstone.card.parent.magic.NormalMagic;
 import com.jk.game.hearthstone.card.parent.organism.Organism;
+import com.jk.game.hearthstone.core.handler.HurtHandler;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
 
@@ -22,8 +23,7 @@ public class IceSpear extends NormalMagic {
     @Override
     public void effect(Desktop desktop, Organism target) {
         if(target.isFreeze()){
-            //todo: 伤害操作应该由独立的handler去完成 hurtHandler
-            target.setHealth(target.getHealth() - (4 + desktop.getSpellPower(this.getPlayerType())));
+            HurtHandler.doHurt(desktop,this,target,4 + desktop.getSpellPower(this.getPlayerType()));
         }
         target.setFreeze(true);
     }

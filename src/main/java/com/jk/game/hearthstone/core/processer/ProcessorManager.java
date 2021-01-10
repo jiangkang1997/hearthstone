@@ -24,9 +24,11 @@ public class ProcessorManager implements Serializable {
         DefaultUseCardPreprocessor defaultUseCardPreprocessor = new DefaultUseCardPreprocessor();
         DefaultUseCardPostProcessor defaultUseCardPostProcessor = new DefaultUseCardPostProcessor();
         DefaultJoinPostProcessor defaultJoinPostProcessor = new DefaultJoinPostProcessor();
+        DefaultHurtPostProcess defaultHurtPostProcess = new DefaultHurtPostProcess();
         register(defaultUseCardPreprocessor);
         register(defaultUseCardPostProcessor);
         register(defaultJoinPostProcessor);
+        register(defaultHurtPostProcess);
     }
 
     /**

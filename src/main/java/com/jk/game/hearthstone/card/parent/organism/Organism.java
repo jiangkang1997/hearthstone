@@ -24,26 +24,39 @@ import java.util.List;
 @Setter
 public class Organism extends Card{
 
-    protected Integer attack = 0;
-    protected Integer health = 0;
+    protected int attack = 0;
+    protected int health = 0;
+    /**
+     * 血量上限
+     */
+    protected int maxHealth = 0;
     protected boolean canAttack = false;
     protected boolean canAttackHero = true;
-
     /**
      * 嘲讽
      */
     protected boolean ridicule = false;
-
     /**
      * 冻结
      */
     protected boolean freeze = false;
+    /**
+     * 免疫
+     */
+    protected boolean immune = false;
+    /**
+     * 寿命，死亡结算的结算依据，负数代表存活
+     * 战斗死亡和剧毒会直接标记为0，腐化迷雾和力量代价等标记为剩余寿命
+     */
+    //todo: 死亡结算器  回合切换也要注意更新一下这里
+    protected int life = -1;
     protected List<Buff> buffList = new ArrayList<>();
 
     public Organism(Desktop desktop,int cost, int attack, int health, String name, String desc, CardType cardType){
         super(desktop,cost, name, desc, cardType);
         this.attack = attack;
         this.health = health;
+        this.maxHealth = health;
     }
 
     public int getAttack(){
@@ -66,6 +79,11 @@ public class Organism extends Card{
     public boolean isCanAttack() {
         return !freeze && canAttack;
     }
+
+    public boolean isCanAttackHero(){
+        return !freeze && canAttack && canAttackHero;
+    }
+
 
     public boolean getRidicule(){
 

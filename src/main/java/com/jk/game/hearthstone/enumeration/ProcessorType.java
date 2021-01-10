@@ -53,5 +53,15 @@ public enum ProcessorType {
     /**
      * 随从攻击后置
      */
-    POST_MINIONATTACK_SKILL;
+    POST_MINIONATTACK_SKILL,
+
+    /**
+     * 伤害后置
+     */
+    POST_HURT,
+
+    /**
+     * 治疗后置
+     */
+    POST_TREAT;
 }

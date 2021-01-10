@@ -16,19 +16,19 @@ import lombok.Setter;
 public class Hero extends Organism{
 
     /**
-     * 英雄技能耗费
-     */
-    protected Integer skillCost = 2;
-
-    /**
      * 护甲
      */
-    protected Integer armor = 0;
+    protected int armor = 0;
 
     /**
      * 是否可以使用英雄技能
      */
     protected Boolean canSkill = true;
+
+    /**
+     * 英雄技能
+     */
+    protected HeroSkill heroSkill;
 
     private static final int ATTACK = 0;
     private static final int HEALTH = 30;
@@ -38,9 +38,8 @@ public class Hero extends Organism{
         this.playerType = playerType;
     }
 
-    public Hero(Desktop desktop,String name,int skillCost,int armor,PlayerType playerType){
+    public Hero(Desktop desktop,String name,int armor,PlayerType playerType){
         this(desktop,name,playerType);
-        this.skillCost = skillCost;
         this.armor = armor;
     }
 
@@ -51,7 +50,4 @@ public class Hero extends Organism{
         int armsAttack = desktop.getPlayer(getPlayerType()).getArms().getAttack();
         return attack + armsAttack;
     }
-
-
-    public void skill(Desktop desktop,Organism target){}
 }

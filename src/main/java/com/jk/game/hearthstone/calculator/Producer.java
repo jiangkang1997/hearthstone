@@ -49,7 +49,7 @@ public class Producer {
     private static List<Action> cardAction(Desktop desktop, PlayerType playerType) {
         List<Action> actions = new ArrayList<>();
         //遍历手牌
-        for (Card card : desktop.getCards(playerType)) {
+        for (Card card : desktop.getCards(playerType).getList()) {
             //通过出牌前置处理器过滤不合法的出牌动作
             List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.PRE_USE_CARD);
             for (Processor processor : processors) {
@@ -82,9 +82,9 @@ public class Producer {
     private static List<Action> entourageAction(Desktop desktop, PlayerType playerType) {
         List<Action> actions = new ArrayList<>();
         //todo: 攻击的前置拦截
-        for (Minion minion : desktop.getMinions(playerType)) {
+        for (Minion minion : desktop.getMinions(playerType).getList()) {
             if (minion.isCanAttack()) {
-                for (Minion foeMinion : desktop.getMinions(playerType.getOpponentType())) {
+                for (Minion foeMinion : desktop.getMinions(playerType.getOpponentType()).getList()) {
                     actions.add(new Action(ActionType.ACTION_TYPE_ATTACK, minion, foeMinion));
                 }
                 actions.add(new Action(ActionType.ACTION_TYPE_ATTACK, minion, desktop.getPlayer(playerType.getOpponentType()).getHero()));
@@ -103,7 +103,7 @@ public class Producer {
             int att = hero.getAttack();
             //英雄攻击力大于0才能攻击
             if (att > 0) {
-                for (Minion foeMinion : desktop.getMinions(playerType.getOpponentType())) {
+                for (Minion foeMinion : desktop.getMinions(playerType.getOpponentType()).getList()) {
                     actions.add(new Action(ActionType.ACTION_TYPE_ATTACK, hero, foeMinion));
                 }
                 actions.add(new Action(ActionType.ACTION_TYPE_ATTACK, hero, desktop.getPlayer(playerType.getOpponentType()).getHero()));
@@ -149,8 +149,8 @@ public class Producer {
 
     private static List<Organism> getAllTarget(Desktop desktop) {
         List<Organism> targets = new ArrayList<>();
-        targets.addAll(desktop.getMainMinions());
-        targets.addAll(desktop.getSecondMinions());
+        targets.addAll(desktop.getMainMinions().getList());
+        targets.addAll(desktop.getSecondMinions().getList());
         targets.add(desktop.getMainPlayer().getHero());
         targets.add(desktop.getSecondPlayer().getHero());
         return targets;

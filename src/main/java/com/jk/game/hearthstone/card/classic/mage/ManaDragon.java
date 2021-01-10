@@ -39,7 +39,11 @@ public class ManaDragon extends Minion {
             ManaDragonAttackBuff(Card owner){
                 this.owner = owner;
                 life = MAX_TURN;
-                attackNum = 1;
+            }
+
+            @Override
+            public int getAttackNum() {
+                return 1;
             }
         }
     }

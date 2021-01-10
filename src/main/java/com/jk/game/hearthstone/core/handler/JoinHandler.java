@@ -7,6 +7,7 @@ import com.jk.game.hearthstone.card.parent.magic.Secret;
 import com.jk.game.hearthstone.card.parent.magic.Task;
 import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
 import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
+import com.jk.game.hearthstone.common.MinionCollection;
 import com.jk.game.hearthstone.core.processer.AbstractJoinPostProcessor;
 import com.jk.game.hearthstone.core.processer.Processor;
 import com.jk.game.hearthstone.data.Desktop;
@@ -15,8 +16,6 @@ import com.jk.game.hearthstone.exception.InvalidOperationException;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
-
-import static com.jk.game.hearthstone.enumeration.Dictionary.MAX_MINION_NUM;
 
 /**
  * 卡牌入场操作的处理者
@@ -57,7 +56,7 @@ public class JoinHandler {
     private static void doArmsJoin(Desktop desktop,Arms arms){
         Player player = desktop.getPlayer(arms.getPlayerType());
         player.setArms(arms);
-        //todo: 武器的入场，替换原有的武器，并触发原有武器的亡语
+        //todo: 触发原有武器的亡语
     }
 
     private static void doTaskAndSecretJoin(Desktop desktop,Card card){
@@ -70,10 +69,8 @@ public class JoinHandler {
 
     private static void doMinionJoin(Desktop desktop,Minion minion){
         //todo：目前入场的随从被默认放在最右侧，暂时不支持选择随从入场位置
-        List<Minion> minions = desktop.getMinions(minion.getPlayerType());
-        if(minions.size() < MAX_MINION_NUM){
-            minions.add(minion);
-        }
+        MinionCollection minions = desktop.getMinions(minion.getPlayerType());
+        minions.add(minion);
         minion.setBirthday(desktop.getHistory().getCurrentTurnNo());
     }
 

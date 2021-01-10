@@ -2,6 +2,7 @@ package com.jk.game.hearthstone.core.handler;
 
 import com.jk.game.hearthstone.card.parent.Player;
 import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
+import com.jk.game.hearthstone.common.MinionCollection;
 import com.jk.game.hearthstone.core.processer.*;
 import com.jk.game.hearthstone.data.AttackParameters;
 import com.jk.game.hearthstone.data.AttackTarget;
@@ -87,7 +88,7 @@ public class AttackHandler {
                     desktop1.setMainPlayer (player1);
 
                     //TODO 确定场面被攻击随从
-                    for(Minion minion :desktop1.getSecondMinions()){
+                    for(Minion minion :desktop1.getSecondMinions().getList()){
 
                     }
 
@@ -164,9 +165,9 @@ public class AttackHandler {
         }
 
         //找出能攻击的随从
-        List<Minion> mainMinions = desktop.getMainMinions ();
-        if(mainMinions != null && mainMinions.size ()>0 ){
-            for(Minion minion:mainMinions){
+        MinionCollection mainMinions = desktop.getMainMinions ();
+        if(mainMinions != null && mainMinions.getList().size ()>0 ){
+            for(Minion minion:mainMinions.getList()){
                 if(minion.isCanAttack () && minion.getAttack ()>0){
                     attackTarget.getMainMinions ().add (minion);
                 }
@@ -174,9 +175,9 @@ public class AttackHandler {
         }
 
         //对手场上的随从
-        List<Minion> secondMinions = desktop.getSecondMinions ();
-        if(secondMinions!=null && secondMinions.size ()>0){
-            for(Minion minion:secondMinions){
+        MinionCollection secondMinions = desktop.getSecondMinions ();
+        if(secondMinions!=null && secondMinions.getList().size ()>0){
+            for(Minion minion:secondMinions.getList()){
                 //对带有嘲讽的随从进行优先排列
                 //排除沉睡的随从
                 if(minion.getRidicule ()){

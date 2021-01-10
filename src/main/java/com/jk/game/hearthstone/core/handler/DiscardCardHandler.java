@@ -1,9 +1,8 @@
 package com.jk.game.hearthstone.core.handler;
 
 import com.jk.game.hearthstone.card.parent.Card;
+import com.jk.game.hearthstone.common.CardCollection;
 import com.jk.game.hearthstone.data.Desktop;
-
-import java.util.List;
 
 /**
  * 弃牌操作执行者
@@ -13,7 +12,7 @@ import java.util.List;
 public class DiscardCardHandler {
 
     public static void discardCard(Desktop desktop, Card card){
-        List<Card> cards = desktop.getCards(card.getPlayerType());
+        CardCollection cards = desktop.getCards(card.getPlayerType());
         cards.remove(card);
         doDisCardPostProcessor();
     }

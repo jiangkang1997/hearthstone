@@ -36,7 +36,11 @@ public class AbusiveSergeant extends Minion implements BattleCry {
         AbusiveSergeantBuff(Card owner){
             this.owner = owner;
             life = 1;
-            attackNum = 2;
+        }
+
+        @Override
+        public int getAttackNum() {
+            return 2;
         }
     }
 }

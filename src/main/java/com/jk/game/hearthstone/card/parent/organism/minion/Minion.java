@@ -25,6 +25,18 @@ public class Minion extends Organism{
      */
     protected boolean raid = false;
     /**
+     * 吸血
+     */
+    protected boolean bloodSucking = false;
+    /**
+     * 圣盾
+     */
+    protected boolean holyShield = false;
+    /**
+     * 剧毒
+     */
+    protected boolean highlyToxic = false;
+    /**
      * 生日
      */
     protected int birthday = -1;
@@ -36,13 +48,17 @@ public class Minion extends Organism{
     @Override
     public boolean isCanAttack() {
         if(!freeze){
-            return birthday == desktop.getHistory().getCurrentTurnNo() ? charge : canAttack;
+            return canAttack || (birthday == desktop.getHistory().getCurrentTurnNo()) && (raid || charge);
         }
         return false;
     }
 
     @Override
     public boolean isCanAttackHero() {
-        return birthday == desktop.getHistory().getCurrentTurnNo() ? raid : canAttack;
+        if(!freeze){
+            return (canAttack && canAttackHero) ||
+                    (birthday == desktop.getHistory().getCurrentTurnNo() && charge && canAttackHero);
+        }
+        return false;
     }
 }

@@ -21,9 +21,9 @@ public class HeroSkillHandler {
     public static void doHeroSkill(Desktop desktop, Hero hero, Organism target) throws IllegalOperationException {
         doPreprocessor(desktop, hero, target);
         //扣费
-        desktop.getPlayer(hero.getPlayerType()).costPower(hero.getSkillCost(),0);
+        desktop.getPlayer(hero.getPlayerType()).costPower(hero.getHeroSkill().getSkillCost(),0);
         //发动效果
-        hero.skill(desktop, target);
+        hero.getHeroSkill().execute(desktop,target);
         doPostProcessor(desktop, hero, target);
     }
 

@@ -11,17 +11,15 @@ public abstract class AbstractAttackBuff extends AbstractBuff {
 
     private static final BuffType BUFF_TYPE = BuffType.BUFF_TYPE_ATTACK;
 
-    /**
-     * buff的攻击力数值
-     */
-    protected int attackNum;
-
     @Override
     public BuffType getBuffType() {
         return BUFF_TYPE;
     }
 
-    public int getAttackNum(){
-        return attackNum;
-    }
+    /**
+     * 获取buff的攻击力数值
+     * @return
+     */
+    public abstract int getAttackNum();
+
 }

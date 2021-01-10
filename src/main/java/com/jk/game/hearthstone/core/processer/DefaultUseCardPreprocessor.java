@@ -7,6 +7,7 @@ import com.jk.game.hearthstone.card.parent.magic.Magic;
 import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
 import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
+import com.jk.game.hearthstone.common.MinionCollection;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.Stand;
 import com.jk.game.hearthstone.exception.IllegalOperationException;
@@ -66,8 +67,8 @@ public class DefaultUseCardPreprocessor extends AbstractUseCardPreprocessor {
     }
 
     private void minionNumLegalityCheck(Desktop desktop, Card card) throws IllegalOperationException{
-        List<Minion> minions = desktop.getMinions(card.getPlayerType());
-        if(minions.size() == MAX_MINION_NUM){
+        MinionCollection minions = desktop.getMinions(card.getPlayerType());
+        if(minions.getList().size() == MAX_MINION_NUM){
             throw new IllegalOperationException("无法拥有更多随从");
         }
         List<Magic> tasksAndSecrets = desktop.getTasksAndSecrets(card.getPlayerType());
