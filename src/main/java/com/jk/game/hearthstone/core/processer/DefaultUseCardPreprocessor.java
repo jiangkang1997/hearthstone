@@ -8,6 +8,7 @@ import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
 import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
 import com.jk.game.hearthstone.common.MinionCollection;
+import com.jk.game.hearthstone.config.Conditional;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.Stand;
 import com.jk.game.hearthstone.exception.IllegalOperationException;
@@ -32,6 +33,10 @@ public class DefaultUseCardPreprocessor extends AbstractUseCardPreprocessor {
         targetLegalityCheck(card, target);
         //随从数量合法性
         minionNumLegalityCheck(desktop,card);
+        //特殊判断
+        if(card instanceof Conditional){
+            conditionCheck(desktop,card);
+        }
     }
 
     private void powerLegalityCheck(Desktop desktop, Card card) throws IllegalOperationException{
@@ -74,6 +79,13 @@ public class DefaultUseCardPreprocessor extends AbstractUseCardPreprocessor {
         List<Magic> tasksAndSecrets = desktop.getTasksAndSecrets(card.getPlayerType());
         if(tasksAndSecrets.size() >= MAX_TASK_SECRET_NUM){
             throw new IllegalOperationException("无法拥有更多奥秘和任务");
+        }
+    }
+
+    private void conditionCheck(Desktop desktop,Card card) throws IllegalOperationException {
+        boolean condition = ((Conditional) card).condition(desktop);
+        if(!condition){
+            throw new IllegalOperationException("无法使用");
         }
     }
 }

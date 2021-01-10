@@ -33,4 +33,9 @@ public abstract class HeroSkill implements Serializable {
      * @param target
      */
     public abstract void execute(Desktop desktop, Organism target);
+
+    public int getSkillCost(){
+        //todo: 光环 buff
+        return skillCost;
+    }
 }

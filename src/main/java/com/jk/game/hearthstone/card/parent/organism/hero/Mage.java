@@ -12,7 +12,6 @@ import com.jk.game.hearthstone.enumeration.PlayerType;
  * @author jk
  * @date 2020/8/12 21:45
  */
-@TargetScope
 public class Mage extends Hero {
 
     private static final String NAME = "法师";

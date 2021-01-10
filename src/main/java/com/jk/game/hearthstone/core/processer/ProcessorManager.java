@@ -25,10 +25,12 @@ public class ProcessorManager implements Serializable {
         DefaultUseCardPostProcessor defaultUseCardPostProcessor = new DefaultUseCardPostProcessor();
         DefaultJoinPostProcessor defaultJoinPostProcessor = new DefaultJoinPostProcessor();
         DefaultHurtPostProcess defaultHurtPostProcess = new DefaultHurtPostProcess();
+        DefaultHeroSkillPreprocessor defaultHeroSkillPreprocessor = new DefaultHeroSkillPreprocessor();
         register(defaultUseCardPreprocessor);
         register(defaultUseCardPostProcessor);
         register(defaultJoinPostProcessor);
         register(defaultHurtPostProcess);
+        register(defaultHeroSkillPreprocessor);
     }
 
     /**
@@ -52,7 +54,11 @@ public class ProcessorManager implements Serializable {
      * @return 已注册的对应类型下所有的处理器
      */
     public List<Processor> getProcessors(ProcessorType processorType){
-        return processorTypeMap.get(processorType);
+        List<Processor> processors = processorTypeMap.get(processorType);
+        if(CollectionUtils.isEmpty(processors)){
+            return new ArrayList<>();
+        }
+        return processors;
     }
 
 

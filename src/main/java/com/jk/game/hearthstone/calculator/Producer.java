@@ -116,33 +116,31 @@ public class Producer {
         Hero hero = desktop.getPlayer(playerType).getHero();
         List<Action> actions = new ArrayList<>();
         if (hero.getCanSkill()) {
+            //有指向目标的技能
+            if (hero.getHeroSkill().getClass().getAnnotationsByType(TargetScope.class).length > 0) {
+                List<Organism> allTarget = getAllTarget(desktop);
+                for (Organism target : allTarget) {
+                    actions.add(new Action(ActionType.ACTION_TYPE_SKILL, hero, target));
+                }
+            }
+            //无目标的技能
+            else {
+                actions.add(new Action(ActionType.ACTION_TYPE_SKILL, hero));
+            }
             List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.PRE_HERO_SKILL);
-            if (!CollectionUtils.isEmpty(processors)) {
-                //英雄技能的前置拦截
-                for (Processor processor : processors) {
-                    //有指向目标的技能
-                    if (hero.getClass().getAnnotationsByType(TargetScope.class).length > 0) {
-                        List<Organism> allTarget = getAllTarget(desktop);
-                        for (Organism target : allTarget) {
-                            try {
-                                ((AbstractHeroSkillPreprocessor) processor).doHeroSkillPreprocessor(desktop, hero, target);
-                            } catch (IllegalOperationException e) {
-                                continue;
-                            }
-                            actions.add(new Action(ActionType.ACTION_TYPE_SKILL, hero, target));
-                        }
-                    }
-                    //无目标的技能
-                    else {
+            List<Action>  illegalAction = new ArrayList<>();
+            if(!CollectionUtils.isEmpty(actions)){
+                for (Action action : actions) {
+                    for (Processor processor : processors){
                         try {
-                            ((AbstractHeroSkillPreprocessor) processor).doHeroSkillPreprocessor(desktop, hero, null);
+                            ((AbstractHeroSkillPreprocessor) processor).doHeroSkillPreprocessor(desktop,hero,action.getTarget());
                         } catch (IllegalOperationException e) {
-                            continue;
+                            illegalAction.add(action);
                         }
-                        actions.add(new Action(ActionType.ACTION_TYPE_SKILL, hero));
                     }
                 }
             }
+            actions.removeAll(illegalAction);
         }
         return actions;
     }
