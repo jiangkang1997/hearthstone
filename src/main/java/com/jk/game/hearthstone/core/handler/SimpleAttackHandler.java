@@ -17,5 +17,7 @@ public class SimpleAttackHandler {
         }
         //攻击者无法再次攻击
         attacker.setCanAttack(false);
+        //当前回合的攻击次数+1
+        attacker.setAttackTime(attacker.getAttackTime() + 1);
     }
 }

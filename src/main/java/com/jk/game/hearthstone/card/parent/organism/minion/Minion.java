@@ -1,6 +1,5 @@
 package com.jk.game.hearthstone.card.parent.organism.minion;
 
-
 import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
@@ -47,8 +46,10 @@ public class Minion extends Organism{
 
     @Override
     public boolean isCanAttack() {
+        //todo：风怒
         if(!freeze && getAttack()>0){
-            return canAttack || (birthday == desktop.getHistory().getCurrentTurnNo()) && (raid || charge);
+            return canAttack ||
+                    (birthday == desktop.getHistory().getCurrentTurnNo()) && (raid || charge) && (attackTime<1);
         }
         return false;
     }
@@ -57,7 +58,8 @@ public class Minion extends Organism{
     public boolean isCanAttackHero() {
         if(!freeze && getAttack()>0){
             return (canAttack && canAttackHero) ||
-                    (birthday == desktop.getHistory().getCurrentTurnNo() && charge && canAttackHero);
+                    (birthday == desktop.getHistory().getCurrentTurnNo()
+                            && charge && canAttackHero && attackTime<1);
         }
         return false;
     }

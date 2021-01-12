@@ -1,8 +1,10 @@
 package com.jk.game.hearthstone.card.base;
 
+import com.jk.game.hearthstone.annotation.TargetScope;
 import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.card.parent.magic.NormalMagic;
 import com.jk.game.hearthstone.card.parent.organism.Organism;
+import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
 import com.jk.game.hearthstone.config.Combo;
 import com.jk.game.hearthstone.core.buff.AbstractAttackBuff;
 import com.jk.game.hearthstone.data.Desktop;
@@ -15,6 +17,7 @@ import static com.jk.game.hearthstone.enumeration.Dictionary.MAX_TURN;
  * @author jk
  * @date 2021/1/10 17:07
  */
+@TargetScope(classScope = Minion.class)
 public class ColdBlooded extends NormalMagic implements Combo {
 
     private static final String NAME = "冷血";

@@ -1,6 +1,7 @@
 package com.jk.game.hearthstone.card.parent.organism;
 
 
+import com.jk.game.hearthstone.annotation.CurrentTurn;
 import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.core.buff.AbstractAttackBuff;
 import com.jk.game.hearthstone.core.buff.Buff;
@@ -46,8 +47,14 @@ public class Organism extends Card{
      * 寿命，死亡结算的结算依据，负数代表存活
      * 战斗死亡和剧毒会直接标记为0，腐化迷雾和力量代价等标记为剩余寿命
      */
-    //todo: 死亡结算器  回合切换也要注意更新一下这里
+    @CurrentTurn
     protected int life = -1;
+    /**
+     * 当前回合已攻击的数量
+     */
+    @CurrentTurn
+    protected int attackTime = 0;
+
     protected List<Buff> buffList = new ArrayList<>();
 
     public Organism(Desktop desktop,int cost, int attack, int health, String name, String desc, CardType cardType){

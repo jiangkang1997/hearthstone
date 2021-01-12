@@ -25,52 +25,9 @@ import java.util.List;
 public class KillCalculator {
 
     public static void main(String[] args) throws IllegalOperationException, IOException, ClassNotFoundException, IllegalAccessException, InvalidOperationException, InstantiationException {
-        Desktop desktop = init();
+        Desktop desktop = DesktopConstruct.desktop1_1();
         dfs(desktop);
     }
-
-    /**
-     * 初始化环境
-     */
-    private static Desktop init() throws InstantiationException, IllegalAccessException, InvalidOperationException {
-        Desktop desktop = new Desktop();
-
-        Player mainPlayer = new Player();
-        Hero mainHero = new Rouge(desktop, PlayerType.PLAYER_TYPE_MAIN);
-        mainPlayer.setHero(mainHero);
-        desktop.setMainPlayer(mainPlayer);
-
-        Player secondPlayer = new Player();
-        Hero secondHero = new Hero(desktop, "敌人",null, PlayerType.PLAYER_TYPE_SECOND);
-        secondPlayer.setHero(secondHero);
-        desktop.setSecondPlayer(secondPlayer);
-
-        secondHero.setHealth(10);
-        mainPlayer.setPower(4);
-        mainPlayer.setMaxPower(4);
-
-        //手牌 两张寒冰箭 一张冰枪术
-        FrostArrow frostArrow1 = new FrostArrow(desktop);
-        FrostArrow frostArrow2 = new FrostArrow(desktop);
-        IceSpear iceSpear = new IceSpear(desktop);
-        frostArrow1.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
-        frostArrow2.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
-        iceSpear.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
-        desktop.getMainCards().add(frostArrow1);
-        desktop.getMainCards().add(frostArrow2);
-        desktop.getMainCards().add(iceSpear);
-
-        //场上一张可攻击的法力伏龙
-        ManaDragon manaDragon = new ManaDragon(desktop);
-        manaDragon.setCanAttack(true);
-        manaDragon.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
-        JoinHandler.join(desktop,manaDragon);
-        manaDragon.setBirthday(2);
-
-
-        return desktop;
-    }
-
 
     private static void dfs(Desktop desktop) throws IllegalOperationException, IOException, ClassNotFoundException {
         List<Action> actions = Producer.getPossibleAction(desktop, PlayerType.PLAYER_TYPE_MAIN);
