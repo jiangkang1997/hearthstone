@@ -41,7 +41,7 @@ public class ManaDragon extends Minion {
 
         static class ManaDragonAttackBuff extends AbstractAttackBuff{
 
-            private static final int ATTACK_NUM = 2;
+            private static final int ATTACK_NUM = 1;
             private static final int LIFE = MAX_TURN;
 
             ManaDragonAttackBuff(Card owner){

@@ -25,7 +25,7 @@ import java.util.List;
 public class KillCalculator {
 
     public static void main(String[] args) throws IllegalOperationException, IOException, ClassNotFoundException, IllegalAccessException, InvalidOperationException, InstantiationException {
-        Desktop desktop = DesktopConstruct.desktop1_1();
+        Desktop desktop = DesktopConstruct.desktop1_2();
         dfs(desktop);
     }
 
