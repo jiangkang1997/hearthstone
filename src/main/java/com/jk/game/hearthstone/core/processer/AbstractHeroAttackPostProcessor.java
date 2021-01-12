@@ -1,5 +1,6 @@
 package com.jk.game.hearthstone.core.processer;
 
+import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.data.AttackParameters;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.ProcessorType;
@@ -12,6 +13,10 @@ import com.jk.game.hearthstone.exception.IllegalOperationException;
 public abstract class AbstractHeroAttackPostProcessor extends AbstractProcessor{
 
     private final ProcessorType PROCESSOR_TYPE = ProcessorType.POST_HEROATTACK_SKILL;
+
+    public AbstractHeroAttackPostProcessor(Card owner) {
+        super(owner);
+    }
 
     /**
     * @Description: 

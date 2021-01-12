@@ -17,13 +17,13 @@ public class Rouge extends Hero{
     private static final String NAME = "潜行者";
 
     public Rouge(Desktop desktop, PlayerType playerType) {
-        super(desktop, NAME, playerType);
+        super(desktop, NAME,new RougeHeroSkill(null), playerType);
     }
 
     static class RougeHeroSkill extends HeroSkill{
 
         public RougeHeroSkill(Hero skillOwner){
-            this.skillOwner = skillOwner;
+            super(skillOwner);
         }
 
         @Override

@@ -21,16 +21,18 @@ public class ProcessorManager implements Serializable {
     private Map<ProcessorType, List<Processor>> processorTypeMap = new HashMap<>();
 
     public ProcessorManager(){
-        DefaultUseCardPreprocessor defaultUseCardPreprocessor = new DefaultUseCardPreprocessor();
-        DefaultUseCardPostProcessor defaultUseCardPostProcessor = new DefaultUseCardPostProcessor();
-        DefaultJoinPostProcessor defaultJoinPostProcessor = new DefaultJoinPostProcessor();
-        DefaultHurtPostProcess defaultHurtPostProcess = new DefaultHurtPostProcess();
-        DefaultHeroSkillPreprocessor defaultHeroSkillPreprocessor = new DefaultHeroSkillPreprocessor();
+        DefaultUseCardPreprocessor defaultUseCardPreprocessor = new DefaultUseCardPreprocessor(null);
+        DefaultUseCardPostProcessor defaultUseCardPostProcessor = new DefaultUseCardPostProcessor(null);
+        DefaultJoinPostProcessor defaultJoinPostProcessor = new DefaultJoinPostProcessor(null);
+        DefaultHurtPostProcess defaultHurtPostProcess = new DefaultHurtPostProcess(null);
+        DefaultHeroSkillPreprocessor defaultHeroSkillPreprocessor = new DefaultHeroSkillPreprocessor(null);
+        DefaultHeroSkillPostProcessor defaultHeroSkillPostProcessor = new DefaultHeroSkillPostProcessor(null);
         register(defaultUseCardPreprocessor);
         register(defaultUseCardPostProcessor);
         register(defaultJoinPostProcessor);
         register(defaultHurtPostProcess);
         register(defaultHeroSkillPreprocessor);
+        register(defaultHeroSkillPostProcessor);
     }
 
     /**

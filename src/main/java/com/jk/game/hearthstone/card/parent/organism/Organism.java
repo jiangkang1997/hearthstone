@@ -8,9 +8,7 @@ import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.BuffType;
 import com.jk.game.hearthstone.enumeration.CardType;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,14 +72,6 @@ public class Organism extends Card{
 
     public void registerBuff(Buff buff){
         buffList.add(buff);
-    }
-
-    public boolean isCanAttack() {
-        return !freeze && canAttack;
-    }
-
-    public boolean isCanAttackHero(){
-        return !freeze && canAttack && canAttackHero;
     }
 
 

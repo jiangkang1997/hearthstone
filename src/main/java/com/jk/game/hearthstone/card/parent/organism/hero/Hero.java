@@ -33,13 +33,18 @@ public class Hero extends Organism{
     private static final int ATTACK = 0;
     private static final int HEALTH = 30;
 
-    public Hero(Desktop desktop, String name, PlayerType playerType){
+    public Hero(Desktop desktop, String name,HeroSkill heroSkill, PlayerType playerType){
         super(desktop,0,ATTACK,HEALTH,name,"", CardType.CARD_TYPE_MAGE);
         this.playerType = playerType;
+        this.heroSkill = heroSkill;
+        canAttack = true;
+        if(heroSkill != null){
+            heroSkill.setSkillOwner(this);
+        }
     }
 
-    public Hero(Desktop desktop,String name,int armor,PlayerType playerType){
-        this(desktop,name,playerType);
+    public Hero(Desktop desktop,String name,HeroSkill heroSkill,int armor,PlayerType playerType){
+        this(desktop,name,heroSkill,playerType);
         this.armor = armor;
     }
 
@@ -47,7 +52,19 @@ public class Hero extends Organism{
     public int getAttack() {
         //自身攻击力加上武器的攻击力
         int attack =  super.getAttack();
-        int armsAttack = desktop.getPlayer(getPlayerType()).getArms().getAttack();
-        return attack + armsAttack;
+        if(desktop.getPlayer(getPlayerType()).getArms() != null){
+            attack += desktop.getPlayer(getPlayerType()).getArms().getAttack();
+        }
+        return attack;
+    }
+
+    @Override
+    public boolean isCanAttack() {
+        return !freeze && canAttack && getAttack()>0;
+    }
+
+    @Override
+    public boolean isCanAttackHero() {
+        return isCanAttack() && canAttackHero;
     }
 }

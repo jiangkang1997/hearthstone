@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class AuraManager implements Serializable {
 
-    private Map<AuraType, List<Aura>> registerAuraMap = new HashMap<>();
+    private final Map<AuraType, List<Aura>> registerAuraMap = new HashMap<>();
 
     /**
      * 注册光环

@@ -11,6 +11,10 @@ import com.jk.game.hearthstone.data.Turn;
  */
 public class DefaultUseCardPostProcessor extends AbstractUseCardPostProcessor {
 
+    public DefaultUseCardPostProcessor(Card owner) {
+        super(owner);
+    }
+
     @Override
     public void processAfterPlay(Desktop desktop, Card card){
         Turn currentTurn = desktop.getHistory().getCurrentTurn();

@@ -11,6 +11,10 @@ import com.jk.game.hearthstone.enumeration.ProcessorType;
  */
 public abstract class AbstractTreatmentPostProcess extends AbstractProcessor {
 
+    public AbstractTreatmentPostProcess(Card owner) {
+        super(owner);
+    }
+
     /**
      * 治疗后置处理方法
      * @param desktop

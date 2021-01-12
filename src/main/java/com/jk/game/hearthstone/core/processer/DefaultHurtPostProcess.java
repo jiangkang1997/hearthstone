@@ -14,6 +14,10 @@ import com.jk.game.hearthstone.data.Desktop;
  */
 public class DefaultHurtPostProcess extends AbstractHurtPostProcess {
 
+    public DefaultHurtPostProcess(Card owner) {
+        super(owner);
+    }
+
     @Override
     public void processAfterHurt(Desktop desktop, Card source, Organism target, int num) {
         //吸血

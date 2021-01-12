@@ -47,7 +47,7 @@ public class Minion extends Organism{
 
     @Override
     public boolean isCanAttack() {
-        if(!freeze){
+        if(!freeze && getAttack()>0){
             return canAttack || (birthday == desktop.getHistory().getCurrentTurnNo()) && (raid || charge);
         }
         return false;
@@ -55,7 +55,7 @@ public class Minion extends Organism{
 
     @Override
     public boolean isCanAttackHero() {
-        if(!freeze){
+        if(!freeze && getAttack()>0){
             return (canAttack && canAttackHero) ||
                     (birthday == desktop.getHistory().getCurrentTurnNo() && charge && canAttackHero);
         }

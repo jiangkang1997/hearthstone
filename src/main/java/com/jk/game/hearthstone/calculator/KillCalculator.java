@@ -5,11 +5,10 @@ import com.jk.game.hearthstone.card.classic.mage.IceSpear;
 import com.jk.game.hearthstone.card.classic.mage.ManaDragon;
 import com.jk.game.hearthstone.card.parent.Player;
 import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
-import com.jk.game.hearthstone.card.parent.organism.hero.Mage;
+import com.jk.game.hearthstone.card.parent.organism.hero.Rouge;
 import com.jk.game.hearthstone.core.handler.JoinHandler;
 import com.jk.game.hearthstone.data.Action;
 import com.jk.game.hearthstone.data.Desktop;
-import com.jk.game.hearthstone.data.History;
 import com.jk.game.hearthstone.enumeration.PlayerType;
 import com.jk.game.hearthstone.exception.IllegalOperationException;
 import com.jk.game.hearthstone.exception.InvalidOperationException;
@@ -37,12 +36,12 @@ public class KillCalculator {
         Desktop desktop = new Desktop();
 
         Player mainPlayer = new Player();
-        Hero mainHero = new Mage(desktop, PlayerType.PLAYER_TYPE_MAIN);
+        Hero mainHero = new Rouge(desktop, PlayerType.PLAYER_TYPE_MAIN);
         mainPlayer.setHero(mainHero);
         desktop.setMainPlayer(mainPlayer);
 
         Player secondPlayer = new Player();
-        Hero secondHero = new Hero(desktop, "敌人", PlayerType.PLAYER_TYPE_SECOND);
+        Hero secondHero = new Hero(desktop, "敌人",null, PlayerType.PLAYER_TYPE_SECOND);
         secondPlayer.setHero(secondHero);
         desktop.setSecondPlayer(secondPlayer);
 

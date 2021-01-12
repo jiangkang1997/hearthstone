@@ -1,6 +1,7 @@
 package com.jk.game.hearthstone.core.processer;
 
 import com.jk.game.hearthstone.annotation.TargetScope;
+import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.card.parent.Player;
 import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
@@ -14,6 +15,10 @@ import com.jk.game.hearthstone.exception.IllegalOperationException;
  * @date 2021/1/10 20:59
  */
 public class DefaultHeroSkillPreprocessor extends AbstractHeroSkillPreprocessor {
+
+    public DefaultHeroSkillPreprocessor(Card owner) {
+        super(owner);
+    }
 
     @Override
     public void doHeroSkillPreprocessor(Desktop desktop, Hero hero, Organism target) throws IllegalOperationException {

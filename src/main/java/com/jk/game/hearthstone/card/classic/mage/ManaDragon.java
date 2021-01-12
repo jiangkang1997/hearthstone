@@ -27,6 +27,10 @@ public class ManaDragon extends Minion {
     @InitializedProcessor
     public static class ManaDragonProcess extends AbstractUseCardPostProcessor{
 
+        public ManaDragonProcess(Card owner) {
+            super(owner);
+        }
+
         @Override
         public void processAfterPlay(Desktop desktop, Card card){
             if(card instanceof Magic){
@@ -36,14 +40,12 @@ public class ManaDragon extends Minion {
         }
 
         static class ManaDragonAttackBuff extends AbstractAttackBuff{
-            ManaDragonAttackBuff(Card owner){
-                this.owner = owner;
-                life = MAX_TURN;
-            }
 
-            @Override
-            public int getAttackNum() {
-                return 1;
+            private static final int ATTACK_NUM = 2;
+            private static final int LIFE = MAX_TURN;
+
+            ManaDragonAttackBuff(Card owner){
+                super(owner,LIFE,ATTACK_NUM);
             }
         }
     }

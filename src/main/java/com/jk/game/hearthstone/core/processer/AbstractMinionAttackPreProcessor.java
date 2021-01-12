@@ -1,5 +1,6 @@
 package com.jk.game.hearthstone.core.processer;
 
+import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.data.AttackParameters;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.ProcessorType;
@@ -11,6 +12,10 @@ import com.jk.game.hearthstone.exception.IllegalOperationException;
  */
 public abstract class AbstractMinionAttackPreProcessor extends AbstractProcessor{
     private final ProcessorType PROCESSOR_TYPE = ProcessorType.PRE_MINIONATTACK_SKILL;
+
+    public AbstractMinionAttackPreProcessor(Card owner) {
+        super(owner);
+    }
 
     /**
     * @Description: 

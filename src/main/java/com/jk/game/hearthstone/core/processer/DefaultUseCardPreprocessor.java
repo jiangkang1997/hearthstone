@@ -25,6 +25,10 @@ public class DefaultUseCardPreprocessor extends AbstractUseCardPreprocessor {
     private static final int MAX_MINION_NUM = 7;
     private static final int MAX_TASK_SECRET_NUM = 5;
 
+    public DefaultUseCardPreprocessor(Card owner) {
+        super(owner);
+    }
+
     @Override
     public void processBeforePlay(Desktop desktop, Card card, Organism target) throws IllegalOperationException {
         //水晶合法性

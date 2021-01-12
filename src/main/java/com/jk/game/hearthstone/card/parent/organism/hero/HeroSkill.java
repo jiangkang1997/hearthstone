@@ -15,6 +15,10 @@ import java.io.Serializable;
 @Setter
 public abstract class HeroSkill implements Serializable {
 
+    public HeroSkill(Hero skillOwner){
+        this.skillOwner = skillOwner;
+    }
+
     //todo: 被动技能的设计
 
     /**

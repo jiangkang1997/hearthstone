@@ -17,15 +17,14 @@ public class Mage extends Hero {
     private static final String NAME = "法师";
 
     public Mage(Desktop desktop, PlayerType playerType) {
-        super(desktop,NAME,playerType);
-        heroSkill = new MageHeroSkill(this);
+        super(desktop,NAME,new MageHeroSkill(null),playerType);
     }
 
     @TargetScope
     static class MageHeroSkill extends HeroSkill{
 
         public MageHeroSkill(Hero skillOwner){
-            this.skillOwner = skillOwner;
+            super(skillOwner);
         }
 
         @Override

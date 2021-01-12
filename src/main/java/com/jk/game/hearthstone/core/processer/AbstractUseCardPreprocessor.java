@@ -16,6 +16,10 @@ public abstract class AbstractUseCardPreprocessor extends AbstractProcessor {
 
     private final ProcessorType PROCESSOR_TYPE = ProcessorType.PRE_USE_CARD;
 
+    public AbstractUseCardPreprocessor(Card owner) {
+        super(owner);
+    }
+
 
     /**
      * 在出牌前被触发

@@ -41,14 +41,11 @@ public class DeathlyPoison extends NormalMagic implements Conditional {
 
     static class DeathlyPoisonBuff extends AbstractAttackBuff{
 
-        DeathlyPoisonBuff(Card owner) {
-            this.owner = owner;
-            life = MAX_TURN;
-        }
+        private static final int ATTACK_NUM = 2;
+        private static final int LIFE = MAX_TURN;
 
-        @Override
-        public int getAttackNum() {
-            return 2;
+        DeathlyPoisonBuff(Card owner) {
+            super(owner,LIFE,ATTACK_NUM);
         }
     }
 }

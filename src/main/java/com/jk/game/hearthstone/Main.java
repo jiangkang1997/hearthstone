@@ -21,8 +21,8 @@ public class Main {
         Desktop desktop = new Desktop();
         Player mainPlayer = new Player();
         Player secondPlayer = new Player();
-        mainPlayer.setHero(new Hero(desktop,"敌人",PlayerType.PLAYER_TYPE_MAIN));
-        secondPlayer.setHero(new Hero(desktop,"玩家",PlayerType.PLAYER_TYPE_SECOND));
+        mainPlayer.setHero(new Hero(desktop,"敌人",null,PlayerType.PLAYER_TYPE_MAIN));
+        secondPlayer.setHero(new Hero(desktop,"玩家",null,PlayerType.PLAYER_TYPE_SECOND));
         desktop.setMainPlayer(mainPlayer);
         desktop.setSecondPlayer(secondPlayer);
         mainPlayer.setPower(10);

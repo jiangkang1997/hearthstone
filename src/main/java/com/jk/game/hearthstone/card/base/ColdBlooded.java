@@ -37,27 +37,21 @@ public class ColdBlooded extends NormalMagic implements Combo {
 
     static class ColdBloodedBuff extends AbstractAttackBuff{
 
-        ColdBloodedBuff(Card owner){
-            this.owner = owner;
-            life = MAX_TURN;
-        }
+        private static final int ATTACK_NUM = 2;
+        private static final int LIFE = MAX_TURN;
 
-        @Override
-        public int getAttackNum() {
-            return 2;
+        ColdBloodedBuff(Card owner){
+            super(owner,LIFE,ATTACK_NUM);
         }
     }
 
     static class ColdBloodedComboBuff extends AbstractAttackBuff{
 
-        ColdBloodedComboBuff(Card owner){
-            this.owner = owner;
-            life = MAX_TURN;
-        }
+        private static final int ATTACK_NUM = 4;
+        private static final int LIFE = MAX_TURN;
 
-        @Override
-        public int getAttackNum() {
-            return 4;
+        ColdBloodedComboBuff(Card owner){
+            super(owner,LIFE,ATTACK_NUM);
         }
     }
 }

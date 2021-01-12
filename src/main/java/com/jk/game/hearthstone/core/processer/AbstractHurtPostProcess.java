@@ -13,6 +13,10 @@ public abstract class AbstractHurtPostProcess extends AbstractProcessor{
 
     private static final ProcessorType PROCESS_TYPE = ProcessorType.POST_HURT;
 
+    public AbstractHurtPostProcess(Card owner) {
+        super(owner);
+    }
+
 
     /**
      * 伤害后置处理方法

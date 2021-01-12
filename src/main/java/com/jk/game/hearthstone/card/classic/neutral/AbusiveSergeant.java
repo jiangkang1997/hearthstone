@@ -10,6 +10,8 @@ import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
 import com.jk.game.hearthstone.enumeration.Stand;
 
+import static com.jk.game.hearthstone.enumeration.Dictionary.MAX_TURN;
+
 
 /**
  * 叫嚣的中士
@@ -33,14 +35,12 @@ public class AbusiveSergeant extends Minion implements BattleCry {
 
 
     static class AbusiveSergeantBuff extends AbstractAttackBuff {
-        AbusiveSergeantBuff(Card owner){
-            this.owner = owner;
-            life = 1;
-        }
 
-        @Override
-        public int getAttackNum() {
-            return 2;
+        private static final int ATTACK_NUM = 2;
+        private static final int LIFE = MAX_TURN;
+
+        AbusiveSergeantBuff(Card owner){
+            super(owner,LIFE,ATTACK_NUM);
         }
     }
 }

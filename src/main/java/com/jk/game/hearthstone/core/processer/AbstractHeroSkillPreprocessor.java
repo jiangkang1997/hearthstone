@@ -1,5 +1,6 @@
 package com.jk.game.hearthstone.core.processer;
 
+import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
 import com.jk.game.hearthstone.data.Desktop;
@@ -12,6 +13,10 @@ import com.jk.game.hearthstone.exception.IllegalOperationException;
 public abstract class AbstractHeroSkillPreprocessor extends AbstractProcessor {
 
     private static final ProcessorType PROCESSOR_TYPE = ProcessorType.PRE_HERO_SKILL;
+
+    public AbstractHeroSkillPreprocessor(Card owner) {
+        super(owner);
+    }
 
     /**
      * 英雄技能前置处理方法

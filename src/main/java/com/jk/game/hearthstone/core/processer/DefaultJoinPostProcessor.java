@@ -6,6 +6,8 @@ import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.core.aura.Aura;
 import com.jk.game.hearthstone.data.Desktop;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * 默认的入场后置处理器
  * 主要用于注册卡牌所携带的处理器和光环效果
@@ -13,6 +15,10 @@ import com.jk.game.hearthstone.data.Desktop;
  * @author jk
  */
 public class DefaultJoinPostProcessor extends AbstractJoinPostProcessor {
+
+    public DefaultJoinPostProcessor(Card owner) {
+        super(owner);
+    }
 
     @Override
     public void processAfterJoin(Desktop desktop, Card card) throws InstantiationException, IllegalAccessException {
@@ -25,8 +31,13 @@ public class DefaultJoinPostProcessor extends AbstractJoinPostProcessor {
         if (classes.length != 0) {
             for (Class<?> clazz : classes) {
                 if (Processor.class.isAssignableFrom(clazz) && clazz.getAnnotation(InitializedProcessor.class) != null) {
-                    Processor processor = (Processor) clazz.newInstance();
-                    processor.setOwner(card);
+                    Processor processor = null;
+                    try {
+                        processor = (Processor) clazz.getDeclaredConstructor(Card.class).newInstance(card);
+                    }catch (NoSuchMethodException | InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                    assert processor != null;
                     desktop.getProcessorManager().register(processor);
                 }
             }
