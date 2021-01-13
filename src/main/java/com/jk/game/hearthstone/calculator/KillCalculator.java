@@ -25,13 +25,13 @@ import java.util.List;
 public class KillCalculator {
 
     public static void main(String[] args) throws IllegalOperationException, IOException, ClassNotFoundException, IllegalAccessException, InvalidOperationException, InstantiationException {
-        Desktop desktop = DesktopConstruct.desktop1_2();
+        Desktop desktop = DesktopConstruct.desktop1_3();
         dfs(desktop);
     }
 
     private static void dfs(Desktop desktop) throws IllegalOperationException, IOException, ClassNotFoundException {
         List<Action> actions = Producer.getPossibleAction(desktop, PlayerType.PLAYER_TYPE_MAIN);
-        log(actions, "当前所有操作：");
+        //log(actions, "当前所有操作：");
         //深度克隆一份controller的副本，以便回溯时回到初始状态
         Desktop duplicate = (Desktop) DeepCloneUtil.deepClone(desktop);
         //出口
@@ -40,21 +40,21 @@ public class KillCalculator {
         }
         //收工了
         if (actions.size() == 0) {
-            log(desktop.getHistory().getCurrentTurn().actions, "收工了，回溯");
+            //log(desktop.getHistory().getCurrentTurn().actions, "收工了，回溯");
             return;
         }
         for (int index = 0; index < actions.size() ; index++) {
             desktop.getHistory().record(actions.get(index));
             Customer.doOperation(desktop,actions.get(index));
-            log(desktop.getHistory().getCurrentTurn().actions, "出牌顺序");
-            log.info("水晶数：" + desktop.getMainPlayer().getPower());
-            log.info("敌方血量：" + desktop.getSecondPlayer().getHero().getHealth());
+            //log(desktop.getHistory().getCurrentTurn().actions, "出牌顺序");
+            //log.info("水晶数：" + desktop.getMainPlayer().getPower());
+            //log.info("敌方血量：" + desktop.getSecondPlayer().getHero().getHealth());
             dfs(desktop);
             //将备份的desktop拿回，回到原始状态
             desktop = duplicate;
             duplicate = (Desktop) DeepCloneUtil.deepClone(duplicate);
             actions = Producer.getPossibleAction(desktop, PlayerType.PLAYER_TYPE_MAIN);
-            log(desktop.getHistory().getCurrentTurn().actions, "回溯");
+            //log(desktop.getHistory().getCurrentTurn().actions, "回溯");
         }
     }
 

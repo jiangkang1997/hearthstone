@@ -22,7 +22,7 @@ public class HurtHandler {
      * 造成伤害的处理
      *
      * @param desktop
-     * @param source  英雄技能和英雄不带武器造成的伤害传入英雄，英雄携带武器攻击时传入武器
+     * @param source
      * @param target
      * @param num
      */
@@ -37,7 +37,7 @@ public class HurtHandler {
                 hurtMinion((Minion) target, num);
             } catch (InvalidHurtException ignore) {}
         }
-
+        doHurtPostProcess(desktop, source, target, num);
     }
 
     private static void hurtHero(Hero target, int num) {

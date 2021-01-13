@@ -15,9 +15,10 @@ public class SimpleAttackHandler {
         if(target instanceof Minion){
             attacker.setHealth(attacker.getHealth() - target.getAttack());
         }
-        //攻击者无法再次攻击
-        attacker.setCanAttack(false);
         //当前回合的攻击次数+1
         attacker.setAttackTime(attacker.getAttackTime() + 1);
+        if(!(attacker.isWindfury() && attacker.getAttackTime()<2)){
+            attacker.setCanAttack(false);
+        }
     }
 }

@@ -1,11 +1,11 @@
 package com.jk.game.hearthstone.calculator;
 
-import com.jk.game.hearthstone.card.base.BluegillWarrior;
-import com.jk.game.hearthstone.card.base.ColdBlooded;
-import com.jk.game.hearthstone.card.base.DeathlyPoison;
+import com.jk.game.hearthstone.card.base.*;
+import com.jk.game.hearthstone.card.base.shaman.Windfury;
 import com.jk.game.hearthstone.card.classic.mage.FrostArrow;
 import com.jk.game.hearthstone.card.classic.mage.IceSpear;
 import com.jk.game.hearthstone.card.classic.mage.ManaDragon;
+import com.jk.game.hearthstone.card.classic.neutral.AbusiveSergeant;
 import com.jk.game.hearthstone.card.parent.Player;
 import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
 import com.jk.game.hearthstone.card.parent.organism.hero.Rouge;
@@ -86,4 +86,39 @@ public class DesktopConstruct {
 
         return desktop;
     }
+
+    public static Desktop desktop1_3() throws InstantiationException, IllegalAccessException, InvalidOperationException {
+        Desktop desktop = new Desktop();
+
+        Player mainPlayer = new Player();
+        Hero mainHero = new Rouge(desktop, PlayerType.PLAYER_TYPE_MAIN);
+        mainHero.setCanSkill(false);
+        mainPlayer.setHero(mainHero);
+        desktop.setMainPlayer(mainPlayer);
+
+        Player secondPlayer = new Player();
+        Hero secondHero = new Hero(desktop, "敌人",null, PlayerType.PLAYER_TYPE_SECOND);
+        secondPlayer.setHero(secondHero);
+        desktop.setSecondPlayer(secondPlayer);
+
+        secondHero.setHealth(12);
+        mainPlayer.setPower(6);
+        mainPlayer.setMaxPower(6);
+
+        StonetuskBoar stonetuskBoar = new StonetuskBoar(desktop);
+        AbusiveSergeant abusiveSergeant = new AbusiveSergeant(desktop);
+        RockbiterWeapon rockbiterWeapon = new RockbiterWeapon(desktop);
+        RockbiterWeapon rockbiterWeapon1 = new RockbiterWeapon(desktop);
+        Windfury windfury = new Windfury(desktop);
+        TeamLeader teamLeader = new TeamLeader(desktop);
+        desktop.getMainCards().add(stonetuskBoar);
+        desktop.getMainCards().add(abusiveSergeant);
+        desktop.getMainCards().add(rockbiterWeapon);
+        desktop.getMainCards().add(rockbiterWeapon1);
+        desktop.getMainCards().add(windfury);
+        desktop.getMainCards().add(teamLeader);
+
+        return desktop;
+    }
 }
+

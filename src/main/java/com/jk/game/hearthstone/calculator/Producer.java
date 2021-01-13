@@ -151,6 +151,7 @@ public class Producer {
         targets.addAll(desktop.getSecondMinions().getList());
         targets.add(desktop.getMainPlayer().getHero());
         targets.add(desktop.getSecondPlayer().getHero());
+        targets.add(null);
         return targets;
     }
 

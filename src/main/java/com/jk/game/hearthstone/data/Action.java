@@ -2,6 +2,7 @@ package com.jk.game.hearthstone.data;
 
 import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.card.parent.organism.Organism;
+import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
 import com.jk.game.hearthstone.enumeration.ActionType;
 import lombok.Data;
 

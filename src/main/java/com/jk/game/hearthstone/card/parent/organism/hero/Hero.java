@@ -1,11 +1,20 @@
 package com.jk.game.hearthstone.card.parent.organism.hero;
 
+import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.card.parent.organism.Organism;
+import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
+import com.jk.game.hearthstone.core.aura.AbstractAttackAura;
+import com.jk.game.hearthstone.core.aura.Aura;
 import com.jk.game.hearthstone.data.Desktop;
+import com.jk.game.hearthstone.enumeration.AuraType;
 import com.jk.game.hearthstone.enumeration.CardType;
 import com.jk.game.hearthstone.enumeration.PlayerType;
+import com.jk.game.hearthstone.enumeration.Stand;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
 
 /**
  * 所有英雄的基类
@@ -54,6 +63,25 @@ public class Hero extends Organism{
         int attack =  super.getAttack();
         if(desktop.getPlayer(getPlayerType()).getArms() != null){
             attack += desktop.getPlayer(getPlayerType()).getArms().getAttack();
+        }
+        //光环计算
+        List<Aura> attackAuras = desktop.getAuraManager().getAurasByType(AuraType.AURA_TYPE_ATTACK);
+        if(!CollectionUtils.isEmpty(attackAuras)){
+            for (Aura attackAura : attackAuras) {
+                if(attackAura.getClassScope() == Minion.class){
+                    continue;
+                }
+                Card owner = attackAura.getOwner();
+                if(attackAura.getStand() == Stand.ALL){
+                    attack += ((AbstractAttackAura) attackAura).getNum();
+                }
+                else if(attackAura.getStand() == Stand.FRIEND && owner.getPlayerType() == playerType){
+                    attack += ((AbstractAttackAura) attackAura).getNum();
+                }
+                else if(attackAura.getStand() == Stand.FOE && owner.getPlayerType() != playerType){
+                    attack += ((AbstractAttackAura) attackAura).getNum();
+                }
+            }
         }
         return attack;
     }

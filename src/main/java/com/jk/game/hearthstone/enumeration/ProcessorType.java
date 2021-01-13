@@ -63,5 +63,9 @@ public enum ProcessorType {
     /**
      * 治疗后置
      */
-    POST_TREAT;
+    POST_TREAT,
+    /**
+     * 回合结束后置
+     */
+    POST_END_ROUND;
 }

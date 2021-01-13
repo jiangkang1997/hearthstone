@@ -9,11 +9,6 @@ package com.jk.game.hearthstone.enumeration;
 public enum  AuraType {
 
     /**
-     * 抽象光环（空实现）
-     */
-    AURA_TYPE_ABSTRACT,
-
-    /**
      * 攻击力型光环
      */
     AURA_TYPE_ATTACK;

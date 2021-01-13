@@ -1,7 +1,10 @@
 package com.jk.game.hearthstone.core.aura;
 
+import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.card.parent.organism.Organism;
+import com.jk.game.hearthstone.enumeration.AuraLife;
 import com.jk.game.hearthstone.enumeration.AuraType;
+import com.jk.game.hearthstone.enumeration.Stand;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,19 +14,26 @@ import lombok.EqualsAndHashCode;
  * @Author jk
  * @Date 2020/8/2 23:09
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
 public abstract class AbstractAttackAura extends AbstractAura {
 
     private static final AuraType AURA_TYPE = AuraType.AURA_TYPE_ATTACK;
 
     /**
-     * 被施加光环的目标，只有是指定目标型的光环时，才被使用
-     */
-    protected Organism target;
-
-    /**
      * 目标被修改的攻击力数值
      */
-    protected Integer num;
+    private Integer num;
+
+    public AbstractAttackAura(Card owner, Class<? extends Organism> classScope, Stand stand, AuraLife auraLife,int num) {
+        super(owner, classScope, stand, auraLife);
+        this.num = num;
+    }
+
+    @Override
+    public  AuraType getAuraType() {
+        return AURA_TYPE;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
 }

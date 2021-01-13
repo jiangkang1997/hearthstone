@@ -29,8 +29,10 @@ public class AbusiveSergeant extends Minion implements BattleCry {
 
     @Override
     public void effect(Desktop desktop, Organism target) {
-        AbusiveSergeantBuff buff = new AbusiveSergeantBuff(this);
-        target.registerBuff(buff);
+        if(target != null){
+            AbusiveSergeantBuff buff = new AbusiveSergeantBuff(this);
+            target.registerBuff(buff);
+        }
     }
 
 

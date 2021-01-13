@@ -40,6 +40,10 @@ public class Organism extends Card{
      */
     protected boolean freeze = false;
     /**
+     * 风怒
+     */
+    protected boolean windfury = false;
+    /**
      * 免疫
      */
     protected boolean immune = false;

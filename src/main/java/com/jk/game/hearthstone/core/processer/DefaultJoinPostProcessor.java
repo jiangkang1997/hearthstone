@@ -49,8 +49,13 @@ public class DefaultJoinPostProcessor extends AbstractJoinPostProcessor {
         if (classes.length != 0) {
             for (Class<?> clazz : classes) {
                 if (Aura.class.isAssignableFrom(clazz) && clazz.getAnnotation(InitializedAura.class) != null) {
-                    Aura aura = (Aura) clazz.newInstance();
-                    aura.setOwner(card);
+                    Aura aura = null;
+                    try {
+                        aura = (Aura) clazz.getDeclaredConstructor(Card.class).newInstance(card);
+                    } catch (InvocationTargetException | NoSuchMethodException e) {
+                        e.printStackTrace();
+                    }
+                    assert aura != null;
                     desktop.getAuraManager().register(aura);
                 }
             }

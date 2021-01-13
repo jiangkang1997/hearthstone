@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class ProcessorManager implements Serializable {
 
-    private Map<ProcessorType, List<Processor>> processorTypeMap = new HashMap<>();
+    private final Map<ProcessorType, List<Processor>> processorTypeMap = new HashMap<>();
 
     public ProcessorManager(){
         DefaultUseCardPreprocessor defaultUseCardPreprocessor = new DefaultUseCardPreprocessor(null);

@@ -25,12 +25,6 @@ public interface Aura extends Serializable {
     AuraType getAuraType();
 
     /**
-     * 设置光环的发起者
-     * @param owner 发起者
-     */
-    void setOwner(Card owner);
-
-    /**
      * 获取光环的发起者
      * @return 光环的发起者
      */
