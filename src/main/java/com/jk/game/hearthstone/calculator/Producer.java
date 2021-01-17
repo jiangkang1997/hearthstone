@@ -6,6 +6,8 @@ import com.jk.game.hearthstone.card.parent.Player;
 import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
 import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
+import com.jk.game.hearthstone.core.aura.AbstractAttackAura;
+import com.jk.game.hearthstone.core.processer.AbstractAttackPreProcessor;
 import com.jk.game.hearthstone.core.processer.AbstractHeroSkillPreprocessor;
 import com.jk.game.hearthstone.core.processer.AbstractUseCardPreprocessor;
 import com.jk.game.hearthstone.core.processer.Processor;
@@ -33,10 +35,10 @@ public class Producer {
      * @param desktop
      * @return 包含所有信息
      */
-    public static List<Action> getPossibleAction(Desktop desktop, PlayerType playerType) {
+    public static List<Action> getPossibleAction(Desktop desktop, PlayerType playerType, boolean ignoreSeat) {
         List<Action> actions = new ArrayList<>();
         //手牌动作
-        actions.addAll(cardAction(desktop, playerType));
+        actions.addAll(cardAction(desktop, playerType, ignoreSeat));
         //随从动作
         actions.addAll(entourageAction(desktop, playerType));
         //英雄攻击
@@ -46,14 +48,15 @@ public class Producer {
         return actions;
     }
 
-    private static List<Action> cardAction(Desktop desktop, PlayerType playerType) {
+    private static List<Action> cardAction(Desktop desktop, PlayerType playerType, boolean ignoreSeat) {
         List<Action> actions = new ArrayList<>();
+        int minionSize = desktop.getMinions(playerType).getList().size();
         //遍历手牌
         for (Card card : desktop.getCards(playerType).getList()) {
             //通过出牌前置处理器过滤不合法的出牌动作
             List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.PRE_USE_CARD);
             for (Processor processor : processors) {
-                //有指向性目标的卡牌，遍历所有可能得目标
+                //有指向性目标的卡牌，遍历所有可能的目标
                 if (card.getClass().getAnnotationsByType(TargetScope.class).length != 0) {
                     List<Organism> allTarget = getAllTarget(desktop);
                     for (Organism target : allTarget) {
@@ -76,6 +79,19 @@ public class Producer {
                 }
             }
         }
+        //遍历随从的站位
+        List<Action> actionsWithSeat = new ArrayList<>();
+        if (!ignoreSeat && actions.size() > 0) {
+            for (Action action : actions) {
+                if(!(action.getCard() instanceof Minion)){
+                    continue;
+                }
+                for (int seat = 0; seat < minionSize; seat++) {
+                    actionsWithSeat.add(new Action(action.getActionType(), action.getCard(), action.getTarget(), seat));
+                }
+            }
+        }
+        actions.addAll(actionsWithSeat);
         return actions;
     }
 
@@ -83,32 +99,54 @@ public class Producer {
         List<Action> actions = new ArrayList<>();
         //todo: 攻击的前置拦截
         for (Minion minion : desktop.getMinions(playerType).getList()) {
-            if (minion.isCanAttack()) {
-                for (Minion foeMinion : desktop.getMinions(playerType.getOpponentType()).getList()) {
-                    actions.add(new Action(ActionType.ACTION_TYPE_ATTACK, minion, foeMinion));
+            for (Minion foeMinion : desktop.getMinions(playerType.getOpponentType()).getList()) {
+                actions.add(new Action(ActionType.ACTION_TYPE_ATTACK, minion, foeMinion));
+            }
+            actions.add(new Action(ActionType.ACTION_TYPE_ATTACK, minion, desktop.getPlayer(playerType.getOpponentType()).getHero()));
+        }
+        //过滤非法操作
+        List<Processor> attackPerProcessors = desktop.getProcessorManager().getProcessors(ProcessorType.PRE_ATTACK);
+        List<Action> illegalAction = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(actions)) {
+            for (Action action : actions) {
+                for (Processor attackPerProcessor : attackPerProcessors) {
+                    try {
+                        ((AbstractAttackPreProcessor) attackPerProcessor).processBeforeHeroAttack(desktop, (Organism) action.getCard(), action.getTarget());
+                    } catch (IllegalOperationException e) {
+                        illegalAction.add(action);
+                    }
                 }
-                actions.add(new Action(ActionType.ACTION_TYPE_ATTACK, minion, desktop.getPlayer(playerType.getOpponentType()).getHero()));
             }
         }
+        actions.removeAll(illegalAction);
         return actions;
     }
 
     private static List<Action> heroAttackAction(Desktop desktop, PlayerType playerType) {
         List<Action> actions = new ArrayList<>();
         //英雄攻击
-        //todo: 攻击的前置拦截
         Player player = desktop.getPlayer(playerType);
         Hero hero = player.getHero();
-        if (hero.isCanAttack()) {
-            int att = hero.getAttack();
-            //英雄攻击力大于0才能攻击
-            if (att > 0) {
-                for (Minion foeMinion : desktop.getMinions(playerType.getOpponentType()).getList()) {
-                    actions.add(new Action(ActionType.ACTION_TYPE_ATTACK, hero, foeMinion));
+
+        for (Minion foeMinion : desktop.getMinions(playerType.getOpponentType()).getList()) {
+            actions.add(new Action(ActionType.ACTION_TYPE_ATTACK, hero, foeMinion));
+        }
+        actions.add(new Action(ActionType.ACTION_TYPE_ATTACK, hero, desktop.getPlayer(playerType.getOpponentType()).getHero()));
+        //过滤非法操作
+        List<Processor> attackPerProcessors = desktop.getProcessorManager().getProcessors(ProcessorType.PRE_ATTACK);
+        List<Action> illegalAction = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(actions)) {
+            for (Action action : actions) {
+                for (Processor attackPerProcessor : attackPerProcessors) {
+                    try {
+                        ((AbstractAttackPreProcessor) attackPerProcessor).processBeforeHeroAttack(desktop, hero, action.getTarget());
+                    } catch (IllegalOperationException e) {
+                        illegalAction.add(action);
+                    }
                 }
-                actions.add(new Action(ActionType.ACTION_TYPE_ATTACK, hero, desktop.getPlayer(playerType.getOpponentType()).getHero()));
             }
         }
+        actions.removeAll(illegalAction);
         return actions;
     }
 
@@ -128,12 +166,12 @@ public class Producer {
                 actions.add(new Action(ActionType.ACTION_TYPE_SKILL, hero));
             }
             List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.PRE_HERO_SKILL);
-            List<Action>  illegalAction = new ArrayList<>();
-            if(!CollectionUtils.isEmpty(actions)){
+            List<Action> illegalAction = new ArrayList<>();
+            if (!CollectionUtils.isEmpty(actions)) {
                 for (Action action : actions) {
-                    for (Processor processor : processors){
+                    for (Processor processor : processors) {
                         try {
-                            ((AbstractHeroSkillPreprocessor) processor).doHeroSkillPreprocessor(desktop,hero,action.getTarget());
+                            ((AbstractHeroSkillPreprocessor) processor).doHeroSkillPreprocessor(desktop, hero, action.getTarget());
                         } catch (IllegalOperationException e) {
                             illegalAction.add(action);
                         }

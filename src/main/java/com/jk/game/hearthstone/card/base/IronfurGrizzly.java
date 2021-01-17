@@ -6,22 +6,22 @@ import com.jk.game.hearthstone.enumeration.CardType;
 import com.jk.game.hearthstone.enumeration.Race;
 
 /**
- * 蓝鳃战士
+ * 铁鬓灰熊
  * @author jk
- * @date 2021/1/10 17:04
+ * @date 2021/1/17 22:36
  */
-public class BluegillWarrior extends Minion {
+public class IronfurGrizzly extends Minion {
 
-    private static final int COST = 2;
-    private static final int ATTACK = 2;
-    private static final int HEALTH = 1;
-    private static final String NAME = "蓝鳃战士";
-    private static final String DESC = "冲锋";
+    private static final int COST = 3;
+    private static final int ATTACK = 3;
+    private static final int HEALTH = 3;
+    private static final String NAME = "铁鬓灰熊";
+    private static final String DESC = "嘲讽";
     private static final CardType CARD_TYPE = CardType.CARD_TYPE_NEUTRAL;
-    private static final Race RACE = Race.RACE_MURLOC;
+    private static final Race RACE = Race.RACE_BEAST;
 
-    public BluegillWarrior(Desktop desktop){
+    public IronfurGrizzly(Desktop desktop) {
         super(desktop,COST,ATTACK,HEALTH,NAME, DESC, CARD_TYPE,RACE);
-        charge = true;
+        ridicule = true;
     }
 }

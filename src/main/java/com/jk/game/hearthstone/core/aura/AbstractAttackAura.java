@@ -1,12 +1,8 @@
 package com.jk.game.hearthstone.core.aura;
 
 import com.jk.game.hearthstone.card.parent.Card;
-import com.jk.game.hearthstone.card.parent.organism.Organism;
 import com.jk.game.hearthstone.enumeration.AuraLife;
 import com.jk.game.hearthstone.enumeration.AuraType;
-import com.jk.game.hearthstone.enumeration.Stand;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * 基础的攻击力型光环，改变攻击力数值的buff
@@ -23,8 +19,8 @@ public abstract class AbstractAttackAura extends AbstractAura {
      */
     private Integer num;
 
-    public AbstractAttackAura(Card owner, Class<? extends Organism> classScope, Stand stand, AuraLife auraLife,int num) {
-        super(owner, classScope, stand, auraLife);
+    public AbstractAttackAura(Card owner, AuraLife auraLife,int num) {
+        super(owner, auraLife);
         this.num = num;
     }
 

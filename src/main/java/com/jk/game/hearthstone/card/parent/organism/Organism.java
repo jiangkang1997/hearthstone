@@ -1,15 +1,18 @@
 package com.jk.game.hearthstone.card.parent.organism;
 
-
 import com.jk.game.hearthstone.annotation.CurrentTurn;
 import com.jk.game.hearthstone.card.parent.Card;
+import com.jk.game.hearthstone.core.aura.AbstractAttackAura;
+import com.jk.game.hearthstone.core.aura.Aura;
 import com.jk.game.hearthstone.core.buff.AbstractAttackBuff;
 import com.jk.game.hearthstone.core.buff.Buff;
 import com.jk.game.hearthstone.data.Desktop;
+import com.jk.game.hearthstone.enumeration.AuraType;
 import com.jk.game.hearthstone.enumeration.BuffType;
 import com.jk.game.hearthstone.enumeration.CardType;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +79,15 @@ public class Organism extends Card{
                 result += ((AbstractAttackBuff) buff).getAttackNum();
             }
         }
-        //todo: 攻击力光环判断
+        //攻击力光环
+        List<Aura> attackAuras = desktop.getAuraManager().getAurasByType(AuraType.AURA_TYPE_ATTACK);
+        if (!CollectionUtils.isEmpty(attackAuras)) {
+            for (Aura attackAura : attackAuras) {
+                if(attackAura.judge(this)){
+                    result += ((AbstractAttackAura) attackAura).getNum();
+                }
+            }
+        }
         return result;
     }
 

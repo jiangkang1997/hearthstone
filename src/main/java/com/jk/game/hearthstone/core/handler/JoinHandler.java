@@ -29,13 +29,13 @@ import java.util.List;
  */
 public class JoinHandler {
 
-
     /**
      * 卡牌的入场
      * @param desktop
      * @param card
+     * @param seat 随从入场的位置  默认最右
      */
-    public static void join(Desktop desktop, Card card) throws InvalidOperationException, InstantiationException, IllegalAccessException {
+    public static void join(Desktop desktop, Card card,Integer seat) throws InvalidOperationException, InstantiationException, IllegalAccessException {
         doJoinPreprocessor(desktop, card);
         if (card instanceof Arms) {
             doArmsJoin(desktop, (Arms) card);
@@ -44,10 +44,12 @@ public class JoinHandler {
         } else if (card instanceof Hero) {
             doHeroJoin(desktop, card);
         } else if (card instanceof Minion) {
-            doMinionJoin(desktop, (Minion) card);
+            doMinionJoin(desktop, (Minion) card,seat);
         }
         doJoinPostProcessor(desktop, card);
     }
+
+
 
     private static void doJoinPreprocessor(Desktop desktop,Card card) throws InvalidOperationException {
         //todo：入场前置 例如法术反制，强制使法术无法入场
@@ -64,13 +66,13 @@ public class JoinHandler {
     }
 
     private static void doHeroJoin(Desktop desktop, Card card){
-        //todo: 英雄入场，替换英雄
+        //todo: 英雄入场，替换英雄 护甲以及血量继承 部分自带血量的英雄就不继承（大王，罗斯）
     }
 
-    private static void doMinionJoin(Desktop desktop,Minion minion){
-        //todo：目前入场的随从被默认放在最右侧，暂时不支持选择随从入场位置
+    private static void doMinionJoin(Desktop desktop,Minion minion,Integer seat){
+        //todo：如果随从有磁力 并且右侧随从是机械 需要触发磁力
         MinionCollection minions = desktop.getMinions(minion.getPlayerType());
-        minions.add(minion);
+        minions.add(minion,seat);
         minion.setBirthday(desktop.getHistory().getCurrentTurnNo());
     }
 

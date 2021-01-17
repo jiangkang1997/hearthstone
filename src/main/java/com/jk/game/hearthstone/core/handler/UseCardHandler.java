@@ -26,7 +26,15 @@ import java.util.List;
 @Slf4j
 public class UseCardHandler {
 
-    public static void usrCard(Desktop desktop, Card card, Organism target) throws IllegalOperationException {
+    /**
+     * 使用卡牌
+     * @param desktop
+     * @param card 使用的卡牌
+     * @param target 战吼或者法术效果指向的目标
+     * @param seat 使用随从卡牌时，指定的随从站位
+     * @throws IllegalOperationException 非法操作
+     */
+    public static void usrCard(Desktop desktop, Card card, Organism target,Integer seat) throws IllegalOperationException {
         //todo：死亡计算时机
         try {
             //前置处理器检查操作合法性
@@ -38,7 +46,7 @@ public class UseCardHandler {
             CardCollection cards = desktop.getCards(card.getPlayerType());
             cards.remove(card);
             //入场
-            JoinHandler.join(desktop, card);
+            JoinHandler.join(desktop, card,seat);
             //触发法术效果/战吼/连击/流放/初始化buff
             executeEffect(desktop, card, target);
             //出牌后置处理

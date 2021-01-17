@@ -6,21 +6,21 @@ import com.jk.game.hearthstone.enumeration.CardType;
 import com.jk.game.hearthstone.enumeration.Race;
 
 /**
- * 蓝鳃战士
+ * 狼骑兵
  * @author jk
- * @date 2021/1/10 17:04
+ * @date 2021/1/17 22:41
  */
-public class BluegillWarrior extends Minion {
+public class Wolfrider extends Minion {
 
-    private static final int COST = 2;
-    private static final int ATTACK = 2;
+    private static final int COST = 3;
+    private static final int ATTACK = 3;
     private static final int HEALTH = 1;
-    private static final String NAME = "蓝鳃战士";
+    private static final String NAME = "狼骑兵";
     private static final String DESC = "冲锋";
     private static final CardType CARD_TYPE = CardType.CARD_TYPE_NEUTRAL;
-    private static final Race RACE = Race.RACE_MURLOC;
+    private static final Race RACE = Race.RACE_MINION;
 
-    public BluegillWarrior(Desktop desktop){
+    public Wolfrider(Desktop desktop){
         super(desktop,COST,ATTACK,HEALTH,NAME, DESC, CARD_TYPE,RACE);
         charge = true;
     }

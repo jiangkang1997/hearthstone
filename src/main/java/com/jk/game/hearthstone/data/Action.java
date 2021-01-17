@@ -19,6 +19,10 @@ public class Action implements Serializable {
     private ActionType actionType;
     private Card card;
     private Organism target;
+    /**
+     * 随从站位 默认最右
+     */
+    private Integer seat;
 
     public Action(ActionType actionType,Card card){
         this.actionType = actionType;
@@ -31,6 +35,13 @@ public class Action implements Serializable {
         this.target = target;
     }
 
+    public Action(ActionType actionType, Card card, Organism target,Integer seat){
+        this.actionType = actionType;
+        this.card = card;
+        this.target = target;
+        this.seat = seat;
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
@@ -39,6 +50,13 @@ public class Action implements Serializable {
                 result.append("出《").append(card.getName()).append("》");
             }else {
                 result.append("出《").append(card.getName()).append("》 目标->《").append(target.getName()).append("》");
+            }
+            if(card instanceof Minion){
+                if(seat == null){
+                    result.append("位置：最右");
+                }else {
+                    result.append("位置：").append(seat);
+                }
             }
         }else if(actionType.equals(ACTION_TYPE_ATTACK)){
             result.append("《").append(card.getName()).append("》 攻击 《").append(target.getName()).append("》");

@@ -64,25 +64,6 @@ public class Hero extends Organism{
         if(desktop.getPlayer(getPlayerType()).getArms() != null){
             attack += desktop.getPlayer(getPlayerType()).getArms().getAttack();
         }
-        //光环计算
-        List<Aura> attackAuras = desktop.getAuraManager().getAurasByType(AuraType.AURA_TYPE_ATTACK);
-        if(!CollectionUtils.isEmpty(attackAuras)){
-            for (Aura attackAura : attackAuras) {
-                if(attackAura.getClassScope() == Minion.class){
-                    continue;
-                }
-                Card owner = attackAura.getOwner();
-                if(attackAura.getStand() == Stand.ALL){
-                    attack += ((AbstractAttackAura) attackAura).getNum();
-                }
-                else if(attackAura.getStand() == Stand.FRIEND && owner.getPlayerType() == playerType){
-                    attack += ((AbstractAttackAura) attackAura).getNum();
-                }
-                else if(attackAura.getStand() == Stand.FOE && owner.getPlayerType() != playerType){
-                    attack += ((AbstractAttackAura) attackAura).getNum();
-                }
-            }
-        }
         return attack;
     }
 

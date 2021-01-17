@@ -26,11 +26,11 @@ public class Customer {
         //攻击操作
         //todo: 正式的攻击处理器还未完成，先用简单的测试
         if(action.getActionType() == ActionType.ACTION_TYPE_ATTACK){
-            SimpleAttackHandler.doAttack((Organism) action.getCard(),action.getTarget());
+            SimpleAttackHandler.doAttack(desktop,(Organism) action.getCard(),action.getTarget());
         }
         //使用卡牌操作
         else if(action.getActionType() == ActionType.ACTION_TYPE_USE){
-            UseCardHandler.usrCard(desktop,action.getCard(),action.getTarget());
+            UseCardHandler.usrCard(desktop,action.getCard(),action.getTarget(),action.getSeat());
         }
         //英雄技能操作
         else if(action.getActionType() == ActionType.ACTION_TYPE_SKILL){

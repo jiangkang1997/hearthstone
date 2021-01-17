@@ -31,7 +31,7 @@ public class Rouge extends Hero{
             try {
                 EvilDagger evilDagger = new EvilDagger(desktop);
                 evilDagger.setPlayerType(getSkillOwner().getPlayerType());
-                JoinHandler.join(desktop,evilDagger);
+                JoinHandler.join(desktop,evilDagger,null);
             }catch (IllegalAccessException | InstantiationException | InvalidOperationException ignored) {}
         }
     }

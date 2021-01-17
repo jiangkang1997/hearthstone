@@ -12,10 +12,8 @@ import com.jk.game.hearthstone.enumeration.Stand;
  */
 public abstract class AbstractAura implements Aura {
 
-    public AbstractAura(Card owner,Class<? extends Organism> classScope,Stand stand,AuraLife auraLife){
+    public AbstractAura(Card owner,AuraLife auraLife){
         this.owner = owner;
-        this.classScope = classScope;
-        this.stand = stand;
         this.auraLife = auraLife;
     }
 
@@ -30,19 +28,9 @@ public abstract class AbstractAura implements Aura {
     private Integer age = 0;
 
     /**
-     *  光环作用的目标类型（随从/英雄/所有）
-     */
-    private Class<? extends Organism> classScope;
-
-    /**
      * 光环的持续时间
      */
     private AuraLife auraLife;
-
-    /**
-     *  光环作用的立场（友方/敌方/全部）
-     */
-    private Stand stand;
 
 
     @Override
@@ -63,15 +51,5 @@ public abstract class AbstractAura implements Aura {
     @Override
     public AuraLife getAuraLife() {
         return auraLife;
-    }
-
-    @Override
-    public Class<? extends Organism> getClassScope() {
-        return classScope;
-    }
-
-    @Override
-    public Stand getStand() {
-        return stand;
     }
 }

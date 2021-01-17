@@ -1,19 +1,11 @@
 package com.jk.game.hearthstone.card.parent.organism.minion;
 
-import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.card.parent.organism.Organism;
-import com.jk.game.hearthstone.card.parent.organism.hero.Hero;
-import com.jk.game.hearthstone.core.aura.AbstractAttackAura;
-import com.jk.game.hearthstone.core.aura.Aura;
 import com.jk.game.hearthstone.data.Desktop;
-import com.jk.game.hearthstone.enumeration.AuraType;
 import com.jk.game.hearthstone.enumeration.CardType;
-import com.jk.game.hearthstone.enumeration.Stand;
+import com.jk.game.hearthstone.enumeration.Race;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.util.CollectionUtils;
-
-import java.util.List;
 
 /**
  * 所有随从的基类
@@ -24,6 +16,10 @@ import java.util.List;
 @Setter
 public class Minion extends Organism{
 
+    /**
+     * 种族
+     */
+    protected Race race;
     /**
      * 冲锋
      */
@@ -49,8 +45,9 @@ public class Minion extends Organism{
      */
     protected int birthday = -1;
 
-    public Minion(Desktop desktop,int cost, int attack, int health, String name, String desc, CardType cardType){
+    public Minion(Desktop desktop,int cost, int attack, int health, String name, String desc, CardType cardType,Race race){
         super(desktop,cost, attack, health, name, desc, cardType);
+        this.race = race;
     }
 
     @Override
@@ -71,30 +68,5 @@ public class Minion extends Organism{
                     (birthday == desktop.getHistory().getCurrentTurnNo() && charge && canAttackHero && windfury && attackTime<2);
         }
         return false;
-    }
-
-    @Override
-    public int getAttack() {
-        int attack = super.getAttack();
-        //光环计算
-        List<Aura> attackAuras = desktop.getAuraManager().getAurasByType(AuraType.AURA_TYPE_ATTACK);
-        if(!CollectionUtils.isEmpty(attackAuras)){
-            for (Aura attackAura : attackAuras) {
-                if(attackAura.getClassScope() == Hero.class){
-                    continue;
-                }
-                Card owner = attackAura.getOwner();
-                if(attackAura.getStand() == Stand.ALL){
-                    attack += ((AbstractAttackAura) attackAura).getNum();
-                }
-                else if(attackAura.getStand() == Stand.FRIEND && owner.getPlayerType() == playerType){
-                    attack += ((AbstractAttackAura) attackAura).getNum();
-                }
-                else if(attackAura.getStand() == Stand.FOE && owner.getPlayerType() != playerType){
-                    attack += ((AbstractAttackAura) attackAura).getNum();
-                }
-            }
-        }
-        return attack;
     }
 }

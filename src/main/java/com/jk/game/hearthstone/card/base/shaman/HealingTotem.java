@@ -8,6 +8,7 @@ import com.jk.game.hearthstone.core.processer.AbstractEndRoundPostProcess;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
 import com.jk.game.hearthstone.enumeration.PlayerType;
+import com.jk.game.hearthstone.enumeration.Race;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -19,11 +20,16 @@ import java.util.List;
  */
 public class HealingTotem extends Minion {
 
+    private static final int COST = 1;
+    private static final int ATTACK = 0;
+    private static final int HEALTH = 2;
     private static final String NAME = "治疗图腾";
     private static final String DESC = "回合结束时，为你的所有随从恢复+1生命值";
+    private static final CardType CARD_TYPE = CardType.CARD_TYPE_SHAMAN;
+    private static final Race RACE = Race.RACE_TOTEM;
 
     public HealingTotem(Desktop desktop) {
-        super(desktop, 1, 0, 2, NAME, DESC, CardType.CARD_TYPE_SHAMAN);
+        super(desktop,COST,ATTACK,HEALTH,NAME, DESC, CARD_TYPE,RACE);
     }
 
 

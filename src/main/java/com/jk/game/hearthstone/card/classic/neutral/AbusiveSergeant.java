@@ -8,6 +8,7 @@ import com.jk.game.hearthstone.config.BattleCry;
 import com.jk.game.hearthstone.core.buff.AbstractAttackBuff;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
+import com.jk.game.hearthstone.enumeration.Race;
 import com.jk.game.hearthstone.enumeration.Stand;
 
 import static com.jk.game.hearthstone.enumeration.Dictionary.MAX_TURN;
@@ -21,10 +22,16 @@ import static com.jk.game.hearthstone.enumeration.Dictionary.MAX_TURN;
 @TargetScope(classScope = Minion.class,stand = Stand.FRIEND)
 public class AbusiveSergeant extends Minion implements BattleCry {
 
+    private static final int COST = 1;
+    private static final int ATTACK = 1;
+    private static final int HEALTH = 1;
+    private static final String NAME = "叫嚣的中士";
     private static final String DESC = "战吼：在本回合中，使一个随从获得+2攻击力";
+    private static final CardType CARD_TYPE = CardType.CARD_TYPE_NEUTRAL;
+    private static final Race RACE = Race.RACE_MINION;
 
     public AbusiveSergeant(Desktop desktop){
-        super(desktop,1,1,1,"叫嚣的中士", DESC, CardType.CARD_TYPE_NEUTRAL);
+        super(desktop,COST,ATTACK,HEALTH,NAME, DESC, CARD_TYPE,RACE);
     }
 
     @Override

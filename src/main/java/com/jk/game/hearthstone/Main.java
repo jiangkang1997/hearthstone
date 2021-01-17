@@ -32,8 +32,8 @@ public class Main {
         TeamLeader teamLeader = new TeamLeader(desktop);
         teamLeader.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
 
-        JoinHandler.join(desktop,stonetuskBoar);
-        JoinHandler.join(desktop,teamLeader);
+        JoinHandler.join(desktop,stonetuskBoar,0);
+        JoinHandler.join(desktop,teamLeader,0);
 
         System.out.println(stonetuskBoar.getAttack());
 
