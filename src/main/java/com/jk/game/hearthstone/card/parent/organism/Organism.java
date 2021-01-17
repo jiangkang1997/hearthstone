@@ -85,9 +85,7 @@ public class Organism extends Card{
         buffList.add(buff);
     }
 
-
-    public boolean getRidicule(){
-
+    public boolean isRidicule() {
         for (Buff buff : buffList) {
             if(buff.getBuffType() == BuffType.BUFF_TYPE_RIDICULE){
                 return !ridicule;

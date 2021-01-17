@@ -21,18 +21,21 @@ public class ProcessorManager implements Serializable {
     private final Map<ProcessorType, List<Processor>> processorTypeMap = new HashMap<>();
 
     public ProcessorManager(){
+        //todo ： 后面通过Spring注解的形式注册进来
         DefaultUseCardPreprocessor defaultUseCardPreprocessor = new DefaultUseCardPreprocessor(null);
         DefaultUseCardPostProcessor defaultUseCardPostProcessor = new DefaultUseCardPostProcessor(null);
         DefaultJoinPostProcessor defaultJoinPostProcessor = new DefaultJoinPostProcessor(null);
         DefaultHurtPostProcess defaultHurtPostProcess = new DefaultHurtPostProcess(null);
         DefaultHeroSkillPreprocessor defaultHeroSkillPreprocessor = new DefaultHeroSkillPreprocessor(null);
         DefaultHeroSkillPostProcessor defaultHeroSkillPostProcessor = new DefaultHeroSkillPostProcessor(null);
+        DefaultAttackPreProcessor defaultAttackPreProcessor = new DefaultAttackPreProcessor(null);
         register(defaultUseCardPreprocessor);
         register(defaultUseCardPostProcessor);
         register(defaultJoinPostProcessor);
         register(defaultHurtPostProcess);
         register(defaultHeroSkillPreprocessor);
         register(defaultHeroSkillPostProcessor);
+        register(defaultAttackPreProcessor);
     }
 
     /**

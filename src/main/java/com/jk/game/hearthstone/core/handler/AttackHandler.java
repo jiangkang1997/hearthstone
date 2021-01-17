@@ -180,7 +180,7 @@ public class AttackHandler {
             for(Minion minion:secondMinions.getList()){
                 //对带有嘲讽的随从进行优先排列
                 //排除沉睡的随从
-                if(minion.getRidicule ()){
+                if(minion.isRidicule ()){
                     attackTarget.getRidiculeMinions ().add (minion);
                 } else {
                     attackTarget.getCommonlyMinions ().add (minion);
@@ -229,34 +229,34 @@ public class AttackHandler {
     }
 
     private static Desktop doHeroAttackPreprocessor(Desktop desktop, AttackParameters attackParameters) throws IllegalOperationException {
-        List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.PRE_HEROATTACK_SKILL);
+        /*List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.PRE_HEROATTACK_SKILL);
         for (Processor preprocessor : processors) {
             ((AbstractHeroAttackPreProcessor) preprocessor).processBeforeHeroAttack (desktop, attackParameters);
-        }
+        }*/
         return desktop;
     }
 
     private static Desktop doHeroAttackPostprocessor(Desktop desktop, AttackParameters attackParameters) throws IllegalOperationException {
-        List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.POST_HEROATTACK_SKILL);
+        /*List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.POST_HEROATTACK_SKILL);
         for (Processor preprocessor : processors) {
-            ((AbstractHeroAttackPostProcessor) preprocessor).processAfterHeroAttack (desktop, attackParameters);
-        }
+            ((AbstractAttackPreProcessor) preprocessor).processAfterHeroAttack (desktop, attackParameters);
+        }*/
         return desktop;
     }
 
     private static Desktop doMinionAttackPreprocessor(Desktop desktop, AttackParameters attackParameters) throws IllegalOperationException {
-        List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.PRE_MINIONATTACK_SKILL);
+        /*List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.PRE_MINIONATTACK_SKILL);
         for (Processor preprocessor : processors) {
             ((AbstractMinionAttackPreProcessor) preprocessor).processBeforeMinionAttack (desktop, attackParameters);
-        }
+        }*/
         return desktop;
     }
 
     private static Desktop doMinionAttackPostprocessor(Desktop desktop, AttackParameters attackParameters) throws IllegalOperationException {
-        List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.POST_MINIONATTACK_SKILL);
+        /*List<Processor> processors = desktop.getProcessorManager().getProcessors(ProcessorType.POST_MINIONATTACK_SKILL);
         for (Processor preprocessor : processors) {
             ((AbstractMinionAttackPostProcessor) preprocessor).processAfterMinionAttack (desktop, attackParameters);
-        }
+        }*/
         return desktop;
     }
 }
