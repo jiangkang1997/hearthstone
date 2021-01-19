@@ -19,11 +19,6 @@ public interface Processor extends Serializable {
      */
     Card getOwner();
 
-    /**
-     * 设置处理器的拥有者
-     * @param card 拥有者
-     */
-    void setOwner(Card card);
 
     /**
      * 获取处理器类型

@@ -4,8 +4,8 @@ package com.jk.game.hearthstone.card.parent;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
 import com.jk.game.hearthstone.enumeration.PlayerType;
+import com.jk.game.hearthstone.enumeration.Race;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
@@ -27,7 +27,7 @@ public class Card implements Serializable {
     protected String name;
     protected String desc;
 
-    public Card(Desktop desktop,int cost, String name, String desc, CardType cardType){
+    public Card(Desktop desktop, int cost, String name, String desc, CardType cardType){
         this.desktop = desktop;
         this.cost = cost;
         this.name = name;

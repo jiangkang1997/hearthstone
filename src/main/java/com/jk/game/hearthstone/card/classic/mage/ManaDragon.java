@@ -8,6 +8,7 @@ import com.jk.game.hearthstone.core.buff.AbstractAttackBuff;
 import com.jk.game.hearthstone.core.processer.AbstractUseCardPostProcessor;
 import com.jk.game.hearthstone.data.Desktop;
 import com.jk.game.hearthstone.enumeration.CardType;
+import com.jk.game.hearthstone.enumeration.Race;
 
 import static com.jk.game.hearthstone.enumeration.Dictionary.MAX_TURN;
 
@@ -17,15 +18,26 @@ import static com.jk.game.hearthstone.enumeration.Dictionary.MAX_TURN;
  */
 public class ManaDragon extends Minion {
 
+    private static final int COST = 2;
+    private static final int ATTACK = 1;
+    private static final int HEALTH = 3;
+    private static final String NAME = "法力浮龙";
     private static final String DESC = "每当你释放一个法术，获得+1攻击力";
+    private static final CardType CARD_TYPE = CardType.CARD_TYPE_MAGE;
+    private static final Race RACE = Race.RACE_MINION;
+
 
     public ManaDragon(Desktop desktop){
-        super(desktop,1,1,3,"法力浮龙",DESC, CardType.CARD_TYPE_MAGE);
-    }
+        super(desktop,COST,ATTACK,HEALTH,NAME, DESC, CARD_TYPE,RACE);
+}
 
 
     @InitializedProcessor
     public static class ManaDragonProcess extends AbstractUseCardPostProcessor{
+
+        public ManaDragonProcess(Card owner) {
+            super(owner);
+        }
 
         @Override
         public void processAfterPlay(Desktop desktop, Card card){
@@ -36,10 +48,12 @@ public class ManaDragon extends Minion {
         }
 
         static class ManaDragonAttackBuff extends AbstractAttackBuff{
+
+            private static final int ATTACK_NUM = 1;
+            private static final int LIFE = MAX_TURN;
+
             ManaDragonAttackBuff(Card owner){
-                this.owner = owner;
-                life = MAX_TURN;
-                attackNum = 1;
+                super(owner,LIFE,ATTACK_NUM);
             }
         }
     }

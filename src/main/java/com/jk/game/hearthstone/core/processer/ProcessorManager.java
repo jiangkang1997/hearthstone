@@ -18,15 +18,24 @@ import java.util.Map;
  */
 public class ProcessorManager implements Serializable {
 
-    private Map<ProcessorType, List<Processor>> processorTypeMap = new HashMap<>();
+    private final Map<ProcessorType, List<Processor>> processorTypeMap = new HashMap<>();
 
     public ProcessorManager(){
-        DefaultUseCardPreprocessor defaultUseCardPreprocessor = new DefaultUseCardPreprocessor();
-        DefaultUseCardPostProcessor defaultUseCardPostProcessor = new DefaultUseCardPostProcessor();
-        DefaultJoinPostProcessor defaultJoinPostProcessor = new DefaultJoinPostProcessor();
+        //todo ： 后面通过Spring注解的形式注册进来
+        DefaultUseCardPreprocessor defaultUseCardPreprocessor = new DefaultUseCardPreprocessor(null);
+        DefaultUseCardPostProcessor defaultUseCardPostProcessor = new DefaultUseCardPostProcessor(null);
+        DefaultJoinPostProcessor defaultJoinPostProcessor = new DefaultJoinPostProcessor(null);
+        DefaultHurtPostProcess defaultHurtPostProcess = new DefaultHurtPostProcess(null);
+        DefaultHeroSkillPreprocessor defaultHeroSkillPreprocessor = new DefaultHeroSkillPreprocessor(null);
+        DefaultHeroSkillPostProcessor defaultHeroSkillPostProcessor = new DefaultHeroSkillPostProcessor(null);
+        DefaultAttackPreProcessor defaultAttackPreProcessor = new DefaultAttackPreProcessor(null);
         register(defaultUseCardPreprocessor);
         register(defaultUseCardPostProcessor);
         register(defaultJoinPostProcessor);
+        register(defaultHurtPostProcess);
+        register(defaultHeroSkillPreprocessor);
+        register(defaultHeroSkillPostProcessor);
+        register(defaultAttackPreProcessor);
     }
 
     /**
@@ -50,7 +59,11 @@ public class ProcessorManager implements Serializable {
      * @return 已注册的对应类型下所有的处理器
      */
     public List<Processor> getProcessors(ProcessorType processorType){
-        return processorTypeMap.get(processorType);
+        List<Processor> processors = processorTypeMap.get(processorType);
+        if(CollectionUtils.isEmpty(processors)){
+            return new ArrayList<>();
+        }
+        return processors;
     }
 
 

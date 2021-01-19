@@ -7,6 +7,11 @@ import com.jk.game.hearthstone.card.parent.Card;
  */
 public abstract class AbstractBuff implements Buff {
 
+    public AbstractBuff(Card owner,int life){
+        this.owner = owner;
+        this.life = life;
+    }
+
     /**
      * buff的释放者
      */

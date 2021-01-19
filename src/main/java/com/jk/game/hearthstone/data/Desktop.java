@@ -4,6 +4,8 @@ import com.jk.game.hearthstone.card.parent.Card;
 import com.jk.game.hearthstone.card.parent.Player;
 import com.jk.game.hearthstone.card.parent.magic.Magic;
 import com.jk.game.hearthstone.card.parent.organism.minion.Minion;
+import com.jk.game.hearthstone.common.CardCollection;
+import com.jk.game.hearthstone.common.MinionCollection;
 import com.jk.game.hearthstone.core.aura.AuraManager;
 import com.jk.game.hearthstone.core.processer.ProcessorManager;
 import com.jk.game.hearthstone.enumeration.PlayerType;
@@ -30,14 +32,14 @@ public class Desktop implements Serializable {
     /**
      * 场上随从
      */
-    private List<Minion> mainMinions = new ArrayList<>();
-    private List<Minion> secondMinions = new ArrayList<>();
+    private MinionCollection mainMinions = new MinionCollection(PlayerType.PLAYER_TYPE_MAIN);
+    private MinionCollection secondMinions = new MinionCollection(PlayerType.PLAYER_TYPE_SECOND);
 
     /**
      * 手牌
      */
-    private List<Card> mainCards = new ArrayList<>();
-    private List<Card> secondCards = new ArrayList<>();
+    private CardCollection mainCards = new CardCollection(PlayerType.PLAYER_TYPE_MAIN);
+    private CardCollection secondCards = new CardCollection(PlayerType.PLAYER_TYPE_SECOND);
 
     /**
      * 头上的任务和奥秘
@@ -58,7 +60,7 @@ public class Desktop implements Serializable {
     /**
      * 历史记录
      */
-    private History history;
+    private History history = new History();
 
     /**
      * 法强
@@ -70,11 +72,11 @@ public class Desktop implements Serializable {
         return playerType == PlayerType.PLAYER_TYPE_MAIN ? mainPlayer : secondPlayer;
     }
 
-    public List<Card> getCards(PlayerType playerType) {
+    public CardCollection getCards(PlayerType playerType) {
         return playerType == PlayerType.PLAYER_TYPE_MAIN ? mainCards : secondCards;
     }
 
-    public List<Minion> getMinions(PlayerType playerType) {
+    public MinionCollection getMinions(PlayerType playerType) {
         return playerType == PlayerType.PLAYER_TYPE_MAIN ? mainMinions : secondMinions;
     }
 

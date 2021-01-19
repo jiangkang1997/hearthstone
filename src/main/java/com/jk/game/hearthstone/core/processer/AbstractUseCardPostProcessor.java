@@ -15,6 +15,10 @@ public abstract class AbstractUseCardPostProcessor extends AbstractProcessor {
 
     private final ProcessorType PROCESSOR_TYPE = ProcessorType.POST_USE_CARD;
 
+    public AbstractUseCardPostProcessor(Card owner) {
+        super(owner);
+    }
+
     /**
      * 在出牌操作后触发
      *

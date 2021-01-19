@@ -14,6 +14,10 @@ public abstract class AbstractJoinPostProcessor extends AbstractProcessor{
 
     private final ProcessorType PROCESSOR_TYPE = ProcessorType.POST_JOIN;
 
+    public AbstractJoinPostProcessor(Card owner) {
+        super(owner);
+    }
+
     /**
      * 在入场操作后触发
      *

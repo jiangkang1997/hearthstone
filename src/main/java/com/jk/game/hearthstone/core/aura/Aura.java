@@ -25,12 +25,6 @@ public interface Aura extends Serializable {
     AuraType getAuraType();
 
     /**
-     * 设置光环的发起者
-     * @param owner 发起者
-     */
-    void setOwner(Card owner);
-
-    /**
      * 获取光环的发起者
      * @return 光环的发起者
      */
@@ -54,14 +48,10 @@ public interface Aura extends Serializable {
     AuraLife getAuraLife();
 
     /**
-     * 获取光环作用的目标类型 （随从/英雄/所有）
-     * @return 环作用的目标类型
+     * 判断该buff是否对当前卡牌生效
+     * @param card
+     * @return
      */
-    Class<? extends Organism> getClassScope();
+    boolean judge(Card card);
 
-    /**
-     * 获取光环作用的立场（友方/敌方/全部）
-     * @return 光环作用的立场
-     */
-    Stand getStand();
 }

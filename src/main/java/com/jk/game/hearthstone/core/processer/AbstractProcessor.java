@@ -7,15 +7,14 @@ import com.jk.game.hearthstone.card.parent.Card;
  */
 public abstract class AbstractProcessor implements Processor {
 
-    private Card owner;
+    private final Card owner;
+
+    public AbstractProcessor(Card owner){
+        this.owner = owner;
+    }
 
     @Override
     public Card getOwner() {
         return owner;
-    }
-
-    @Override
-    public void setOwner(Card owner) {
-        this.owner = owner;
     }
 }

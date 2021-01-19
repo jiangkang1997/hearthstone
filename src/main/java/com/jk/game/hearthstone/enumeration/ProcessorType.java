@@ -5,10 +5,6 @@ package com.jk.game.hearthstone.enumeration;
  */
 public enum ProcessorType {
 
-    /**
-     * 基础处理器（空实现）
-     */
-    BASE,
 
     /**
      * 出牌前置处理
@@ -36,22 +32,22 @@ public enum ProcessorType {
     POST_HERO_SKILL,
 
     /**
-     * 英雄攻击前置
+     * 攻击前置
      */
-    PRE_HEROATTACK_SKILL,
+    PRE_ATTACK,
+
 
     /**
-     * 英雄攻击后置
+     * 伤害后置
      */
-    POST_HEROATTACK_SKILL,
+    POST_HURT,
 
     /**
-     * 随从攻击前置
+     * 治疗后置
      */
-    PRE_MINIONATTACK_SKILL,
-
+    POST_TREAT,
     /**
-     * 随从攻击后置
+     * 回合结束后置
      */
-    POST_MINIONATTACK_SKILL;
+    POST_END_ROUND;
 }

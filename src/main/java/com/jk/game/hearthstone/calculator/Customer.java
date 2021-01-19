@@ -26,11 +26,11 @@ public class Customer {
         //攻击操作
         //todo: 正式的攻击处理器还未完成，先用简单的测试
         if(action.getActionType() == ActionType.ACTION_TYPE_ATTACK){
-            SimpleAttackHandler.doAttack((Organism) action.getCard(),action.getTarget());
+            SimpleAttackHandler.doAttack(desktop,(Organism) action.getCard(),action.getTarget());
         }
         //使用卡牌操作
         else if(action.getActionType() == ActionType.ACTION_TYPE_USE){
-            UseCardHandler.usrCard(desktop,action.getCard(),action.getTarget());
+            UseCardHandler.usrCard(desktop,action.getCard(),action.getTarget(),action.getSeat());
         }
         //英雄技能操作
         else if(action.getActionType() == ActionType.ACTION_TYPE_SKILL){
@@ -39,12 +39,12 @@ public class Customer {
         //死亡结算 这里只结算死亡的随从
         List<Minion> mainGraveyard = new ArrayList<>();
         List<Minion> secondGraveyard = new ArrayList<>();
-        for (Minion mainMinion : desktop.getMainMinions()) {
+        for (Minion mainMinion : desktop.getMainMinions().getList()) {
             if(mainMinion.getHealth() <= 0 ){
                 mainGraveyard.add(mainMinion);
             }
         }
-        for (Minion secondMinion : desktop.getSecondMinions()) {
+        for (Minion secondMinion : desktop.getSecondMinions().getList()) {
             if(secondMinion.getHealth() <= 0){
                 secondGraveyard.add(secondMinion);
             }
