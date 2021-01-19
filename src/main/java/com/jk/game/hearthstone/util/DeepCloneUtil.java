@@ -56,7 +56,7 @@ public class DeepCloneUtil {
                     field.set(duplicate,cloneMap);
                 }
                 else {
-                    if(field.getType().isPrimitive() || field.getType() == String.class){
+                    if(field.getType().isPrimitive() || isWrapper(field.getType())){
                         field.set(duplicate,field.get(object));
                     }
                     else if (field.get(object) != null && field.getType() != object.getClass()){
@@ -101,5 +101,16 @@ public class DeepCloneUtil {
         Field[] fields = new Field[fieldList.size()];
         fieldList.toArray(fields);
         return fields;
+    }
+    
+    /**
+     * 判断一个类是否为包装类 String被认为是特殊的包装类
+     * @param clazz
+     * @return
+     */
+    private static boolean isWrapper(Class<?> clazz){
+        return clazz == Integer.class || clazz == Short.class || clazz == Long.class
+                || clazz == Byte.class || clazz == Float.class || clazz == Double.class
+                || clazz == Character.class || clazz == Boolean.class || clazz == String.class;
     }
 }
