@@ -8,8 +8,8 @@
         <version>2.3.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.jk.game</groupId>
-    <artifactId>hearthstone</artifactId>
+    <groupId>com.jk.game.hearthstone</groupId>
+    <artifactId>parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>hearthstone</name>
     <description>hearthstone</description>
@@ -47,6 +47,10 @@
             </exclusions>
         </dependency>
     </dependencies>
+
+    <modules>
+        <module>hearthstone-card</module>
+    </modules>
 
     <build>
         <plugins>
