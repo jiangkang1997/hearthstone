@@ -91,7 +91,6 @@ public class Organism extends Card{
         return result;
     }
 
-
     public void registerBuff(Buff buff){
         buffList.add(buff);
     }

@@ -5,6 +5,7 @@ import com.jk.game.hearthstone.core.enumeration.PlayerType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -38,7 +39,12 @@ public class CardCollection implements Serializable {
         CardCollection.maxCard = maxCard;
     }
 
+    @Deprecated
     public List<Card> getList() {
         return list;
+    }
+
+    public Iterator<Card> iterator(){
+        return list.iterator();
     }
 }

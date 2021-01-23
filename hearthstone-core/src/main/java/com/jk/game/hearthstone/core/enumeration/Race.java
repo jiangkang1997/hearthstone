@@ -1,6 +1,7 @@
 package com.jk.game.hearthstone.core.enumeration;
 
 /**
+ * 种族
  * @author jk
  */
 

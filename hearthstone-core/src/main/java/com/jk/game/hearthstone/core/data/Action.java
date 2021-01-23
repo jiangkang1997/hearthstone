@@ -4,6 +4,7 @@ import com.jk.game.hearthstone.core.card.parent.Card;
 import com.jk.game.hearthstone.core.card.parent.organism.Organism;
 import com.jk.game.hearthstone.core.card.parent.organism.minion.Minion;
 import com.jk.game.hearthstone.core.enumeration.ActionType;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -60,6 +61,8 @@ public class Action implements Serializable {
             }
         }else if(actionType.equals(ACTION_TYPE_ATTACK)){
             result.append("《").append(card.getName()).append("》 攻击 《").append(target.getName()).append("》");
+            /*result.append(((Organism)card).getAttack());
+            result.append(target.getHealth());*/
         }else if(actionType.equals(ACTION_TYPE_SKILL)){
             if(target ==null){
                 result.append("使用英雄技能");

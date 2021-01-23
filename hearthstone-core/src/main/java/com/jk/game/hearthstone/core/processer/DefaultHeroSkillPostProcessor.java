@@ -4,6 +4,7 @@ import com.jk.game.hearthstone.core.card.parent.Card;
 import com.jk.game.hearthstone.core.card.parent.organism.Organism;
 import com.jk.game.hearthstone.core.card.parent.organism.hero.Hero;
 import com.jk.game.hearthstone.core.data.Desktop;
+import com.jk.game.hearthstone.core.handler.DeathHandler;
 
 /**
  * @author jk

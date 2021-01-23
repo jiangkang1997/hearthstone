@@ -46,11 +46,13 @@ public class UseCardHandler {
             CardCollection cards = desktop.getCards(card.getPlayerType());
             cards.remove(card);
             //入场
-            JoinHandler.join(desktop, card,seat);
+            JoinHandler.join(desktop, card,card.getPlayerType(),seat);
             //触发法术效果/战吼/连击/流放/初始化buff
             executeEffect(desktop, card, target);
             //出牌后置处理
             doUseCardPostProcessor(desktop, card);
+            //死亡结算
+            DeathHandler.doDeathHandler(desktop);
         } catch (InvalidOperationException ignored) {
         } catch (IllegalAccessException | InstantiationException e) {
             log.error("实例化处理器失败");

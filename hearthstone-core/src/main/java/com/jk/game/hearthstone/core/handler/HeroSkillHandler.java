@@ -25,6 +25,8 @@ public class HeroSkillHandler {
         //发动效果
         hero.getHeroSkill().execute(desktop,target);
         doPostProcessor(desktop, hero, target);
+        //死亡结算
+        DeathHandler.doDeathHandler(desktop);
     }
 
     private static void doPreprocessor(Desktop desktop, Hero hero, Organism target) throws IllegalOperationException {

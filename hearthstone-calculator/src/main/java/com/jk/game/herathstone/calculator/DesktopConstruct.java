@@ -3,11 +3,17 @@ package com.jk.game.herathstone.calculator;
 import com.jk.game.hearthstone.card.base.*;
 import com.jk.game.hearthstone.card.base.shaman.FlametongueTotem;
 import com.jk.game.hearthstone.card.base.shaman.Windfury;
+import com.jk.game.hearthstone.card.base.warrior.Warrior;
+import com.jk.game.hearthstone.card.base.warrior.Whirlwind;
 import com.jk.game.hearthstone.card.classic.mage.FrostArrow;
 import com.jk.game.hearthstone.card.classic.mage.IceSpear;
 import com.jk.game.hearthstone.card.classic.mage.ManaDragon;
 import com.jk.game.hearthstone.card.classic.neutral.AbusiveSergeant;
 import com.jk.game.hearthstone.card.classic.neutral.ShieldGuard;
+import com.jk.game.hearthstone.card.classic.warror.RiotBerserker;
+import com.jk.game.hearthstone.card.classic.warror.ShieldSlam;
+import com.jk.game.hearthstone.card.kobolds.IronwoodGolem;
+import com.jk.game.hearthstone.card.witch.FuriousWerewolf;
 import com.jk.game.hearthstone.core.card.parent.Player;
 import com.jk.game.hearthstone.core.card.parent.organism.hero.Hero;
 import com.jk.game.hearthstone.card.base.rouge.Rouge;
@@ -46,8 +52,8 @@ public class DesktopConstruct {
         desktop.getMainCards().add(deathlyPoison);
 
         BluegillWarrior bluegillWarrior = new BluegillWarrior(desktop);
-        bluegillWarrior.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
-        JoinHandler.join(desktop,bluegillWarrior,0);
+
+        JoinHandler.join(desktop,bluegillWarrior,PlayerType.PLAYER_TYPE_MAIN,0);
 
         return desktop;
     }
@@ -83,8 +89,7 @@ public class DesktopConstruct {
         //场上一张可攻击的法力伏龙
         ManaDragon manaDragon = new ManaDragon(desktop);
         manaDragon.setCanAttack(true);
-        manaDragon.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
-        JoinHandler.join(desktop,manaDragon,0);
+        JoinHandler.join(desktop,manaDragon,PlayerType.PLAYER_TYPE_MAIN,0);
 
 
         return desktop;
@@ -155,14 +160,50 @@ public class DesktopConstruct {
         stonetuskBoar2.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
         flametongueTotem.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
         bluegillWarrior.setPlayerType(PlayerType.PLAYER_TYPE_MAIN);
-        JoinHandler.join(desktop,stonetuskBoar2,null);
-        JoinHandler.join(desktop,flametongueTotem,null);
-        JoinHandler.join(desktop,bluegillWarrior,null);
+        JoinHandler.join(desktop,stonetuskBoar2,PlayerType.PLAYER_TYPE_MAIN,null);
+        JoinHandler.join(desktop,flametongueTotem,PlayerType.PLAYER_TYPE_MAIN,null);
+        JoinHandler.join(desktop,bluegillWarrior,PlayerType.PLAYER_TYPE_MAIN,null);
 
         ShieldGuard shieldGuard = new ShieldGuard(desktop);
         IronfurGrizzly ironfurGrizzly = new IronfurGrizzly(desktop);
         desktop.getSecondMinions().add(shieldGuard);
         desktop.getSecondMinions().add(ironfurGrizzly);
+
+        return desktop;
+    }
+
+    public static Desktop desktop1_5() throws InstantiationException, IllegalAccessException, InvalidOperationException {
+        Desktop desktop = new Desktop();
+
+        Player mainPlayer = new Player();
+        Hero mainHero = new Warrior(desktop, PlayerType.PLAYER_TYPE_MAIN);
+        mainPlayer.setHero(mainHero);
+        desktop.setMainPlayer(mainPlayer);
+
+        Player secondPlayer = new Player();
+        Hero secondHero = new Hero(desktop, "敌人",null, PlayerType.PLAYER_TYPE_SECOND);
+        secondPlayer.setHero(secondHero);
+        desktop.setSecondPlayer(secondPlayer);
+
+        secondHero.setHealth(11);
+        mainPlayer.setPower(10);
+        mainPlayer.setMaxPower(10);
+
+        ShieldSlam shieldSlam = new ShieldSlam(desktop);
+        Whirlwind whirlwind = new Whirlwind(desktop);
+        FuriousWerewolf furiousWerewolf = new FuriousWerewolf(desktop);
+        FuriousWerewolf furiousWerewolf1 = new FuriousWerewolf(desktop);
+        desktop.getMainCards().add(shieldSlam);
+        desktop.getMainCards().add(whirlwind);
+        desktop.getMainCards().add(furiousWerewolf);
+        desktop.getMainCards().add(furiousWerewolf1);
+
+        RiotBerserker riotBerserker = new RiotBerserker(desktop);
+        JoinHandler.join(desktop,riotBerserker,PlayerType.PLAYER_TYPE_MAIN,null);
+        riotBerserker.setCanAttack(true);
+
+        IronwoodGolem ironwoodGolem = new IronwoodGolem(desktop);
+        JoinHandler.join(desktop,ironwoodGolem,PlayerType.PLAYER_TYPE_SECOND,null);
 
         return desktop;
     }

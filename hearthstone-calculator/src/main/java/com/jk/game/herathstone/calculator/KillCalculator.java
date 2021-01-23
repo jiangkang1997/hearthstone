@@ -8,7 +8,7 @@ import com.jk.game.hearthstone.core.exception.InvalidOperationException;
 import com.jk.game.hearthstone.core.util.DeepCloneUtil;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -20,15 +20,29 @@ public class KillCalculator {
     /**
      * 是否无视随从站位
      */
-    private static final boolean IGNORE_SEAT = false;
+    private static final boolean IGNORE_SEAT = true;
     /**
      * 日志等级 1：只保留成功， 2:保留调试信息
      */
-    private static final int LOG_LEVEL = 1;
+    private static final int LOG_LEVEL = 2;
+
+    static FileOutputStream fileOutputStream;
+
+    static {
+        try {
+            fileOutputStream = new FileOutputStream("D:\\projectDatas\\hearthstone\\test.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public KillCalculator() throws FileNotFoundException {
+    }
 
     public static void main(String[] args) throws IllegalOperationException, IOException, ClassNotFoundException, IllegalAccessException, InvalidOperationException, InstantiationException {
+        fileOutputStream.write("开始".getBytes());
         long start = System.currentTimeMillis();
-        Desktop desktop = DesktopConstruct.desktop1_1();
+        Desktop desktop = DesktopConstruct.desktop1_5();
         dfs(desktop);
         System.out.println((System.currentTimeMillis() - start) / 1000);
     }
@@ -51,8 +65,8 @@ public class KillCalculator {
             desktop.getHistory().record(actions.get(index));
             Customer.doOperation(desktop,actions.get(index));
             log(desktop.getHistory().getCurrentTurn().actions, "出牌顺序");
-            //log.info("水晶数：" + desktop.getMainPlayer().getPower());
-            //log.info("敌方血量：" + desktop.getSecondPlayer().getHero().getHealth());
+            fileOutputStream.write(("水晶数：" + desktop.getMainPlayer().getPower()+"\n").getBytes());
+            fileOutputStream.write(("敌方血量：" + desktop.getSecondPlayer().getHero().getHealth()+"\n").getBytes());
             dfs(desktop);
             //将备份的desktop拿回，回到原始状态
             desktop = duplicate;
@@ -62,15 +76,17 @@ public class KillCalculator {
         }
     }
 
-    private static void log(List<Action> actions, String info) {
+    private static void log(List<Action> actions, String info) throws IOException {
         if(!info.equals("成功") && LOG_LEVEL < 2 ){
             return;
         }
-        System.out.println(info);
+        fileOutputStream.write((info+"\n").getBytes());
         for (Action action : actions) {
-            System.out.println(action.toString());
+            fileOutputStream.write(action.toString().getBytes());
+            fileOutputStream.write("\n".getBytes());
         }
-        System.out.println("-------------------------------------");
+        fileOutputStream.write("-------------------------------------\n".getBytes());
+        fileOutputStream.flush();
     }
 
 }

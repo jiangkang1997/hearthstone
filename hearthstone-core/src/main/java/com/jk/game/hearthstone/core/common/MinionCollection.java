@@ -5,6 +5,7 @@ import com.jk.game.hearthstone.core.enumeration.PlayerType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -68,7 +69,12 @@ public class MinionCollection implements Serializable {
         return -1;
     }
 
+    @Deprecated
     public List<Minion> getList() {
         return list;
+    }
+
+    public Iterator<Minion> iterator(){
+        return list.iterator();
     }
 }
