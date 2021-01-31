@@ -42,7 +42,7 @@ public class KillCalculator {
     public static void main(String[] args) throws IllegalOperationException, IOException, ClassNotFoundException, IllegalAccessException, InvalidOperationException, InstantiationException {
         fileOutputStream.write("开始".getBytes());
         long start = System.currentTimeMillis();
-        Desktop desktop = DesktopConstruct.desktop1_5();
+        Desktop desktop = DesktopConstruct.desktop1_1();
         dfs(desktop);
         System.out.println((System.currentTimeMillis() - start) / 1000);
     }

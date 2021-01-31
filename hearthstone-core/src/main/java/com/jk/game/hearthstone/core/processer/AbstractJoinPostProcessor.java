@@ -5,7 +5,7 @@ import com.jk.game.hearthstone.core.data.Desktop;
 import com.jk.game.hearthstone.core.enumeration.ProcessorType;
 
 /**
- * 出牌后置处理器
+ * 入场后置处理器
  * 随从/法术 在以任何形式入场后，会触发 processAfterJoin 方法
  *
  * @author jk

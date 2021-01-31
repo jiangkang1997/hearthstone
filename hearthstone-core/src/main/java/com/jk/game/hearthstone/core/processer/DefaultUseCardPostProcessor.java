@@ -20,6 +20,8 @@ public class DefaultUseCardPostProcessor extends AbstractUseCardPostProcessor {
     public void processAfterPlay(Desktop desktop, Card card){
         Turn currentTurn = desktop.getHistory().getCurrentTurn();
         currentTurn.setUseNum(currentTurn.getUseNum() + 1);
+
+        //todo: 腐蚀
     }
 
 }

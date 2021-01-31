@@ -26,5 +26,6 @@ public class DeathHandler {
                 secondIterator.remove();
             }
         }
+        //todo 判断 寿命
     }
 }
