@@ -2,7 +2,10 @@ package com.jk.game.hearthstone.server.netty;
 
 import com.jk.game.hearthstone.server.exception.IllegalInputException;
 import com.jk.game.hearthstone.server.exception.NoSuchCommandException;
+import com.jk.game.hearthstone.server.model.Command;
+import com.jk.game.hearthstone.server.service.CommandDispatcherService;
 import com.jk.game.hearthstone.server.service.CommandParseService;
+import com.jk.game.hearthstone.server.service.CommandService;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerAdapter;
@@ -24,8 +27,10 @@ import javax.annotation.Resource;
 @ChannelHandler.Sharable
 public class DiscardServerHandler extends ChannelHandlerAdapter {
 
-    @Autowired
+    @Resource
     CommandParseService commandParseService;
+    @Resource
+    CommandDispatcherService commandDispatcherService;
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
@@ -33,10 +38,12 @@ public class DiscardServerHandler extends ChannelHandlerAdapter {
         try {
             ByteBuf in = (ByteBuf) msg;
             log.info(in.toString(CharsetUtil.UTF_8));
-            commandParseService.commandParse(in.toString(CharsetUtil.UTF_8));
-        } catch (NoSuchCommandException e) {
-            e.printStackTrace();
-        } catch (IllegalInputException e) {
+            Command command = commandParseService.commandParse(in.toString(CharsetUtil.UTF_8));
+            CommandService commandService = commandDispatcherService.dispatcher(command.getCommandType());
+            //todo: 这里做业务逻辑
+            //todo：游戏环境的创建和获取
+            commandService.doCommand();
+        } catch (NoSuchCommandException | IllegalInputException e) {
             e.printStackTrace();
         } finally {
             ReferenceCountUtil.release(msg);

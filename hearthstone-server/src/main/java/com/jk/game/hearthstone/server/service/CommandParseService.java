@@ -15,6 +15,7 @@ public interface CommandParseService {
      * @param input
      * @return
      * @throws IllegalInputException 非法输入
+     * @throws NoSuchCommandException 不存在的命令
      */
     Command commandParse(String input) throws IllegalInputException, NoSuchCommandException;
 }

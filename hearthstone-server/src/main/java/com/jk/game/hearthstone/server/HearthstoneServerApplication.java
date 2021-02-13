@@ -28,6 +28,7 @@ public class HearthstoneServerApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(HearthstoneServerApplication.class, args);
+
     }
 
     @Override

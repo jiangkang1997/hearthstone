@@ -6,7 +6,6 @@ import com.jk.game.hearthstone.server.exception.NoSuchCommandException;
 import com.jk.game.hearthstone.server.model.Command;
 import com.jk.game.hearthstone.server.service.CommandParseService;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ import java.util.List;
  * @date 2021/1/31 18:06
  */
 @Component
-@Service
 public class CommandParseServiceImpl implements CommandParseService {
 
     @Override
@@ -33,7 +31,7 @@ public class CommandParseServiceImpl implements CommandParseService {
         Command command = new Command();
         //获取命令
         try {
-            command.setCommandType(CommandType.valueOf(split[0].toUpperCase()));
+            command.setCommandType(CommandType.getEnum(split[0].trim()));
         }catch (Exception e){
             throw new NoSuchCommandException(split[0]);
         }

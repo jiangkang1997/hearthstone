@@ -27,4 +27,14 @@ public enum CommandType {
         this.help = help;
         this.defaultOption = defaultOption;
     }
+
+    public static CommandType getEnum(String name){
+        CommandType[] commandTypes = CommandType.class.getEnumConstants();
+        for (CommandType commandType : commandTypes) {
+            if(commandType.name().toUpperCase().equals(name.toUpperCase())){
+                return commandType;
+            }
+        }
+        return null;
+    }
 }
